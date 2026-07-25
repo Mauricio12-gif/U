@@ -1,101 +1,65 @@
 import { db } from "./firebase.js";
 
 import {
-    collection,
-    addDoc,
-    getDocs,
-    serverTimestamp,
-    orderBy,
-    query
+collection,
+addDoc,
+onSnapshot,
+query,
+orderBy,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
 
 
 let currentUser = "";
 
 
 
-
 // LOGIN
 
-window.login = async function(){
+window.login = function(){
+
+const name =
+document.getElementById("visitorName").value.trim();
+
+const password =
+document.getElementById("password").value;
 
 
-    const name =
-    document.getElementById("visitorName").value.trim();
+if(name === ""){
+document.getElementById("error").innerHTML =
+"Enter your name ❤️";
+return;
+}
 
 
-    const password =
-    document.getElementById("password").value;
+if(password !== "LOVE"){
+
+document.getElementById("error").innerHTML =
+"Wrong password ❤️";
+
+return;
+
+}
 
 
-    const error =
-    document.getElementById("error");
+currentUser = name;
 
 
-
-    if(name === ""){
-
-        error.innerHTML =
-        "Enter your name ❤️";
-
-        return;
-
-    }
+document.getElementById("loginPage")
+.classList.add("hidden");
 
 
-
-    if(password === "LOVE"){
-
-
-        currentUser = name;
+document.getElementById("mainPage")
+.classList.remove("hidden");
 
 
-        document
-        .getElementById("loginPage")
-        .classList.add("hidden");
+document.getElementById("welcome").innerHTML =
+"Welcome " + name + " ❤️";
 
 
-        document
-        .getElementById("mainPage")
-        .classList.remove("hidden");
-
-
-
-        document
-        .getElementById("welcome")
-        .innerHTML =
-        "Welcome " + name + " ❤️";
-
-
-
-        // Save login record
-
-        await addDoc(
-            collection(db,"users"),
-            {
-
-                name:name,
-
-                loginTime:
-                serverTimestamp()
-
-            }
-        );
-
-
-
-    }
-
-    else{
-
-        error.innerHTML =
-        "Wrong password ❤️";
-
-    }
+loadMessages();
 
 };
-
 
 
 
@@ -104,28 +68,20 @@ window.login = async function(){
 
 // OPEN SECTIONS
 
-window.showSection = function(sectionID){
+window.showSection=function(sectionID){
+
+document.querySelectorAll(".content")
+.forEach(section=>{
+
+section.classList.add("hidden");
+
+});
 
 
-    const sections =
-    document.querySelectorAll(".content");
-
-
-    sections.forEach(section=>{
-
-        section.classList.add("hidden");
-
-    });
-
-
-
-    document
-    .getElementById(sectionID)
-    .classList.remove("hidden");
-
+document.getElementById(sectionID)
+.classList.remove("hidden");
 
 };
-
 
 
 
@@ -135,43 +91,31 @@ window.showSection = function(sectionID){
 
 // SEND MESSAGE
 
-window.sendMessage = async function(){
+window.sendMessage=function(){
+
+const input =
+document.getElementById("messageInput");
 
 
-    const input =
-    document.getElementById("messageInput");
+const text =
+input.value.trim();
 
 
-    const text =
-    input.value.trim();
+if(text==="") return;
 
 
+addDoc(collection(db,"messages"),{
 
-    if(text === "") return;
+sender:currentUser,
 
+message:text,
 
+time:serverTimestamp()
 
-    await addDoc(
-        collection(db,"messages"),
-        {
-
-            sender:currentUser,
-
-            message:text,
-
-            time:
-            serverTimestamp()
-
-        }
-    );
+});
 
 
-
-    input.value="";
-
-
-    loadMessages();
-
+input.value="";
 
 };
 
@@ -181,64 +125,58 @@ window.sendMessage = async function(){
 
 
 
-// LOAD MESSAGES
+// REAL TIME MESSAGES
 
-async function loadMessages(){
-
-
-    const chatBox =
-    document.querySelector(".chat-box");
+function loadMessages(){
 
 
-    chatBox.innerHTML="";
+const chatBox =
+document.querySelector(".chat-box");
 
 
 
-    const q =
-    query(
-        collection(db,"messages"),
-        orderBy("time")
-    );
+const q =
+query(
+collection(db,"messages"),
+orderBy("time")
+);
 
 
 
-    const snapshot =
-    await getDocs(q);
+onSnapshot(q,(snapshot)=>{
+
+
+chatBox.innerHTML="";
+
+
+snapshot.forEach(doc=>{
+
+
+const data =
+doc.data();
+
+
+chatBox.innerHTML += `
+
+<p>
+
+❤️ <b>${data.sender}</b><br>
+
+${data.message}
+
+</p>
+
+<hr>
+
+`;
 
 
 
-    snapshot.forEach(doc=>{
+});
 
 
-        const data =
-        doc.data();
+});
 
-
-
-        chatBox.innerHTML += `
-
-        <p>
-        ❤️ <b>${data.sender}</b><br>
-        ${data.message}
-        </p>
-
-        <hr>
-
-        `;
-
-
-    });
 
 
 }
-
-
-
-
-
-
-window.onload=function(){
-
-    loadMessages();
-
-};    
