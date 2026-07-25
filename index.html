@@ -1,140 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Love ❤️</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<!-- LOGIN -->
-
-<div id="loginPage" class="login">
-
-<div class="login-card">
-
-<h1>❤️ Love</h1>
-
-<p>Welcome to our private place</p>
-
-<input
-id="visitorName"
-type="text"
-placeholder="Enter your name">
-
-<input
-id="password"
-type="password"
-placeholder="Password">
-
-<button onclick="login()">
-Login ❤️
-</button>
-
-<p id="error"></p>
-
-</div>
-
-</div>
-
-
-
-
-
-<!-- MAIN APP -->
-
-<div id="mainPage" class="hidden">
-
-
-<header>
-
-<h2 id="welcome">
-Welcome ❤️
-</h2>
-
-<button onclick="logout()">
-Logout
-</button>
-
-</header>
-
-
-
-
-<div class="container">
-
-
-<!-- SIDEBAR -->
-
-<div id="sidebar" class="sidebar">
-
-<h3>💬 Inbox</h3>
-
-<div id="chatList">
-
-<p>No conversations yet.</p>
-
-</div>
-
-</div>
-
-
-
-
-
-<!-- CHAT -->
-
 <div class="chat-area">
 
-
 <div id="chatHeader">
-
-<h3>Select a conversation</h3>
-
+<h3>💬 Private Chat</h3>
 </div>
 
 
+<div id="messages" class="messages">
 
-<div
-id="messages"
-class="messages">
+<p>
+Start your conversation ❤️
+</p>
 
 </div>
-
 
 
 
 <div class="message-bar">
 
-<input
+<input 
 id="messageInput"
-type="text"
-placeholder="Type a message...">
+placeholder="Write a message ❤️">
+
 
 <button onclick="sendMessage()">
-
-Send ❤️
-
+Send
 </button>
 
-</div>
-
-
-</div>
 
 </div>
 
 
 </div>
-
-<script type="module" src="script.js"></script>
-
-</body>
-
-</html>
