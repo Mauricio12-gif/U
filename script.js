@@ -5,92 +5,115 @@ collection,
 addDoc,
 getDocs,
 query,
-where,
 orderBy,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
 let currentUser = "";
-let activeChat = "";
 
 
 // LOGIN
 
 window.login = async function(){
 
-const name = document.getElementById("visitorName").value.trim();
-const password = document.getElementById("password").value;
-const error = document.getElementById("error");
+let name =
+document.getElementById("visitorName").value;
+
+let password =
+document.getElementById("password").value;
 
 
-if(name === ""){
-error.innerHTML="Enter your name ❤️";
-return;
-}
-
-
-if(password !== "LOVE"){
-error.innerHTML="Wrong password ❤️";
-return;
-}
-
+if(password === "LOVE"){
 
 currentUser = name;
-activeChat = name;
 
 
-// Hide login
+document
+.getElementById("loginPage")
+.classList.add("hidden");
 
-document.getElementById("loginPage").style.display="none";
 
+document
+.getElementById("mainPage")
+.classList.remove("hidden");
 
-// Show app
-
-document.getElementById("mainPage").classList.remove("hidden");
 
 document.getElementById("welcome").innerHTML =
-"❤️ Welcome " + name;
+"Welcome " + name + " ❤️";
 
 
 
-// Open chat automatically
-
-document.getElementById("chatHeader").innerHTML =
-"<h3>💬 Chat with Mauricio</h3>";
-
+await addDoc(
+collection(db,"users"),
+{
+name:name,
+loginTime:serverTimestamp()
+}
+);
 
 
 loadMessages();
+
+
+}
+
+else{
+
+document.getElementById("error").innerHTML =
+"Wrong password ❤️";
+
+}
 
 };
 
 
 
 
+// SECTION DISPLAY
+
+window.showSection=function(id){
+
+let sections =
+document.querySelectorAll(".content");
+
+
+sections.forEach(section=>{
+
+section.classList.add("hidden");
+
+});
+
+
+document
+.getElementById(id)
+.classList.remove("hidden");
+
+};
+
+
+
+
+
 // SEND MESSAGE
 
-window.sendMessage = async function(){
+window.sendMessage=async function(){
 
 
-const input =
+let input =
 document.getElementById("messageInput");
 
 
-const text =
-input.value.trim();
+let text =
+input.value;
 
 
-
-if(text===""){
-return;
-}
+if(text==="") return;
 
 
-
-await addDoc(collection(db,"messages"),{
-
-chat:activeChat,
+await addDoc(
+collection(db,"messages"),
+{
 
 sender:currentUser,
 
@@ -98,15 +121,14 @@ message:text,
 
 time:serverTimestamp()
 
-});
+}
 
+);
 
 
 input.value="";
 
-
 loadMessages();
-
 
 };
 
@@ -115,70 +137,44 @@ loadMessages();
 
 
 
-// LOAD MESSAGES
+// LOAD CHAT
 
 async function loadMessages(){
 
 
-const box =
-document.getElementById("messages");
+let box =
+document.getElementById("chatBox");
 
 
-box.innerHTML="Loading messages ❤️";
-
-
-
-const q=query(
-
-collection(db,"messages"),
-
-where("chat","==",activeChat),
-
-orderBy("time","asc")
-
-);
-
-
-
-const result =
-await getDocs(q);
-
+if(!box) return;
 
 
 box.innerHTML="";
 
 
-
-if(result.empty){
-
-box.innerHTML=
-"<p>No messages yet ❤️ Start the conversation</p>";
-
-return;
-
-}
+let q =
+query(
+collection(db,"messages"),
+orderBy("time")
+);
 
 
+let snap =
+await getDocs(q);
 
-result.forEach(doc=>{
+
+
+snap.forEach(doc=>{
 
 
 let data=doc.data();
 
 
-
-let style =
-data.sender===currentUser
-?"sent"
-:"received";
-
-
-
 box.innerHTML += `
 
-<div class="message ${style}">
+<div class="message">
 
-<strong>${data.sender}</strong><br>
+<b>${data.sender}</b><br>
 
 ${data.message}
 
@@ -186,30 +182,7 @@ ${data.message}
 
 `;
 
-
-
 });
 
 
-
-box.scrollTop = box.scrollHeight;
-
-
 }
-
-
-
-
-
-
-// LOGOUT
-
-window.logout=function(){
-
-currentUser="";
-
-activeChat="";
-
-location.reload();
-
-};
