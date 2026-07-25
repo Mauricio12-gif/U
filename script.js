@@ -13,30 +13,35 @@ serverTimestamp
 let currentUser = "";
 
 
-
 // LOGIN
 
 window.login = function(){
 
-const name =
-document.getElementById("visitorName").value.trim();
+const name = document
+.getElementById("visitorName")
+.value
+.trim();
 
-const password =
-document.getElementById("password").value;
+const password = document
+.getElementById("password")
+.value;
+
+
+const error = document
+.getElementById("error");
 
 
 if(name === ""){
-document.getElementById("error").innerHTML =
-"Enter your name ❤️";
+
+error.innerHTML = "Enter your name ❤️";
 return;
+
 }
 
 
 if(password !== "LOVE"){
 
-document.getElementById("error").innerHTML =
-"Wrong password ❤️";
-
+error.innerHTML = "Wrong password ❤️";
 return;
 
 }
@@ -45,19 +50,24 @@ return;
 currentUser = name;
 
 
-document.getElementById("loginPage")
+document
+.getElementById("loginPage")
 .classList.add("hidden");
 
 
-document.getElementById("mainPage")
+document
+.getElementById("mainPage")
 .classList.remove("hidden");
 
 
-document.getElementById("welcome").innerHTML =
+document
+.getElementById("welcome")
+.innerHTML =
 "Welcome " + name + " ❤️";
 
 
 loadMessages();
+
 
 };
 
@@ -65,12 +75,13 @@ loadMessages();
 
 
 
+// SHOW SECTIONS
 
-// OPEN SECTIONS
+window.showSection = function(sectionID){
 
-window.showSection=function(sectionID){
 
-document.querySelectorAll(".content")
+document
+.querySelectorAll(".content")
 .forEach(section=>{
 
 section.classList.add("hidden");
@@ -78,11 +89,12 @@ section.classList.add("hidden");
 });
 
 
-document.getElementById(sectionID)
+document
+.getElementById(sectionID)
 .classList.remove("hidden");
 
-};
 
+};
 
 
 
@@ -91,7 +103,8 @@ document.getElementById(sectionID)
 
 // SEND MESSAGE
 
-window.sendMessage=function(){
+window.sendMessage = async function(){
+
 
 const input =
 document.getElementById("messageInput");
@@ -101,21 +114,47 @@ const text =
 input.value.trim();
 
 
-if(text==="") return;
+
+if(text === ""){
+
+return;
+
+}
 
 
-addDoc(collection(db,"messages"),{
 
-sender:currentUser,
-
-message:text,
-
-time:serverTimestamp()
-
-});
+try{
 
 
-input.value="";
+await addDoc(
+collection(db,"messages"),
+{
+
+sender: currentUser,
+
+message: text,
+
+time: serverTimestamp()
+
+}
+
+);
+
+
+
+input.value = "";
+
+
+}
+
+catch(error){
+
+console.log(error);
+
+alert("Message failed to send");
+
+}
+
 
 };
 
@@ -125,7 +164,7 @@ input.value="";
 
 
 
-// REAL TIME MESSAGES
+// LOAD REAL TIME MESSAGES
 
 function loadMessages(){
 
@@ -134,11 +173,10 @@ const chatBox =
 document.querySelector(".chat-box");
 
 
-
 const q =
 query(
 collection(db,"messages"),
-orderBy("time")
+orderBy("time","asc")
 );
 
 
@@ -146,27 +184,28 @@ orderBy("time")
 onSnapshot(q,(snapshot)=>{
 
 
-chatBox.innerHTML="";
+chatBox.innerHTML = "";
 
 
-snapshot.forEach(doc=>{
+
+snapshot.forEach((doc)=>{
 
 
-const data =
-doc.data();
+const data = doc.data();
+
 
 
 chatBox.innerHTML += `
 
-<p>
+<div class="message">
 
-❤️ <b>${data.sender}</b><br>
+❤️ <b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
-</p>
-
-<hr>
+</div>
 
 `;
 
@@ -175,8 +214,25 @@ ${data.message}
 });
 
 
+
 });
 
 
 
 }
+
+
+
+
+
+
+
+// LOGOUT
+
+window.logout = function(){
+
+currentUser = "";
+
+location.reload();
+
+};
