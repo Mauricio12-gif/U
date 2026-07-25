@@ -1,97 +1,179 @@
-// Enter story button
-function openStory() {
+// LOGIN SYSTEM
 
-    const story = document.getElementById("story");
+function login(){
 
-    story.classList.remove("hidden");
+    const name =
+    document.getElementById("visitorName").value;
 
-    story.scrollIntoView({
-        behavior: "smooth"
+
+    const password =
+    document.getElementById("password").value;
+
+
+    const error =
+    document.getElementById("error");
+
+
+
+    if(password === "LOVE"){
+
+
+        document.getElementById("loginPage")
+        .classList.add("hidden");
+
+
+        document.getElementById("mainPage")
+        .classList.remove("hidden");
+
+
+
+        document.getElementById("welcome")
+        .innerHTML =
+        "Welcome " + name + " ❤️";
+
+
+
+    }else{
+
+
+        error.innerHTML =
+        "Wrong password ❤️ Try again";
+
+
+    }
+
+
+}
+
+
+
+
+
+
+// SHOW SECTIONS
+
+function showSection(sectionID){
+
+
+    const sections =
+    document.querySelectorAll(".content");
+
+
+    sections.forEach(section=>{
+
+        section.classList.add("hidden");
+
     });
 
-}
+
+
+    document
+    .getElementById(sectionID)
+    .classList.remove("hidden");
 
 
 
-// Open love letter
-function openLetter(){
+    document
+    .getElementById(sectionID)
+    .scrollIntoView({
 
-    const letter = document.getElementById("letter");
+        behavior:"smooth"
 
-    letter.classList.remove("hidden");
+    });
 
-    letter.style.animation = "fadeIn 2s ease";
-
-}
-
-
-
-// Reasons cards
-function showReason(card){
-
-    const text = card.querySelector("span");
-
-    const messages = [
-        "Your smile can change my whole day ❤️",
-        "Your kindness makes you beautiful inside and out ❤️",
-        "Your personality is one of the reasons I appreciate you ❤️",
-        "You bring happiness into my life ❤️"
-    ];
-
-
-    const random =
-    messages[Math.floor(Math.random()*messages.length)];
-
-
-    alert(random);
 
 }
 
 
 
-// Floating hearts animation
-
-function createHeart(){
-
-    const heart = document.createElement("div");
-
-    heart.className="heart";
-
-    heart.innerHTML="❤️";
-
-
-    heart.style.left =
-    Math.random()*100+"vw";
-
-
-    heart.style.animationDuration =
-    (Math.random()*3+3)+"s";
-
-
-    document.body.appendChild(heart);
 
 
 
-    setTimeout(()=>{
 
-        heart.remove();
+// LOVE GAME
 
-    },6000);
+function startGame(){
+
+
+let score = 0;
+
+
+
+let answer1 =
+prompt(
+"Where did our story begin? ❤️"
+);
+
+
+
+if(answer1){
+
+score++;
 
 }
 
 
 
-setInterval(createHeart,500);
+
+let answer2 =
+prompt(
+"What is something you love about us? ❤️"
+);
 
 
 
-// Welcome message
+if(answer2){
 
-window.onload=function(){
+score++;
 
-    console.log(
-    "Welcome to Our Little Story ❤️"
-    );
+}
 
-};
+
+
+
+let answer3 =
+prompt(
+"What memory will you never forget? ❤️"
+);
+
+
+
+if(answer3){
+
+score++;
+
+}
+
+
+
+
+
+document
+.getElementById("gameResult")
+.innerHTML =
+
+"Your love score is "
++
+score
++
+"/3 ❤️";
+
+
+}
+
+
+
+
+
+
+
+
+// BUTTON SCROLL
+
+function scrollToMemories(){
+
+
+showSection("story");
+
+
+}
