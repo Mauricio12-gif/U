@@ -1,13 +1,24 @@
-// STORE CURRENT USER
+import { db } from "./firebase.js";
+
+import {
+    collection,
+    addDoc,
+    getDocs,
+    serverTimestamp,
+    orderBy,
+    query
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+
 
 let currentUser = "";
 
 
 
 
-// LOGIN SYSTEM
+// LOGIN
 
-function login(){
+window.login = async function(){
 
 
     const name =
@@ -26,12 +37,11 @@ function login(){
     if(name === ""){
 
         error.innerHTML =
-        "Please enter your name ❤️";
+        "Enter your name ❤️";
 
         return;
 
     }
-
 
 
 
@@ -44,7 +54,6 @@ function login(){
         document
         .getElementById("loginPage")
         .classList.add("hidden");
-
 
 
         document
@@ -60,26 +69,32 @@ function login(){
 
 
 
-        localStorage.setItem(
-            "visitorName",
-            name
+        // Save login record
+
+        await addDoc(
+            collection(db,"users"),
+            {
+
+                name:name,
+
+                loginTime:
+                serverTimestamp()
+
+            }
         );
+
 
 
     }
 
     else{
 
-
         error.innerHTML =
         "Wrong password ❤️";
 
-
     }
 
-
-}
-
+};
 
 
 
@@ -89,15 +104,14 @@ function login(){
 
 // OPEN SECTIONS
 
-function showSection(sectionID){
+window.showSection = function(sectionID){
 
 
     const sections =
     document.querySelectorAll(".content");
 
 
-
-    sections.forEach(section => {
+    sections.forEach(section=>{
 
         section.classList.add("hidden");
 
@@ -105,18 +119,113 @@ function showSection(sectionID){
 
 
 
-    const selected =
-    document.getElementById(sectionID);
+    document
+    .getElementById(sectionID)
+    .classList.remove("hidden");
+
+
+};
 
 
 
-    selected.classList.remove("hidden");
 
 
 
-    selected.scrollIntoView({
 
-        behavior:"smooth"
+
+// SEND MESSAGE
+
+window.sendMessage = async function(){
+
+
+    const input =
+    document.getElementById("messageInput");
+
+
+    const text =
+    input.value.trim();
+
+
+
+    if(text === "") return;
+
+
+
+    await addDoc(
+        collection(db,"messages"),
+        {
+
+            sender:currentUser,
+
+            message:text,
+
+            time:
+            serverTimestamp()
+
+        }
+    );
+
+
+
+    input.value="";
+
+
+    loadMessages();
+
+
+};
+
+
+
+
+
+
+
+// LOAD MESSAGES
+
+async function loadMessages(){
+
+
+    const chatBox =
+    document.querySelector(".chat-box");
+
+
+    chatBox.innerHTML="";
+
+
+
+    const q =
+    query(
+        collection(db,"messages"),
+        orderBy("time")
+    );
+
+
+
+    const snapshot =
+    await getDocs(q);
+
+
+
+    snapshot.forEach(doc=>{
+
+
+        const data =
+        doc.data();
+
+
+
+        chatBox.innerHTML += `
+
+        <p>
+        ❤️ <b>${data.sender}</b><br>
+        ${data.message}
+        </p>
+
+        <hr>
+
+        `;
+
 
     });
 
@@ -128,79 +237,8 @@ function showSection(sectionID){
 
 
 
+window.onload=function(){
 
+    loadMessages();
 
-// LOAD SAVED USER
-
-window.onload = function(){
-
-
-    const savedName =
-    localStorage.getItem("visitorName");
-
-
-    if(savedName){
-
-
-        document
-        .getElementById("visitorName")
-        .value = savedName;
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-// SIMPLE LOVE GAME
-
-function startGame(){
-
-
-    let score = 0;
-
-
-
-    let question1 =
-    prompt(
-    "What is your favourite memory with me? ❤️"
-    );
-
-
-    if(question1){
-
-        score++;
-
-    }
-
-
-
-    let question2 =
-    prompt(
-    "What makes our story special? ❤️"
-    );
-
-
-    if(question2){
-
-        score++;
-
-    }
-
-
-
-    alert(
-    "Your love score is "
-    + score +
-    "/2 ❤️"
-    );
-
-
-}
+};
