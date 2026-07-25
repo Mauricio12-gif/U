@@ -1,451 +1,215 @@
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', 'Segoe UI', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial,sans-serif;
 }
-
 
 body{
-
-    background:#fff5f8;
-    color:#4a2030;
-    min-height:100vh;
-
+background:#f4f5f7;
+height:100vh;
+overflow:hidden;
 }
 
-
-
-/* LOGIN PAGE */
-
+/* LOGIN */
 
 .login{
-
-    height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-    background:
-    linear-gradient(
-    rgba(0,0,0,.45),
-    rgba(0,0,0,.45)
-    ),
-    url("IMG_3939.jpg");
-
-    background-size:cover;
-
-    background-position:center;
-
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff5f9e,#ff9ac2);
 }
-
-
 
 .login-card{
-
-    width:100%;
-
-    max-width:400px;
-
-    padding:35px;
-
-    background:rgba(255,255,255,.15);
-
-    backdrop-filter:blur(15px);
-
-    border-radius:25px;
-
-    text-align:center;
-
-    color:white;
-
+background:white;
+padding:35px;
+border-radius:25px;
+width:90%;
+max-width:380px;
+text-align:center;
+box-shadow:0 15px 35px rgba(0,0,0,.2);
 }
-
-
 
 .login-card h1{
-
-    font-size:35px;
-
-    margin-bottom:15px;
-
+margin-bottom:10px;
+color:#e91e63;
 }
 
-
+.login-card p{
+margin-bottom:20px;
+color:#666;
+}
 
 .login-card input{
-
-    width:100%;
-
-    padding:15px;
-
-    margin:10px 0;
-
-    border:none;
-
-    border-radius:25px;
-
-    outline:none;
-
-    font-size:16px;
-
+width:100%;
+padding:15px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:15px;
+font-size:16px;
 }
 
-
-
-
-
-button{
-
-    border:none;
-
-    padding:14px 25px;
-
-    border-radius:30px;
-
-    background:#e91e63;
-
-    color:white;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+.login-card button{
+width:100%;
+padding:15px;
+background:#e91e63;
+color:white;
+border:none;
+border-radius:15px;
+font-size:16px;
+cursor:pointer;
 }
 
-
-
-button:hover{
-
-    transform:translateY(-3px);
-
-    background:#c2185b;
-
+.login-card button:hover{
+background:#c2185b;
 }
 
+/* APP */
 
-
-
-
-
-/* HEADER */
-
-
-.top{
-
-    text-align:center;
-
-    padding:30px 20px;
-
-    background:
-    linear-gradient(135deg,#ec407a,#ad1457);
-
-    color:white;
-
-    border-radius:0 0 30px 30px;
-
+header{
+height:70px;
+background:#e91e63;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
 }
 
-
-
-
-/* PROFILE */
-
-
-.profile-card{
-
-    margin:25px;
-
-    padding:25px;
-
-    text-align:center;
-
-    background:white;
-
-    border-radius:25px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-
+header button{
+background:white;
+color:#e91e63;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+cursor:pointer;
 }
 
-
-
-.profile-card img{
-
-    width:130px;
-
-    height:130px;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    border:5px solid #f8bbd0;
-
-    margin-bottom:15px;
-
+.container{
+display:flex;
+height:calc(100vh - 70px);
 }
 
+/* SIDEBAR */
 
-
-
-
-
-
-/* DASHBOARD CARDS */
-
-
-.dashboard{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-    padding:25px;
-
+.sidebar{
+width:320px;
+background:white;
+border-right:1px solid #ddd;
+overflow-y:auto;
 }
 
-
-
-.app-card{
-
-    background:white;
-
-    padding:25px 15px;
-
-    border-radius:25px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,.08);
-
-    transition:.3s;
-
+.sidebar h3{
+padding:20px;
+background:#fff0f5;
+border-bottom:1px solid #ddd;
 }
 
-
-
-.app-card:hover{
-
-    transform:translateY(-8px);
-
+.chat-item{
+padding:18px;
+border-bottom:1px solid #eee;
+cursor:pointer;
+transition:.3s;
 }
 
-
-
-.app-card span{
-
-    font-size:35px;
-
+.chat-item:hover{
+background:#fff5f8;
 }
 
+/* CHAT AREA */
 
-
-.app-card h3{
-
-    margin:10px 0;
-
+.chat-area{
+flex:1;
+display:flex;
+flex-direction:column;
+background:#fafafa;
 }
 
-
-
-
-
-.app-card p{
-
-    font-size:14px;
-
-    color:#777;
-
+#chatHeader{
+padding:20px;
+background:white;
+border-bottom:1px solid #ddd;
 }
 
-
-
-
-
-
-
-/* CONTENT */
-
-
-.content{
-
-    margin:25px;
-
-    padding:30px;
-
-    background:white;
-
-    border-radius:25px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    animation:fade .5s;
-
-    text-align:center;
-
+.messages{
+flex:1;
+padding:20px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
-
-
-
-.love-list p{
-
-    background:#ffe4ec;
-
-    padding:15px;
-
-    margin:10px;
-
-    border-radius:20px;
-
+.message{
+padding:12px 18px;
+border-radius:18px;
+max-width:70%;
+word-wrap:break-word;
 }
 
-
-
-
-
-
-
-.memory-photo{
-
-    width:100%;
-
-    max-width:400px;
-
-    border-radius:25px;
-
+.sent{
+background:#e91e63;
+color:white;
+align-self:flex-end;
 }
 
-
-
-
-
-
-/* CHAT */
-
-
-.chat-box{
-
-    height:250px;
-
-    background:#fff0f5;
-
-    border-radius:20px;
-
-    padding:20px;
-
-    margin-bottom:15px;
-
-    overflow:auto;
-
+.received{
+background:white;
+border:1px solid #ddd;
+align-self:flex-start;
 }
 
-
-
-#messageInput{
-
-    width:70%;
-
-    padding:14px;
-
-    border-radius:25px;
-
-    border:1px solid #ddd;
-
+.message-bar{
+display:flex;
+padding:15px;
+background:white;
+border-top:1px solid #ddd;
 }
 
-
-
-
-
-
-footer{
-
-    text-align:center;
-
-    padding:40px;
-
-    color:#ad1457;
-
+.message-bar input{
+flex:1;
+padding:15px;
+border:1px solid #ccc;
+border-radius:25px;
+outline:none;
 }
 
-
-
-
+.message-bar button{
+margin-left:10px;
+padding:15px 20px;
+background:#e91e63;
+color:white;
+border:none;
+border-radius:25px;
+cursor:pointer;
+}
 
 .hidden{
-
-    display:none;
-
+display:none;
 }
 
+/* MOBILE */
 
+@media(max-width:768px){
 
-
-
-@keyframes fade{
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
+.sidebar{
+width:95px;
 }
 
-to{
+.sidebar h3{
+font-size:14px;
+text-align:center;
+padding:15px;
+}
 
-opacity:1;
+.chat-item{
+font-size:13px;
+padding:12px;
+}
 
-transform:translateY(0);
-
+.message{
+max-width:90%;
 }
 
 }
-
-
-
-
-
-
-
-@media(max-width:600px){
-
-
-.dashboard{
-
-grid-template-columns:1fr 1fr;
-
-}
-
-
-
-.app-card{
-
-padding:20px 10px;
-
-}
-
-
-
-.profile-card{
-
-margin:15px;
-
-}
-
-
-    }
