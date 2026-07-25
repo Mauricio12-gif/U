@@ -15,65 +15,55 @@ let currentUser = "";
 let activeChat = "";
 
 
-
 // LOGIN
 
 window.login = async function(){
 
-const name =
-document.getElementById("visitorName").value.trim();
-
-const password =
-document.getElementById("password").value;
+const name = document.getElementById("visitorName").value.trim();
+const password = document.getElementById("password").value;
+const error = document.getElementById("error");
 
 
-const error =
-document.getElementById("error");
-
-
-
-if(password !== "LOVE"){
-
-error.innerHTML="Wrong password ❤️";
+if(name === ""){
+error.innerHTML="Enter your name ❤️";
 return;
-
 }
 
 
-currentUser=name;
+if(password !== "LOVE"){
+error.innerHTML="Wrong password ❤️";
+return;
+}
+
+
+currentUser = name;
+activeChat = name;
 
 
 // Hide login
 
-document
-.getElementById("loginPage")
-.classList.add("hidden");
+document.getElementById("loginPage").style.display="none";
 
 
 // Show app
 
-document
-.getElementById("mainPage")
-.classList.remove("hidden");
+document.getElementById("mainPage").classList.remove("hidden");
+
+document.getElementById("welcome").innerHTML =
+"❤️ Welcome " + name;
 
 
-document
-.getElementById("welcome")
-.innerHTML=
-"Welcome "+name+" ❤️";
+
+// Open chat automatically
+
+document.getElementById("chatHeader").innerHTML =
+"<h3>💬 Chat with Mauricio</h3>";
 
 
-// Open personal chat automatically
-
-activeChat=name;
 
 loadMessages();
 
-
 };
-
-
-
 
 
 
@@ -91,13 +81,14 @@ const text =
 input.value.trim();
 
 
-if(text==="") return;
+
+if(text===""){
+return;
+}
 
 
 
-await addDoc(
-collection(db,"messages"),
-{
+await addDoc(collection(db,"messages"),{
 
 chat:activeChat,
 
@@ -107,9 +98,8 @@ message:text,
 
 time:serverTimestamp()
 
-}
+});
 
-);
 
 
 input.value="";
@@ -125,9 +115,7 @@ loadMessages();
 
 
 
-
 // LOAD MESSAGES
-
 
 async function loadMessages(){
 
@@ -136,32 +124,50 @@ const box =
 document.getElementById("messages");
 
 
-box.innerHTML="";
+box.innerHTML="Loading messages ❤️";
 
 
-const q =
-query(
+
+const q=query(
+
 collection(db,"messages"),
+
 where("chat","==",activeChat),
-orderBy("time")
+
+orderBy("time","asc")
+
 );
 
 
 
-const snapshot =
+const result =
 await getDocs(q);
 
 
 
-snapshot.forEach(doc=>{
-
-
-const data =
-doc.data();
+box.innerHTML="";
 
 
 
-let type =
+if(result.empty){
+
+box.innerHTML=
+"<p>No messages yet ❤️ Start the conversation</p>";
+
+return;
+
+}
+
+
+
+result.forEach(doc=>{
+
+
+let data=doc.data();
+
+
+
+let style =
 data.sender===currentUser
 ?"sent"
 :"received";
@@ -170,9 +176,9 @@ data.sender===currentUser
 
 box.innerHTML += `
 
-<div class="message ${type}">
+<div class="message ${style}">
 
-<b>${data.sender}</b><br>
+<strong>${data.sender}</strong><br>
 
 ${data.message}
 
@@ -181,7 +187,12 @@ ${data.message}
 `;
 
 
+
 });
+
+
+
+box.scrollTop = box.scrollHeight;
 
 
 }
@@ -193,16 +204,12 @@ ${data.message}
 
 // LOGOUT
 
-
 window.logout=function(){
-
 
 currentUser="";
 
 activeChat="";
 
-
 location.reload();
-
 
 };
