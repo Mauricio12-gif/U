@@ -1,9 +1,17 @@
+// STORE CURRENT USER
+
+let currentUser = "";
+
+
+
+
 // LOGIN SYSTEM
 
 function login(){
 
+
     const name =
-    document.getElementById("visitorName").value;
+    document.getElementById("visitorName").value.trim();
 
 
     const password =
@@ -15,29 +23,56 @@ function login(){
 
 
 
+    if(name === ""){
+
+        error.innerHTML =
+        "Please enter your name ❤️";
+
+        return;
+
+    }
+
+
+
+
     if(password === "LOVE"){
 
 
-        document.getElementById("loginPage")
+        currentUser = name;
+
+
+        document
+        .getElementById("loginPage")
         .classList.add("hidden");
 
 
-        document.getElementById("mainPage")
+
+        document
+        .getElementById("mainPage")
         .classList.remove("hidden");
 
 
 
-        document.getElementById("welcome")
+        document
+        .getElementById("welcome")
         .innerHTML =
         "Welcome " + name + " ❤️";
 
 
 
-    }else{
+        localStorage.setItem(
+            "visitorName",
+            name
+        );
+
+
+    }
+
+    else{
 
 
         error.innerHTML =
-        "Wrong password ❤️ Try again";
+        "Wrong password ❤️";
 
 
     }
@@ -50,7 +85,9 @@ function login(){
 
 
 
-// SHOW SECTIONS
+
+
+// OPEN SECTIONS
 
 function showSection(sectionID){
 
@@ -59,7 +96,8 @@ function showSection(sectionID){
     document.querySelectorAll(".content");
 
 
-    sections.forEach(section=>{
+
+    sections.forEach(section => {
 
         section.classList.add("hidden");
 
@@ -67,15 +105,16 @@ function showSection(sectionID){
 
 
 
-    document
-    .getElementById(sectionID)
-    .classList.remove("hidden");
+    const selected =
+    document.getElementById(sectionID);
 
 
 
-    document
-    .getElementById(sectionID)
-    .scrollIntoView({
+    selected.classList.remove("hidden");
+
+
+
+    selected.scrollIntoView({
 
         behavior:"smooth"
 
@@ -90,90 +129,78 @@ function showSection(sectionID){
 
 
 
-// LOVE GAME
+
+// LOAD SAVED USER
+
+window.onload = function(){
+
+
+    const savedName =
+    localStorage.getItem("visitorName");
+
+
+    if(savedName){
+
+
+        document
+        .getElementById("visitorName")
+        .value = savedName;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+// SIMPLE LOVE GAME
 
 function startGame(){
 
 
-let score = 0;
+    let score = 0;
 
 
 
-let answer1 =
-prompt(
-"Where did our story begin? ❤️"
-);
+    let question1 =
+    prompt(
+    "What is your favourite memory with me? ❤️"
+    );
+
+
+    if(question1){
+
+        score++;
+
+    }
 
 
 
-if(answer1){
-
-score++;
-
-}
-
+    let question2 =
+    prompt(
+    "What makes our story special? ❤️"
+    );
 
 
+    if(question2){
 
-let answer2 =
-prompt(
-"What is something you love about us? ❤️"
-);
+        score++;
+
+    }
 
 
 
-if(answer2){
-
-score++;
-
-}
-
-
-
-
-let answer3 =
-prompt(
-"What memory will you never forget? ❤️"
-);
-
-
-
-if(answer3){
-
-score++;
-
-}
-
-
-
-
-
-document
-.getElementById("gameResult")
-.innerHTML =
-
-"Your love score is "
-+
-score
-+
-"/3 ❤️";
-
-
-}
-
-
-
-
-
-
-
-
-// BUTTON SCROLL
-
-function scrollToMemories(){
-
-
-showSection("story");
+    alert(
+    "Your love score is "
+    + score +
+    "/2 ❤️"
+    );
 
 
 }
