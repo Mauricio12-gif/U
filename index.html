@@ -1,153 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Little Story ❤️</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Little Story ❤️</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<div class="hearts"></div>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage" class="login">
+
+<h1>Welcome To Our Story ❤️</h1>
+
+<p>A little place made only for special memories</p>
+
+
+<input 
+type="text" 
+id="visitorName" 
+placeholder="Enter your name">
+
+
+<input 
+type="password" 
+id="password" 
+placeholder="Enter password">
+
+
+<button onclick="login()">
+Enter ❤️
+</button>
+
+
+<p id="error"></p>
+
+</div>
+
+
+
+
+
+<!-- MAIN WEBSITE -->
+
+<div id="mainPage" class="hidden">
+
+
+
+<header>
+
+<h2 id="welcome">
+Our Story ❤️
+</h2>
+
+
+</header>
+
+
+
+
 
 <section class="hero">
-    <div class="hero-content">
-        <h1>Our Little Story ❤️</h1>
-        <p>A special place created just for you</p>
-        <button onclick="openStory()">Enter Our Story ❤️</button>
-    </div>
-</section>
 
-
-<section id="story" class="section hidden">
-
-    <h2>How It All Began 📖</h2>
-    <p>
-        Every beautiful story starts with a simple moment.
-        This is where we keep our memories, our laughter,
-        and the moments that make us special.
-    </p>
-
-</section>
-
-
-<section class="section">
-
-    <h2>Our Memories 📸</h2>
-
-    <div class="gallery">
-
-        <div class="photo">
-            <img src="IMG_3939.jpg" alt="Our Memory">
-            <p>One of my favourite moments ❤️</p>
-        </div>
-
-        <div class="photo">
-            <img src="IMG_3939.jpg" alt="Our Memory">
-            <p>A memory I will always treasure ❤️</p>
-        </div>
-
-        <div class="photo">
-            <img src="https://via.placeholder.com/300" alt="Memory">
-            <p>Your smile makes everything better ❤️</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<section class="section">
-
-    <h2>A Letter For You 💌</h2>
-
-    <div class="envelope" onclick="openLetter()">
-        💌
-        <p>Tap to open</p>
-    </div>
-
-
-    <div id="letter" class="letter hidden">
-
-        <p>
-        Dear My Love,
-        <br><br>
-
-        I created this little space because sometimes
-        words are not enough to explain how special
-        someone is.
-
-        <br><br>
-
-        Thank you for the memories, conversations,
-        laughter and happiness you bring into my life.
-
-        <br><br>
-
-        Even though distance separates us,
-        I hope you always remember that you are
-        appreciated and valued.
-
-        <br><br>
-
-        ❤️
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<section class="section">
-
-<h2>Why You Are Special 🌹</h2>
-
-<div class="cards">
-
-<div class="card" onclick="showReason(this)">
-❤️
-<span>Your smile</span>
-</div>
-
-<div class="card" onclick="showReason(this)">
-❤️
-<span>Your kindness</span>
-</div>
-
-<div class="card" onclick="showReason(this)">
-❤️
-<span>Your personality</span>
-</div>
-
-<div class="card" onclick="showReason(this)">
-❤️
-<span>The happiness you bring</span>
-</div>
-
-</div>
-
-</section>
-
-
-
-<section class="final">
-
-<h2>Distance Doesn't Change Us ❤️</h2>
+<h1>
+Our Beautiful Journey ❤️
+</h1>
 
 <p>
-No matter how far apart we are,
-the memories and feelings we share remain special.
+Every memory, every laugh and every moment.
 </p>
 
-<h1>Happy Girlfriend Day ❤️</h1>
+</section>
+
+
+
+
+
+
+
+<div class="menu">
+
+
+<button onclick="showSection('story')">
+📖 Our Story
+</button>
+
+
+<button onclick="showSection('love')">
+💕 Why I Love You
+</button>
+
+
+<button onclick="showSection('meeting')">
+🤝 How We Met
+</button>
+
+
+<button onclick="showSection('gallery')">
+📸 Gallery
+</button>
+
+
+<button onclick="showSection('dreams')">
+✨ Our Dreams
+</button>
+
+
+<button onclick="showSection('game')">
+🎮 Romantic Game
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<section id="story" class="content hidden">
+
+<h2>📖 Our Story</h2>
+
+
+<p>
+
+This is where our journey is written.
+
+The little moments, conversations,
+laughter and memories that make us special.
+
+</p>
+
 
 </section>
+
+
+
+
+
+
+
+<section id="love" class="content hidden">
+
+
+<h2>💕 Why I Love You</h2>
+
+
+<ul>
+
+<li>Your smile ❤️</li>
+
+<li>Your kindness ❤️</li>
+
+<li>Your personality ❤️</li>
+
+<li>The happiness you bring ❤️</li>
+
+</ul>
+
+
+</section>
+
+
+
+
+
+
+
+<section id="meeting" class="content hidden">
+
+
+<h2>🤝 How We Met</h2>
+
+
+<p>
+
+Every beautiful story has a beginning.
+
+This is where we write how everything started.
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section id="gallery" class="content hidden">
+
+
+<h2>📸 Our Memories</h2>
+
+
+<div class="gallery">
+
+
+<img src="IMG_3939.jpg" alt="Our Memory">
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section id="dreams" class="content hidden">
+
+
+<h2>✨ Our Dreams</h2>
+
+
+<p>
+
+Places we want to visit,
+things we want to experience,
+and memories we are yet to create.
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section id="game" class="content hidden">
+
+
+<h2>🎮 Love Game</h2>
+
+
+<p>
+How well do you know our story?
+</p>
+
+
+<button onclick="startGame()">
+Start Game ❤️
+</button>
+
+
+<p id="gameResult"></p>
+
+
+</section>
+
+
+
+
+
+
+
+<footer>
+
+<h2>
+Forever creating memories ❤️
+</h2>
+
+</footer>
+
+
+
+</div>
+
+
+
 
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
