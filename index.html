@@ -1,84 +1,256 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love ❤️</title>
+
+<title>Our Story ❤️</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
+
+
+<!-- LOGIN -->
 
 <div id="loginPage" class="login">
 
 <div class="login-card">
 
-<h1>❤️ Love</h1>
-<p>Your private space</p>
+<h1>❤️ Our Secret Place</h1>
 
-<input id="visitorName" placeholder="Your name">
+<p>A story only we understand</p>
+
+<input id="visitorName" placeholder="Enter your name">
 
 <input id="password" type="password" placeholder="Password">
 
-<button onclick="login()">Enter ❤️</button>
+
+<button onclick="login()">
+Enter ❤️
+</button>
+
 
 <p id="error"></p>
 
-</div>
 
 </div>
 
+</div>
 
+
+
+
+
+<!-- HOME -->
 
 <div id="mainPage" class="hidden">
 
 
-<div class="topbar">
+<section class="hero">
 
-<h2 id="welcome">Welcome ❤️</h2>
+<h1>
+Welcome ❤️
+</h1>
 
-<button onclick="logout()">Logout</button>
-
-</div>
-
-
-
-<div class="app">
+<p id="welcome">
+Our little world
+</p>
 
 
-<div class="sidebar">
-
-<h3>Messages</h3>
-
-<div class="chat-item">
-❤️ Mauricio
-</div>
-
-
-</div>
+</section>
 
 
 
-<div class="chat">
+<div class="profile">
 
+<img src="IMG_3939.jpg">
 
-<div class="chat-title">
+<h2>
+Our Journey ❤️
+</h2>
 
-💌 Private Chat
+<p>
+Every picture, every memory, every moment tells a story.
+</p>
 
 </div>
 
 
 
-<div id="messages" class="messages">
+
+
+<div class="cards">
+
+
+<button onclick="showSection('story')">
+
+📖
+<br>
+Our Story
+
+</button>
+
+
+
+<button onclick="showSection('meet')">
+
+✨
+<br>
+How We Met
+
+</button>
+
+
+
+
+<button onclick="showSection('love')">
+
+❤️
+<br>
+Why I Love You
+
+</button>
+
+
+
+
+
+<button onclick="showSection('gallery')">
+
+📸
+<br>
+Gallery
+
+</button>
+
+
+
+
+
+<button onclick="showSection('dreams')">
+
+🌹
+<br>
+Our Dreams
+
+</button>
+
+
+
+
+
+<button onclick="showSection('chat')">
+
+💬
+<br>
+Private Chat
+
+</button>
+
+
 
 </div>
 
 
 
-<div class="input-area">
 
-<input id="messageInput" placeholder="Write something ❤️">
+
+
+
+<div id="story" class="section hidden">
+
+<h2>Our Story ❤️</h2>
+
+<p>
+Write your beautiful journey here...
+</p>
+
+</div>
+
+
+
+
+
+<div id="meet" class="section hidden">
+
+<h2>How We Met ✨</h2>
+
+<p>
+The beginning of something special...
+</p>
+
+</div>
+
+
+
+
+
+<div id="love" class="section hidden">
+
+<h2>Why I Love You ❤️</h2>
+
+<p>
+Reasons that make her special...
+</p>
+
+</div>
+
+
+
+
+
+
+<div id="gallery" class="section hidden">
+
+<h2>Gallery 📸</h2>
+
+<div class="gallery">
+
+<img src="IMG_3939.jpg">
+
+</div>
+
+</div>
+
+
+
+
+
+
+<div id="dreams" class="section hidden">
+
+<h2>Our Dreams 🌹</h2>
+
+<p>
+The future we imagine together...
+</p>
+
+</div>
+
+
+
+
+
+
+
+<div id="chat" class="section hidden">
+
+<h2>Private Chat 💬</h2>
+
+
+<div id="chatBox">
+
+</div>
+
+
+<div class="chat-input">
+
+<input id="messageInput"
+placeholder="Write a message ❤️">
 
 
 <button onclick="sendMessage()">
@@ -92,14 +264,25 @@ Send
 </div>
 
 
-</div>
 
 
+
+<button class="logout" onclick="logout()">
+
+Logout
+
+</button>
+
+
+
 </div>
+
 
 
 
 <script type="module" src="script.js"></script>
 
+
 </body>
+
 </html>
