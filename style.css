@@ -2,40 +2,65 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Georgia', serif;
+    font-family:'Poppins', 'Segoe UI', sans-serif;
 }
 
 
 body{
 
-    background:#fff0f5;
-    color:#4b1f2d;
+    background:#fff5f8;
+    color:#4a2030;
     min-height:100vh;
 
 }
 
 
+
 /* LOGIN PAGE */
+
 
 .login{
 
     height:100vh;
+
     display:flex;
-    flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
-    text-align:center;
+
     padding:20px;
 
     background:
     linear-gradient(
-    rgba(0,0,0,.4),
-    rgba(0,0,0,.4)
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.45)
     ),
     url("IMG_3939.jpg");
 
     background-size:cover;
+
     background-position:center;
+
+}
+
+
+
+.login-card{
+
+    width:100%;
+
+    max-width:400px;
+
+    padding:35px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    text-align:center;
 
     color:white;
 
@@ -43,32 +68,29 @@ body{
 
 
 
-.login h1{
+.login-card h1{
 
-    font-size:40px;
-    margin-bottom:20px;
+    font-size:35px;
 
-}
-
-
-.login p{
-
-    margin-bottom:25px;
+    margin-bottom:15px;
 
 }
 
 
 
-input{
+.login-card input{
 
-    width:90%;
-    max-width:350px;
+    width:100%;
 
     padding:15px;
-    margin:10px;
+
+    margin:10px 0;
 
     border:none;
-    border-radius:30px;
+
+    border-radius:25px;
+
+    outline:none;
 
     font-size:16px;
 
@@ -77,11 +99,12 @@ input{
 
 
 
+
 button{
 
-    padding:15px 30px;
-
     border:none;
+
+    padding:14px 25px;
 
     border-radius:30px;
 
@@ -93,8 +116,6 @@ button{
 
     cursor:pointer;
 
-    margin:10px;
-
     transition:.3s;
 
 }
@@ -103,21 +124,12 @@ button{
 
 button:hover{
 
-    transform:scale(1.08);
+    transform:translateY(-3px);
 
-    background:#ad1457;
-
-}
-
-
-
-
-
-#error{
-
-    color:#ffcccc;
+    background:#c2185b;
 
 }
+
 
 
 
@@ -126,48 +138,56 @@ button:hover{
 /* HEADER */
 
 
-header{
-
-    padding:20px;
+.top{
 
     text-align:center;
 
-    background:#e91e63;
+    padding:30px 20px;
+
+    background:
+    linear-gradient(135deg,#ec407a,#ad1457);
 
     color:white;
 
+    border-radius:0 0 30px 30px;
+
 }
 
 
 
 
+/* PROFILE */
 
-/* HERO */
 
+.profile-card{
 
-.hero{
+    margin:25px;
 
-    padding:70px 20px;
+    padding:25px;
 
     text-align:center;
 
-    background:
+    background:white;
 
-    linear-gradient(
-    rgba(255,255,255,.7),
-    rgba(255,255,255,.7)
-    ),
-    url("IMG_3939.jpg");
+    border-radius:25px;
 
-    background-size:cover;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
 
 }
 
 
 
-.hero h1{
+.profile-card img{
 
-    font-size:40px;
+    width:130px;
+
+    height:130px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:5px solid #f8bbd0;
 
     margin-bottom:15px;
 
@@ -178,28 +198,79 @@ header{
 
 
 
-/* MENU BUTTONS */
+
+/* DASHBOARD CARDS */
 
 
-.menu{
+.dashboard{
 
-    display:flex;
+    display:grid;
 
-    flex-wrap:wrap;
+    grid-template-columns:repeat(2,1fr);
 
-    justify-content:center;
+    gap:18px;
 
-    padding:30px;
+    padding:25px;
+
+}
+
+
+
+.app-card{
+
+    background:white;
+
+    padding:25px 15px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
 
 }
 
 
 
-.menu button{
+.app-card:hover{
 
-    width:200px;
+    transform:translateY(-8px);
 
 }
+
+
+
+.app-card span{
+
+    font-size:35px;
+
+}
+
+
+
+.app-card h3{
+
+    margin:10px 0;
+
+}
+
+
+
+
+
+.app-card p{
+
+    font-size:14px;
+
+    color:#777;
+
+}
+
 
 
 
@@ -211,50 +282,32 @@ header{
 
 .content{
 
-    margin:20px;
+    margin:25px;
 
     padding:30px;
 
     background:white;
 
-    border-radius:20px;
+    border-radius:25px;
 
-    box-shadow:
-    0 5px 20px rgba(0,0,0,.1);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    animation:fade .5s;
 
     text-align:center;
 
-    animation:appear .5s ease;
-
-}
-
-
-
-.content h2{
-
-    margin-bottom:20px;
-
 }
 
 
 
 
-
-ul{
-
-    list-style:none;
-
-}
-
-
-
-li{
+.love-list p{
 
     background:#ffe4ec;
 
-    margin:10px;
-
     padding:15px;
+
+    margin:10px;
 
     border-radius:20px;
 
@@ -265,29 +318,14 @@ li{
 
 
 
-/* GALLERY */
 
+.memory-photo{
 
-.gallery{
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-
-
-.gallery img{
-
-    width:90%;
+    width:100%;
 
     max-width:400px;
 
-    border-radius:20px;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,.2);
+    border-radius:25px;
 
 }
 
@@ -295,21 +333,54 @@ li{
 
 
 
-/* FOOTER */
+
+/* CHAT */
+
+
+.chat-box{
+
+    height:250px;
+
+    background:#fff0f5;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    overflow:auto;
+
+}
+
+
+
+#messageInput{
+
+    width:70%;
+
+    padding:14px;
+
+    border-radius:25px;
+
+    border:1px solid #ddd;
+
+}
+
+
+
+
 
 
 footer{
 
     text-align:center;
 
-    padding:50px;
+    padding:40px;
 
-    background:#e91e63;
-
-    color:white;
+    color:#ad1457;
 
 }
-
 
 
 
@@ -325,7 +396,7 @@ footer{
 
 
 
-@keyframes appear{
+@keyframes fade{
 
 from{
 
@@ -349,28 +420,32 @@ transform:translateY(0);
 
 
 
+
+
 @media(max-width:600px){
 
 
-.login h1{
+.dashboard{
 
-font-size:30px;
-
-}
-
-
-.hero h1{
-
-font-size:30px;
+grid-template-columns:1fr 1fr;
 
 }
 
 
-.menu button{
 
-width:90%;
+.app-card{
+
+padding:20px 10px;
+
+}
+
+
+
+.profile-card{
+
+margin:15px;
 
 }
 
 
-}
+    }
