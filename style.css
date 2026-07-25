@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
+
+body {
+    background: #fff5f7;
+    color: #4a1c2b;
+    overflow-x: hidden;
+}
+
+.hero {
+    height: 100vh;
+    background: linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.45)
+    ),
+    url("https://via.placeholder.com/1200x800")
+    center/cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.hero-content {
+    color: white;
+    animation: fadeIn 2s ease;
+}
+
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #ff4d88;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+button:hover {
+    transform: scale(1.1);
+    background: #e6005c;
+}
+
+
+.section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+
+.section p {
+    line-height: 1.8;
+    max-width: 700px;
+    margin: auto;
+}
+
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.photo {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    width: 280px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+.photo img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+.envelope {
+    font-size: 80px;
+    cursor: pointer;
+    margin: 30px;
+    animation: float 2s infinite;
+}
+
+
+.letter {
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    max-width:600px;
+    margin:auto;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+}
+
+
+
+.cards {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+
+.card {
+    background:white;
+    width:200px;
+    padding:30px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:.5s;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+
+.card:hover {
+    transform:translateY(-10px);
+}
+
+
+
+.final {
+    background:#ff4d88;
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+
+
+.hidden {
+    display:none;
+}
+
+
+
+@keyframes fadeIn {
+
+from {
+opacity:0;
+transform:translateY(30px);
+}
+
+to {
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+
+@keyframes float {
+
+0%,100% {
+transform:translateY(0);
+}
+
+50% {
+transform:translateY(-15px);
+}
+
+}
+
+
+
+/* Floating hearts */
+
+.heart {
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:rise 6s linear infinite;
+}
+
+
+
+@keyframes rise {
+
+from {
+transform:translateY(0);
+opacity:1;
+}
+
+to {
+transform:translateY(-100vh);
+opacity:0;
+}
+
+}
+
+
+
+/* Mobile design */
+
+@media(max-width:600px){
+
+.hero h1{
+font-size:2.2rem;
+}
+
+.gallery{
+flex-direction:column;
+align-items:center;
+}
+
+.card{
+width:90%;
+}
+
+  }
