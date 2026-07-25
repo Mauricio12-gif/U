@@ -1,25 +1,84 @@
-<div class="chat-area">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-<div id="chatHeader">
-<h3>💬 Private Chat</h3>
+<body>
+
+<div id="loginPage" class="login">
+
+<div class="login-card">
+
+<h1>❤️ Love</h1>
+<p>Your private space</p>
+
+<input id="visitorName" placeholder="Your name">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Enter ❤️</button>
+
+<p id="error"></p>
+
 </div>
+
+</div>
+
+
+
+<div id="mainPage" class="hidden">
+
+
+<div class="topbar">
+
+<h2 id="welcome">Welcome ❤️</h2>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+
+
+<div class="app">
+
+
+<div class="sidebar">
+
+<h3>Messages</h3>
+
+<div class="chat-item">
+❤️ Mauricio
+</div>
+
+
+</div>
+
+
+
+<div class="chat">
+
+
+<div class="chat-title">
+
+💌 Private Chat
+
+</div>
+
 
 
 <div id="messages" class="messages">
 
-<p>
-Start your conversation ❤️
-</p>
-
 </div>
 
 
 
-<div class="message-bar">
+<div class="input-area">
 
-<input 
-id="messageInput"
-placeholder="Write a message ❤️">
+<input id="messageInput" placeholder="Write something ❤️">
 
 
 <button onclick="sendMessage()">
@@ -31,3 +90,16 @@ Send
 
 
 </div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
