@@ -2,14 +2,16 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Our Story ❤️</title>
+<title>Our Little Story ❤️</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
+
 
 <body>
 
@@ -20,17 +22,18 @@
 
 <div class="login-card">
 
-<h1>❤️ Our Secret Place</h1>
+<h1>Our Little Story ❤️</h1>
 
-<p>A story only we understand</p>
+<p>A private place for our memories</p>
 
-<input id="visitorName" placeholder="Enter your name">
+
+<input id="visitorName" type="text" placeholder="Your name">
 
 <input id="password" type="password" placeholder="Password">
 
 
 <button onclick="login()">
-Enter ❤️
+Enter Our Story
 </button>
 
 
@@ -45,19 +48,42 @@ Enter ❤️
 
 
 
-<!-- HOME -->
+
+<!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
 
 
-<section class="hero">
+<header class="top">
 
-<h1>
+<h2 id="welcome">
 Welcome ❤️
-</h1>
+</h2>
 
-<p id="welcome">
-Our little world
+<p>
+Our memories, dreams and conversations
+</p>
+
+</header>
+
+
+
+
+
+
+<section class="profile-card">
+
+
+<img src="IMG_3939.jpg" alt="Our photo">
+
+
+<h2>
+Our Beautiful Journey ❤️
+</h2>
+
+
+<p>
+A small corner of the internet made for us.
 </p>
 
 
@@ -65,16 +91,25 @@ Our little world
 
 
 
-<div class="profile">
 
-<img src="IMG_3939.jpg">
 
-<h2>
-Our Journey ❤️
-</h2>
+
+
+
+<!-- APP MENU -->
+
+
+<section class="dashboard">
+
+
+<div class="app-card" onclick="showSection('story')">
+
+<span>📖</span>
+
+<h3>Our Story</h3>
 
 <p>
-Every picture, every memory, every moment tells a story.
+How everything began
 </p>
 
 </div>
@@ -83,90 +118,14 @@ Every picture, every memory, every moment tells a story.
 
 
 
-<div class="cards">
+<div class="app-card" onclick="showSection('love')">
 
+<span>💕</span>
 
-<button onclick="showSection('story')">
-
-📖
-<br>
-Our Story
-
-</button>
-
-
-
-<button onclick="showSection('meet')">
-
-✨
-<br>
-How We Met
-
-</button>
-
-
-
-
-<button onclick="showSection('love')">
-
-❤️
-<br>
-Why I Love You
-
-</button>
-
-
-
-
-
-<button onclick="showSection('gallery')">
-
-📸
-<br>
-Gallery
-
-</button>
-
-
-
-
-
-<button onclick="showSection('dreams')">
-
-🌹
-<br>
-Our Dreams
-
-</button>
-
-
-
-
-
-<button onclick="showSection('chat')">
-
-💬
-<br>
-Private Chat
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div id="story" class="section hidden">
-
-<h2>Our Story ❤️</h2>
+<h3>Why I Love You</h3>
 
 <p>
-Write your beautiful journey here...
+Reasons you are special
 </p>
 
 </div>
@@ -175,26 +134,14 @@ Write your beautiful journey here...
 
 
 
-<div id="meet" class="section hidden">
+<div class="app-card" onclick="showSection('meeting')">
 
-<h2>How We Met ✨</h2>
+<span>🤝</span>
 
-<p>
-The beginning of something special...
-</p>
-
-</div>
-
-
-
-
-
-<div id="love" class="section hidden">
-
-<h2>Why I Love You ❤️</h2>
+<h3>How We Met</h3>
 
 <p>
-Reasons that make her special...
+Our beginning
 </p>
 
 </div>
@@ -204,29 +151,14 @@ Reasons that make her special...
 
 
 
-<div id="gallery" class="section hidden">
+<div class="app-card" onclick="showSection('gallery')">
 
-<h2>Gallery 📸</h2>
+<span>📸</span>
 
-<div class="gallery">
-
-<img src="IMG_3939.jpg">
-
-</div>
-
-</div>
-
-
-
-
-
-
-<div id="dreams" class="section hidden">
-
-<h2>Our Dreams 🌹</h2>
+<h3>Gallery</h3>
 
 <p>
-The future we imagine together...
+Our memories
 </p>
 
 </div>
@@ -237,50 +169,204 @@ The future we imagine together...
 
 
 
-<div id="chat" class="section hidden">
+<div class="app-card" onclick="showSection('dreams')">
 
-<h2>Private Chat 💬</h2>
+<span>✨</span>
 
+<h3>Our Dreams</h3>
 
-<div id="chatBox">
+<p>
+The future we imagine
+</p>
 
 </div>
 
 
-<div class="chat-input">
-
-<input id="messageInput"
-placeholder="Write a message ❤️">
 
 
-<button onclick="sendMessage()">
-Send
+
+
+
+
+<div class="app-card" onclick="showSection('chat')">
+
+<span>💬</span>
+
+<h3>Private Chat</h3>
+
+<p>
+Talk with me
+</p>
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- CONTENT SECTIONS -->
+
+
+
+<section id="story" class="content hidden">
+
+<h2>📖 Our Story</h2>
+
+<p>
+Our journey, memories and moments together will be written here.
+</p>
+
+</section>
+
+
+
+
+
+
+<section id="love" class="content hidden">
+
+<h2>💕 Why I Love You</h2>
+
+
+<div class="love-list">
+
+<p>❤️ Your smile</p>
+
+<p>❤️ Your kindness</p>
+
+<p>❤️ Your personality</p>
+
+<p>❤️ The happiness you bring</p>
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section id="meeting" class="content hidden">
+
+<h2>🤝 How We Met</h2>
+
+<p>
+Every beautiful story has a beginning.
+This is where ours will be written.
+</p>
+
+</section>
+
+
+
+
+
+
+
+
+<section id="gallery" class="content hidden">
+
+<h2>📸 Our Gallery</h2>
+
+
+<img class="memory-photo" src="IMG_3939.jpg">
+
+
+</section>
+
+
+
+
+
+
+
+
+<section id="dreams" class="content hidden">
+
+<h2>✨ Our Dreams</h2>
+
+<p>
+Places we want to visit.
+Things we want to experience.
+Memories we are yet to create.
+</p>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- CHAT PLACEHOLDER -->
+
+<section id="chat" class="content hidden">
+
+<h2>💬 Our Private Chat</h2>
+
+
+<div class="chat-box">
+
+<p>
+Your private conversation will appear here ❤️
+</p>
+
+
+</div>
+
+
+<input 
+id="messageInput"
+placeholder="Write a message...">
+
+
+<button>
+Send ❤️
 </button>
 
 
+</section>
+
+
+
+
+
+
+
+
+<footer>
+
+<p>
+Forever creating memories ❤️
+</p>
+
+</footer>
+
+
+
 </div>
 
 
-</div>
 
 
 
 
-
-<button class="logout" onclick="logout()">
-
-Logout
-
-</button>
-
-
-
-</div>
-
-
-
-
-<script type="module" src="script.js"></script>
+<script src="script.js"></script>
 
 
 </body>
