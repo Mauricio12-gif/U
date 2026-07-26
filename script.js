@@ -4,6 +4,7 @@ import { db, auth } from "./firebase.js";
 import {
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+console.log("SCRIPT IS WORKING");
 
 
 import {
