@@ -5,6 +5,7 @@ collection,
 addDoc,
 onSnapshot,
 query,
+where,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
@@ -26,7 +27,14 @@ const password =
 document.getElementById("password").value;
 
 
-if(name==="") return;
+if(name===""){
+
+document.getElementById("error").innerHTML =
+"Enter your name ❤️";
+
+return;
+
+}
 
 
 if(password!=="LOVE"){
@@ -40,7 +48,7 @@ return;
 
 
 
-currentUser=name;
+currentUser = name;
 
 
 
@@ -52,26 +60,31 @@ document.getElementById("mainPage")
 .classList.remove("hidden");
 
 
+
 document.getElementById("welcome")
 .innerHTML =
-"Welcome "+name+" ❤️";
+"Welcome " + name + " ❤️";
 
 
 
 
 // SAVE USER
 
-await addDoc(collection(db,"users"),{
-
+await addDoc(
+collection(db,"users"),
+{
 name:name,
-
+role:name.toLowerCase()==="mauricio"
+?"admin"
+:"member",
 time:serverTimestamp()
+}
+);
 
-});
 
 
 
-// ONLY MAURICIO GETS ADMIN
+// ONLY MAURICIO SEES ADMIN
 
 if(name.toLowerCase()==="mauricio"){
 
@@ -79,13 +92,8 @@ document
 .getElementById("adminCard")
 .classList.remove("hidden");
 
-loadUsers();
-
 }
 
-
-
-loadMessages();
 
 
 };
@@ -98,12 +106,13 @@ loadMessages();
 
 
 
-// SHOW SECTIONS
+// OPEN SECTIONS
 
 window.showSection=function(id){
 
 
-document.querySelectorAll(".content")
+document
+.querySelectorAll(".content")
 .forEach(section=>{
 
 section.classList.add("hidden");
@@ -111,8 +120,18 @@ section.classList.add("hidden");
 });
 
 
-document.getElementById(id)
+
+document
+.getElementById(id)
 .classList.remove("hidden");
+
+
+
+if(id==="chat"){
+
+loadUserMessages();
+
+}
 
 
 
@@ -123,12 +142,6 @@ loadUsers();
 }
 
 
-if(id==="chat"){
-
-loadMessages();
-
-}
-
 
 };
 
@@ -140,16 +153,16 @@ loadMessages();
 
 
 
-// SEND MESSAGE
+// MEMBER SEND MESSAGE
 
-window.sendMessage=async function(){
+window.sendMessage = async function(){
 
 
-let input =
+const input =
 document.getElementById("messageInput");
 
 
-let text =
+const text =
 input.value.trim();
 
 
@@ -158,7 +171,9 @@ if(text==="") return;
 
 
 
-await addDoc(collection(db,"messages"),{
+await addDoc(
+collection(db,"messages"),
+{
 
 chatId:currentUser,
 
@@ -168,12 +183,13 @@ message:text,
 
 time:serverTimestamp()
 
-});
+}
+
+);
 
 
 
 input.value="";
-
 
 };
 
@@ -185,9 +201,9 @@ input.value="";
 
 
 
-// LOAD USER CHAT
+// MEMBER VIEW CHAT
 
-function loadMessages(){
+function loadUserMessages(){
 
 
 const box =
@@ -195,8 +211,13 @@ document.querySelector("#chat .chat-box");
 
 
 
-const q =
-collection(db,"messages");
+const q=query(
+
+collection(db,"messages"),
+
+where("chatId","==",currentUser)
+
+);
 
 
 
@@ -206,17 +227,15 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
+
 snapshot.forEach(doc=>{
 
 
-let data=doc.data();
+const data=doc.data();
 
 
 
-if(data.chatId===currentUser){
-
-
-box.innerHTML+=`
+box.innerHTML += `
 
 <div>
 
@@ -226,9 +245,10 @@ ${data.message}
 
 </div>
 
+<br>
+
 `;
 
-}
 
 
 });
@@ -262,25 +282,25 @@ onSnapshot(collection(db,"users"),(snapshot)=>{
 list.innerHTML="";
 
 
-let names=[];
+let users=[];
 
 
 
 snapshot.forEach(doc=>{
 
 
-let user=doc.data();
+let data=doc.data();
 
 
 
 if(
-user.name.toLowerCase()!=="mauricio"
+data.role==="member"
 &&
-!names.includes(user.name)
+!users.includes(data.name)
 
 ){
 
-names.push(user.name);
+users.push(data.name);
 
 }
 
@@ -291,9 +311,9 @@ names.push(user.name);
 
 
 
-if(names.length===0){
+if(users.length===0){
 
-list.innerHTML="No visitors yet";
+list.innerHTML="No members yet";
 
 return;
 
@@ -301,10 +321,10 @@ return;
 
 
 
-names.forEach(name=>{
+users.forEach(name=>{
 
 
-list.innerHTML+=`
+list.innerHTML += `
 
 <button onclick="openUser('${name}')">
 
@@ -334,16 +354,13 @@ list.innerHTML+=`
 
 
 
-// SELECT USER
+// ADMIN SELECT MEMBER
 
 window.openUser=function(name){
 
-
 selectedUser=name;
 
-
 loadAdminMessages();
-
 
 };
 
@@ -354,7 +371,8 @@ loadAdminMessages();
 
 
 
-// ADMIN VIEW MESSAGES
+
+// ADMIN VIEW SELECTED CHAT
 
 function loadAdminMessages(){
 
@@ -363,46 +381,53 @@ const box =
 document.getElementById("adminChat");
 
 
-onSnapshot(collection(db,"messages"),(snapshot)=>{
+
+const q=query(
+
+collection(db,"messages"),
+
+where("chatId","==",selectedUser)
+
+);
+
+
+
+onSnapshot(q,(snapshot)=>{
 
 
 box.innerHTML="";
 
 
+
 snapshot.forEach(doc=>{
 
 
-let data=doc.data();
+const data=doc.data();
 
 
 
-if(data.chatId===selectedUser){
+box.innerHTML += `
 
-
-box.innerHTML+=`
-
-<p>
+<div>
 
 <b>${data.sender}</b><br>
 
 ${data.message}
 
-</p>
+</div>
 
 <hr>
 
 `;
 
-}
-
-
-
-});
 
 
 });
 
 
+});
+
+
 }
 
 
@@ -412,16 +437,17 @@ ${data.message}
 
 
 
-// ADMIN SEND
+
+// ADMIN REPLY
 
 window.adminSend=async function(){
 
 
-let input =
+const input =
 document.getElementById("adminMessage");
 
 
-let text =
+const text =
 input.value.trim();
 
 
@@ -430,7 +456,11 @@ if(text==="" || selectedUser==="") return;
 
 
 
-await addDoc(collection(db,"messages"),{
+await addDoc(
+
+collection(db,"messages"),
+
+{
 
 chatId:selectedUser,
 
@@ -440,11 +470,12 @@ message:text,
 
 time:serverTimestamp()
 
-});
+}
+
+);
 
 
 
 input.value="";
-
 
 };
