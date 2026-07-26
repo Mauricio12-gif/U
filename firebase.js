@@ -2,7 +2,14 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { 
+getFirestore 
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+
+import {
+getStorage
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
 
 
 
@@ -33,11 +40,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 
-// Connect Firestore database
+
+// Connect Firestore
 
 const db = getFirestore(app);
 
 
-// Make database available to other files
 
-export { db };
+// Connect Storage
+
+const storage = getStorage(app);
+
+
+
+// Export for other files
+
+export { db, storage };
