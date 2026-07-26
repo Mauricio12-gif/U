@@ -7,11 +7,9 @@
 
 
 body{
-
     background:#fff5f8;
     color:#4a2030;
     min-height:100vh;
-
 }
 
 
@@ -21,56 +19,40 @@ body{
 .login{
 
     height:100vh;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:20px;
 
-
     background:
-
     linear-gradient(
     rgba(0,0,0,.55),
     rgba(0,0,0,.55)
     ),
-
     url("IMG_3939.jpg");
 
-
     background-size:cover;
-
     background-position:center;
 
 }
 
 
-
 .login-card{
 
     width:100%;
-
     max-width:400px;
 
     padding:35px;
-
 
     background:rgba(255,255,255,.15);
 
     backdrop-filter:blur(15px);
 
-
     border-radius:25px;
-
 
     text-align:center;
 
-
     color:white;
-
 
 }
 
@@ -85,7 +67,6 @@ body{
 }
 
 
-
 .login-card input{
 
     width:100%;
@@ -93,7 +74,6 @@ body{
     padding:15px;
 
     margin:10px 0;
-
 
     border:none;
 
@@ -110,7 +90,6 @@ body{
 
 
 
-
 button{
 
     border:none;
@@ -119,18 +98,13 @@ button{
 
     border-radius:30px;
 
-
     background:#e91e63;
-
 
     color:white;
 
-
     font-size:16px;
 
-
     cursor:pointer;
-
 
     transition:.3s;
 
@@ -152,16 +126,13 @@ button:hover{
 
 
 
-
 /* HEADER */
-
 
 .top{
 
     text-align:center;
 
     padding:30px 20px;
-
 
     background:
 
@@ -171,9 +142,7 @@ button:hover{
     #ad1457
     );
 
-
     color:white;
-
 
     border-radius:0 0 30px 30px;
 
@@ -185,57 +154,41 @@ button:hover{
 
 
 
-
 /* PROFILE */
-
 
 .profile-card{
 
     margin:25px;
 
-
     padding:25px;
-
 
     text-align:center;
 
-
     background:white;
-
 
     border-radius:25px;
 
-
     box-shadow:
-
     0 10px 30px rgba(0,0,0,.1);
 
-
 }
-
 
 
 .profile-card img{
 
-
     width:130px;
-
 
     height:130px;
 
-
     object-fit:cover;
-
 
     border-radius:50%;
 
-
     border:5px solid #f8bbd0;
 
+    margin-bottom:15px;
 
 }
-
-
 
 
 
@@ -245,52 +198,36 @@ button:hover{
 
 /* DASHBOARD */
 
-
 .dashboard{
-
 
     display:grid;
 
-
     grid-template-columns:repeat(2,1fr);
-
 
     gap:18px;
 
-
     padding:25px;
-
 
 }
 
 
 
-
 .app-card{
-
 
     background:white;
 
-
     padding:25px 15px;
-
 
     border-radius:25px;
 
-
     text-align:center;
-
 
     cursor:pointer;
 
-
     box-shadow:
-
     0 8px 20px rgba(0,0,0,.08);
 
-
     transition:.3s;
-
 
 }
 
@@ -298,14 +235,9 @@ button:hover{
 
 .app-card:hover{
 
-
     transform:translateY(-8px);
 
 }
-
-
-
-
 
 
 .app-card span{
@@ -321,35 +253,43 @@ button:hover{
 
 
 
-
 /* CONTENT */
-
 
 .content{
 
-
     margin:25px;
-
 
     padding:25px;
 
-
     background:white;
-
 
     border-radius:25px;
 
-
     box-shadow:
-
     0 10px 25px rgba(0,0,0,.08);
-
 
     animation:fade .5s;
 
-
     text-align:center;
 
+}
+
+
+
+
+
+
+/* LOVE */
+
+.love-list p{
+
+    background:#ffe4ec;
+
+    padding:15px;
+
+    margin:10px;
+
+    border-radius:20px;
 
 }
 
@@ -359,9 +299,64 @@ button:hover{
 
 
 
+/* HOW WE MET EDITOR */
+
+#meetingStory{
+
+    width:100%;
+
+    height:300px;
+
+    padding:20px;
+
+    margin-top:20px;
+
+    border-radius:25px;
+
+    border:2px solid #f8bbd0;
+
+    outline:none;
+
+    resize:none;
+
+    background:#fff5f8;
+
+    color:#4a2030;
+
+    font-size:16px;
+
+    line-height:1.6;
+
+}
+
+
+
+#meetingStory:focus{
+
+    border-color:#e91e63;
+
+    box-shadow:
+    0 0 15px rgba(233,30,99,.2);
+
+}
+
+
+
+#storySaved{
+
+    color:#e91e63;
+
+    margin-top:15px;
+
+}
+
+
+
+
+
+
 
 /* GALLERY */
-
 
 #gallery.content{
 
@@ -373,102 +368,62 @@ button:hover{
 
 .gallery-grid{
 
-
     display:grid;
-
 
     grid-template-columns:repeat(3,1fr);
 
-
     gap:6px;
-
 
     width:100%;
 
-
     height:75vh;
-
 
     margin-top:20px;
 
-
 }
-
-
 
 
 
 .gallery-grid img{
 
-
     width:100%;
-
 
     height:100%;
 
-
     object-fit:cover;
-
 
     border-radius:12px;
 
-
     cursor:pointer;
-
 
     transition:.3s;
 
-
 }
-
-
-
-.gallery-grid img:hover{
-
-
-    transform:scale(1.05);
-
-
-}
-
-
 
 
 
 .gallery-grid img.expanded{
 
-
     position:fixed;
-
 
     top:50%;
 
-
     left:50%;
-
 
     width:90vw;
 
-
     height:85vh;
-
 
     object-fit:contain;
 
-
     transform:translate(-50%,-50%);
-
 
     z-index:1001;
 
-
     background:black;
 
-
-    border-radius:20px;
-
-
 }
+
 
 
 
@@ -476,24 +431,17 @@ button:hover{
 
 .gallery-grid:has(img.expanded)::before{
 
-
     content:"";
-
 
     position:fixed;
 
-
     inset:0;
-
 
     background:rgba(0,0,0,.85);
 
-
     z-index:1000;
 
-
 }
-
 
 
 
@@ -504,27 +452,54 @@ button:hover{
 
 /* CHAT */
 
-
 .chat-box{
-
 
     height:350px;
 
-
     background:#fff0f5;
-
 
     border-radius:20px;
 
-
     padding:20px;
-
 
     margin-bottom:15px;
 
-
     overflow-y:auto;
 
+}
+
+
+
+.message{
+
+    background:white;
+
+    padding:15px;
+
+    margin:10px 0;
+
+    border-radius:20px;
+
+    text-align:left;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.1);
+
+}
+
+
+
+#messageInput{
+
+    width:70%;
+
+    padding:14px;
+
+    border-radius:25px;
+
+    border:1px solid #ddd;
+
+    outline:none;
 
 }
 
@@ -532,7 +507,91 @@ button:hover{
 
 
 
-.message{
 
 
-    background:white
+footer{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#ad1457;
+
+}
+
+
+
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+
+
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+.dashboard{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+
+
+#messageInput{
+
+width:100%;
+
+}
+
+
+
+.gallery-grid{
+
+height:70vh;
+
+}
+
+
+
+.gallery-grid img.expanded{
+
+width:95vw;
+
+height:90vh;
+
+}
+
+
+    }
