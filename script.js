@@ -20,14 +20,17 @@ let selectedUser = "";
 
 window.login = function(){
 
+
 const name =
 document.getElementById("visitorName").value.trim();
+
 
 const password =
 document.getElementById("password").value;
 
 
 if(name === "") return;
+
 
 
 if(password !== "LOVE"){
@@ -40,15 +43,19 @@ return;
 }
 
 
+
 currentUser = name;
+
 
 
 document.getElementById("loginPage")
 .classList.add("hidden");
 
 
+
 document.getElementById("mainPage")
 .classList.remove("hidden");
+
 
 
 document.getElementById("welcome")
@@ -57,7 +64,19 @@ document.getElementById("welcome")
 
 
 
+
 saveUser();
+
+
+
+if(currentUser === "Mauricio"){
+
+document
+.getElementById("adminCard")
+.classList.remove("hidden");
+
+}
+
 
 
 };
@@ -67,35 +86,44 @@ saveUser();
 
 
 
-// SAVE VISITOR
+
+
+
+// SAVE USER
 
 async function saveUser(){
 
-await addDoc(collection(db,"users"),{
+
+await addDoc(
+collection(db,"users"),
+{
 
 name:currentUser,
 
 time:serverTimestamp()
 
-});
+}
+
+);
+
+
+}
 
 
 
-};
 
 
 
 
 
 
-
-
-// SHOW SECTIONS
+// SHOW SECTION
 
 window.showSection=function(id){
 
 
-document.querySelectorAll(".content")
+document
+.querySelectorAll(".content")
 .forEach(section=>{
 
 section.classList.add("hidden");
@@ -103,16 +131,19 @@ section.classList.add("hidden");
 });
 
 
-document.getElementById(id)
+
+document
+.getElementById(id)
 .classList.remove("hidden");
 
 
 
 if(id==="chat"){
 
-loadMessages();
+loadUserMessages();
 
 }
+
 
 
 if(id==="admin"){
@@ -132,7 +163,7 @@ loadUsers();
 
 
 
-// VISITOR SEND
+// USER SEND MESSAGE
 
 window.sendMessage = async function(){
 
@@ -145,11 +176,14 @@ const text =
 input.value.trim();
 
 
+
 if(text==="") return;
 
 
 
-await addDoc(collection(db,"messages"),{
+await addDoc(
+collection(db,"messages"),
+{
 
 chatId:currentUser,
 
@@ -159,7 +193,9 @@ message:text,
 
 time:serverTimestamp()
 
-});
+}
+
+);
 
 
 
@@ -176,13 +212,14 @@ input.value="";
 
 
 
-// VISITOR CHAT
+// USER CHAT DISPLAY
 
-function loadMessages(){
+function loadUserMessages(){
 
 
 const box =
 document.querySelector("#chat .chat-box");
+
 
 
 const q=query(
@@ -208,7 +245,8 @@ snapshot.forEach(doc=>{
 let data=doc.data();
 
 
-box.innerHTML+=`
+
+box.innerHTML += `
 
 <div class="${data.sender===currentUser ? "my-message":"other-message"}">
 
@@ -237,13 +275,15 @@ ${data.message}
 
 
 
-// ADMIN USERS
+
+// ADMIN SEE ALL USERS
 
 function loadUsers(){
 
 
 const box =
 document.getElementById("usersList");
+
 
 
 const q =
@@ -257,26 +297,39 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
+
+let users = [];
+
+
+
 snapshot.forEach(doc=>{
 
 
-let user=doc.data();
+let user = doc.data();
 
 
+if(!users.includes(user.name) && user.name !== "Mauricio"){
 
-box.innerHTML+=`
+users.push(user.name);
+
+
+box.innerHTML += `
 
 <button onclick="openUser('${user.name}')">
 
 ❤️ ${user.name}
 
-</button><br><br>
+</button>
+
+<br><br>
 
 `;
 
+}
 
 
 });
+
 
 
 });
@@ -291,14 +344,16 @@ box.innerHTML+=`
 
 
 
-// OPEN VISITOR CHAT
+
+// ADMIN SELECT USER
 
 window.openUser=function(name){
+
 
 selectedUser=name;
 
 
-loadAdminChat();
+loadSelectedChat();
 
 
 };
@@ -310,9 +365,10 @@ loadAdminChat();
 
 
 
-// ADMIN VIEW MESSAGES
 
-function loadAdminChat(){
+// ADMIN VIEW SELECTED CHAT
+
+function loadSelectedChat(){
 
 
 const box =
@@ -336,13 +392,15 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
+
 snapshot.forEach(doc=>{
 
 
 let data=doc.data();
 
 
-box.innerHTML+=`
+
+box.innerHTML += `
 
 <div>
 
@@ -373,7 +431,8 @@ ${data.message}
 
 
 
-// ADMIN SEND
+
+// ADMIN SEND REPLY
 
 window.adminSend=async function(){
 
@@ -387,11 +446,13 @@ input.value.trim();
 
 
 
-if(text==="") return;
+if(text==="" || selectedUser==="") return;
 
 
 
-await addDoc(collection(db,"messages"),{
+await addDoc(
+collection(db,"messages"),
+{
 
 chatId:selectedUser,
 
@@ -401,23 +462,13 @@ message:text,
 
 time:serverTimestamp()
 
-});
+}
+
+);
 
 
 
 input.value="";
 
-
-};
-
-
-
-
-
-
-
-window.logout=function(){
-
-location.reload();
 
 };
