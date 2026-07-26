@@ -22,6 +22,19 @@ let currentUser = "";
 
 
 const OWNER_EMAIL = "lovermax876@gmail.com";
+window.enterWebsite = function(){
+
+document
+.getElementById("welcomePage")
+.classList.add("hidden");
+
+
+document
+.getElementById("mainPage")
+.classList.remove("hidden");
+
+
+};
 
 
 
