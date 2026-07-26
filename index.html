@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Our Little Story ❤️</title>
@@ -14,6 +15,7 @@
 
 
 <body>
+
 
 
 <!-- LOGIN -->
@@ -52,9 +54,12 @@ Enter Our Story
 
 
 
+
+
 <!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
+
 
 
 <header class="top">
@@ -74,6 +79,7 @@ Our memories, dreams and conversations
 
 
 
+
 <section class="profile-card">
 
 
@@ -86,11 +92,13 @@ Our Beautiful Journey ❤️
 
 
 <p>
-A small corner of the internet made for memories.
+A small corner of the internet made for our memories.
 </p>
 
 
 </section>
+
+
 
 
 
@@ -117,6 +125,7 @@ How everything began
 
 
 
+
 <div class="app-card" onclick="showSection('love')">
 
 <span>💕</span>
@@ -132,6 +141,7 @@ Reasons you are special
 
 
 
+
 <div class="app-card" onclick="showSection('meeting')">
 
 <span>🤝</span>
@@ -139,10 +149,11 @@ Reasons you are special
 <h3>How We Met</h3>
 
 <p>
-Write our beginning
+Our beginning
 </p>
 
 </div>
+
 
 
 
@@ -162,6 +173,7 @@ Our memories
 
 
 
+
 <div class="app-card" onclick="showSection('dreams')">
 
 <span>✨</span>
@@ -169,10 +181,11 @@ Our memories
 <h3>Our Dreams</h3>
 
 <p>
-The future we imagine
+Future plans
 </p>
 
 </div>
+
 
 
 
@@ -191,6 +204,7 @@ Leave a message
 
 
 
+
 </section>
 
 
@@ -201,7 +215,7 @@ Leave a message
 
 
 
-<!-- STORY -->
+<!-- OUR STORY -->
 
 <section id="story" class="content hidden">
 
@@ -209,11 +223,25 @@ Leave a message
 <h2>📖 Our Story</h2>
 
 
-<p>
+<textarea id="ourStoryText">
 
-Our journey, memories and moments together will be written here.
+Write our journey here ❤️
 
-</p>
+</textarea>
+
+
+
+<br><br>
+
+
+<button onclick="saveStorySection('ourStory','ourStoryText','storySaved')">
+
+Save Story ❤️
+
+</button>
+
+
+<p id="storySaved"></p>
 
 
 </section>
@@ -234,19 +262,26 @@ Our journey, memories and moments together will be written here.
 <h2>💕 Why I Love You</h2>
 
 
-<div class="love-list">
+
+<textarea id="loveText">
+
+Write reasons you are special here ❤️
+
+</textarea>
 
 
-<p>❤️ Your smile</p>
 
-<p>❤️ Your kindness</p>
-
-<p>❤️ Your personality</p>
-
-<p>❤️ The happiness you bring</p>
+<br><br>
 
 
-</div>
+<button onclick="saveStorySection('love','loveText','loveSaved')">
+
+Save Love ❤️
+
+</button>
+
+
+<p id="loveSaved"></p>
 
 
 </section>
@@ -259,7 +294,7 @@ Our journey, memories and moments together will be written here.
 
 
 
-<!-- HOW WE MET EDITABLE -->
+<!-- HOW WE MET -->
 
 <section id="meeting" class="content hidden">
 
@@ -268,12 +303,9 @@ Our journey, memories and moments together will be written here.
 
 
 
-<textarea 
-id="meetingStory"
-placeholder="Write your story here ❤️">
+<textarea id="meetingText">
 
-Every beautiful story has a beginning.
-This is where ours will be written.
+Write how everything started ❤️
 
 </textarea>
 
@@ -282,17 +314,14 @@ This is where ours will be written.
 <br><br>
 
 
-
-<button onclick="saveMeetingStory()">
+<button onclick="saveStorySection('howWeMet','meetingText','meetingSaved')">
 
 Save Story ❤️
 
 </button>
 
 
-
-<p id="storySaved"></p>
-
+<p id="meetingSaved"></p>
 
 
 </section>
@@ -359,13 +388,26 @@ Save Story ❤️
 <h2>✨ Our Dreams</h2>
 
 
-<p>
 
-Places we want to visit.
-Things we want to experience.
-Memories we are yet to create.
+<textarea id="dreamsText">
 
-</p>
+Write our dreams here ❤️
+
+</textarea>
+
+
+
+<br><br>
+
+
+<button onclick="saveStorySection('dreams','dreamsText','dreamsSaved')">
+
+Save Dreams ❤️
+
+</button>
+
+
+<p id="dreamsSaved"></p>
 
 
 </section>
@@ -395,7 +437,6 @@ Memories we are yet to create.
 
 
 
-
 <input 
 id="messageInput"
 placeholder="Write a message...">
@@ -405,12 +446,12 @@ placeholder="Write a message...">
 <br><br>
 
 
-
 <button onclick="sendMessage()">
 
 Send ❤️
 
 </button>
+
 
 
 <br><br>
@@ -437,11 +478,8 @@ Send ❤️
 <footer>
 
 <p>
-
 Forever creating memories ❤️
-
 </p>
-
 
 </footer>
 
@@ -460,4 +498,4 @@ Forever creating memories ❤️
 
 </body>
 
-</html>
+  </html>
