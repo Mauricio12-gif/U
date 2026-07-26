@@ -645,3 +645,29 @@ window.addEventListener(
 
     }
 );
+// MAKE SURE BUTTONS WORK
+
+window.enterWebsite = function(){
+
+    document
+    .getElementById("welcomePage")
+    .style.display = "none";
+
+
+    document
+    .getElementById("mainPage")
+    .classList
+    .remove("hidden");
+
+};
+
+
+
+window.openOwnerLogin = function(){
+
+    document
+    .getElementById("loginPage")
+    .classList
+    .remove("hidden");
+
+};
