@@ -1,8 +1,10 @@
 import { db, auth } from "./firebase.js";
 
+
 import {
 signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
 
 import {
 collection,
@@ -24,7 +26,24 @@ const OWNER_EMAIL = "lovermax876@gmail.com";
 
 
 
-// LOGIN
+
+// OPEN OWNER LOGIN
+
+window.openOwnerLogin = function(){
+
+document
+.getElementById("loginPage")
+.classList.remove("hidden");
+
+};
+
+
+
+
+
+
+
+// OWNER LOGIN ONLY
 
 window.login = async function(){
 
@@ -48,9 +67,13 @@ try{
 
 const userCredential =
 await signInWithEmailAndPassword(
+
 auth,
+
 email,
+
 password
+
 );
 
 
@@ -64,29 +87,9 @@ currentUser = user.email;
 
 
 
-document
-.getElementById("loginPage")
-.classList.add("hidden");
-
-
-
-document
-.getElementById("mainPage")
-.classList.remove("hidden");
-
-
-
-document
-.getElementById("welcome")
-.innerHTML =
-"Welcome ❤️";
-
-
-
-
-// SHOW EDIT BUTTONS ONLY TO MAURICIO
 
 if(user.email === OWNER_EMAIL){
+
 
 
 document
@@ -98,16 +101,31 @@ button.classList.remove("hidden");
 });
 
 
+
+document
+.getElementById("loginPage")
+.classList.add("hidden");
+
+
+
+alert("Welcome Mauricio ❤️ Editing unlocked");
+
+
+}
+
+
+else{
+
+
+alert("Login successful, but editing is disabled");
+
+
 }
 
 
 
-loadStories();
-
-loadMessages();
-
-
 }
+
 
 
 catch(e){
@@ -133,7 +151,7 @@ error.innerHTML =
 
 
 
-// SHOW PAGE SECTIONS
+// SHOW WEBSITE SECTIONS
 
 window.showSection=function(id){
 
@@ -185,9 +203,10 @@ loadMessages();
 
 
 
-// LOAD STORIES
+// LOAD STORIES FROM FIREBASE
 
 async function loadStories(){
+
 
 
 const stories=[
@@ -225,13 +244,11 @@ input:"dreamsText"
 
 
 
-
 for(let story of stories){
 
 
 
-const result =
-await getDoc(
+const result = await getDoc(
 
 doc(
 db,
@@ -276,8 +293,6 @@ input.value=text;
 }
 
 
-}
-
 
 }
 
@@ -285,6 +300,7 @@ input.value=text;
 }
 
 
+}
 
 
 
@@ -292,7 +308,9 @@ input.value=text;
 
 
 
-// OPEN EDIT AREA
+
+
+// OPEN EDIT BOX
 
 window.editStory=function(type){
 
@@ -301,35 +319,20 @@ let box;
 
 
 
-if(type==="ourStory"){
-
+if(type==="ourStory")
 box="ourStoryEdit";
 
-}
 
-
-
-if(type==="love"){
-
+if(type==="love")
 box="loveEdit";
 
-}
 
-
-
-if(type==="howWeMet"){
-
+if(type==="howWeMet")
 box="meetingEdit";
 
-}
 
-
-
-if(type==="dreams"){
-
+if(type==="dreams")
 box="dreamsEdit";
-
-}
 
 
 
@@ -354,16 +357,20 @@ document
 
 
 
-// SAVE STORY TO FIREBASE
+// SAVE STORIES
 
 window.saveStorySection = async function(
+
 collectionName,
+
 inputId
+
 ){
 
 
 
 const text =
+
 document
 .getElementById(inputId)
 .value;
@@ -387,34 +394,13 @@ updatedAt:serverTimestamp()
 }
 
 );
-
-
-
-alert("Saved ❤️");
-
-
-loadStories();
-
-
-};
-
-
-
-
-
-
-
-
-
-// SEND PUBLIC MESSAGE
+// PUBLIC CHAT SEND
 
 window.sendMessage = async function(){
 
 
-
 const input =
 document.getElementById("messageInput");
-
 
 
 const message =
@@ -422,7 +408,7 @@ input.value.trim();
 
 
 
-if(message==="") return;
+if(message === "") return;
 
 
 
@@ -508,22 +494,27 @@ ${data.Message || ""}
 `;
 
 
+
 });
 
 
 
 if(snapshot.empty){
 
+
 box.innerHTML =
 "No messages yet ❤️";
 
+
 }
+
 
 
 }
 
 
 );
+
 
 
 }
@@ -541,7 +532,9 @@ box.innerHTML =
 window.expandPhoto=function(photo){
 
 
+
 photo.classList.toggle("expanded");
+
 
 
 };
@@ -573,13 +566,46 @@ const text =
 window.open(
 
 "https://wa.me/" +
+
 phone +
+
 "?text=" +
+
 encodeURIComponent(text),
 
 "_blank"
 
 );
+
+
+
+};
+
+
+
+
+
+
+
+
+
+// AUTO LOAD STORIES WHEN PAGE OPENS
+
+window.addEventListener("load",()=>{
+
+
+loadStories();
+
+
+});
+
+
+
+alert("Saved ❤️");
+
+
+loadStories();
+
 
 
 };
