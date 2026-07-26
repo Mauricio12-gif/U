@@ -17,32 +17,27 @@ let currentUser = "";
 
 window.login = function(){
 
-
 const name =
 document.getElementById("visitorName").value.trim();
 
-
 const password =
 document.getElementById("password").value;
-
 
 const error =
 document.getElementById("error");
 
 
+if(name === ""){
 
-if(name===""){
-
-error.innerHTML="Enter your name ❤️";
+error.innerHTML = "Enter your name ❤️";
 return;
 
 }
 
 
+if(password !== "LOVE"){
 
-if(password!=="LOVE"){
-
-error.innerHTML="Wrong password ❤️";
+error.innerHTML = "Wrong password ❤️";
 return;
 
 }
@@ -67,8 +62,7 @@ document
 
 document
 .getElementById("welcome")
-.innerHTML =
-"Welcome ❤️";
+.innerHTML = "Welcome ❤️";
 
 
 
@@ -76,7 +70,6 @@ loadMessages();
 
 
 };
-
 
 
 
@@ -106,7 +99,7 @@ document
 
 
 
-if(sectionID==="chat"){
+if(sectionID === "chat"){
 
 loadMessages();
 
@@ -122,8 +115,7 @@ loadMessages();
 
 
 
-
-// SEND ANONYMOUS MESSAGE
+// SEND MESSAGE
 
 window.sendMessage = async function(){
 
@@ -137,7 +129,7 @@ input.value.trim();
 
 
 
-if(text==="") return;
+if(text === "") return;
 
 
 
@@ -161,7 +153,7 @@ Time:serverTimestamp()
 
 
 
-input.value="";
+input.value = "";
 
 
 
@@ -174,25 +166,34 @@ input.value="";
 
 
 
-
-// LOAD PUBLIC ANONYMOUS CHAT
+// LOAD ALL PUBLIC MESSAGES
 
 function loadMessages(){
 
 
 const box =
-document.querySelector("#chat .chat-box");
+document.querySelector(".chat-box");
 
 
 
-if(!box) return;
+if(!box){
+
+console.log("Chat box missing");
+
+return;
+
+}
 
 
 
-onSnapshot(collection(db,"messages"),(snapshot)=>{
+onSnapshot(
+
+collection(db,"messages"),
+
+(snapshot)=>{
 
 
-box.innerHTML="";
+box.innerHTML = "";
 
 
 
@@ -202,7 +203,6 @@ if(snapshot.empty){
 box.innerHTML =
 "<p>No messages yet ❤️</p>";
 
-
 return;
 
 
@@ -210,7 +210,7 @@ return;
 
 
 
-snapshot.forEach(doc=>{
+snapshot.forEach((doc)=>{
 
 
 const data = doc.data();
@@ -218,9 +218,7 @@ const data = doc.data();
 
 
 const message =
-data.Message ||
-data.message ||
-"";
+data.Message || "No message";
 
 
 
@@ -245,11 +243,12 @@ ${message}
 });
 
 
-});
+}
+
+);
 
 
 }
-
 
 
 
@@ -264,26 +263,26 @@ window.openWhatsApp = function(){
 
 
 const phone =
-"254797147255";
+"254797147155";
 
 
-const message =
+const text =
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const link =
+const url =
 "https://wa.me/"
 +
 phone
 +
 "?text="
 +
-encodeURIComponent(message);
+encodeURIComponent(text);
 
 
 
-window.open(link,"_blank");
+window.open(url,"_blank");
 
 
 };
