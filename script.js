@@ -45,7 +45,7 @@ document.getElementById("error");
 
 
 
-if(name === ""){
+if(name===""){
 
 error.innerHTML="Enter your name ❤️";
 
@@ -55,7 +55,7 @@ return;
 
 
 
-if(password !== "LOVE"){
+if(password!=="LOVE"){
 
 error.innerHTML="Wrong password ❤️";
 
@@ -65,7 +65,7 @@ return;
 
 
 
-currentUser = name;
+currentUser=name;
 
 
 
@@ -83,13 +83,14 @@ document
 
 document
 .getElementById("welcome")
-.innerHTML="Welcome ❤️";
+.innerHTML=
+"Welcome ❤️";
 
 
+
+loadAllStories();
 
 loadMessages();
-
-loadMeetingStory();
 
 
 };
@@ -102,7 +103,7 @@ loadMeetingStory();
 
 
 
-// SECTION SWITCH
+// CHANGE SECTION
 
 window.showSection=function(id){
 
@@ -130,10 +131,14 @@ loadMessages();
 }
 
 
+if(
+id==="story" ||
+id==="love" ||
+id==="meeting" ||
+id==="dreams"
+){
 
-if(id==="meeting"){
-
-loadMeetingStory();
+loadAllStories();
 
 }
 
@@ -148,7 +153,121 @@ loadMeetingStory();
 
 
 
-// PUBLIC CHAT SEND
+// SAVE ANY STORY SECTION
+
+window.saveStorySection = async function(
+sectionName,
+inputId,
+savedId
+){
+
+
+const text =
+document.getElementById(inputId).value;
+
+
+
+await setDoc(
+
+doc(db,"story",sectionName),
+
+{
+
+content:text,
+
+updatedAt:serverTimestamp()
+
+}
+
+);
+
+
+
+document
+.getElementById(savedId)
+.innerHTML=
+"Saved ❤️";
+
+
+};
+
+
+
+
+
+
+
+
+
+// LOAD ALL STORIES
+
+async function loadAllStories(){
+
+
+const sections=[
+
+{
+name:"ourStory",
+input:"ourStoryText"
+},
+
+{
+name:"love",
+input:"loveText"
+},
+
+{
+name:"howWeMet",
+input:"meetingText"
+},
+
+{
+name:"dreams",
+input:"dreamsText"
+}
+
+];
+
+
+
+for(let item of sections){
+
+
+const story =
+await getDoc(
+
+doc(db,"story",item.name)
+
+);
+
+
+
+if(story.exists()){
+
+
+document
+.getElementById(item.input)
+.value =
+story.data().content;
+
+
+}
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+// SEND CHAT MESSAGE
 
 window.sendMessage = async function(){
 
@@ -157,12 +276,12 @@ const input =
 document.getElementById("messageInput");
 
 
-const text =
+const message =
 input.value.trim();
 
 
 
-if(text==="") return;
+if(message==="") return;
 
 
 
@@ -174,7 +293,7 @@ collection(db,"messages"),
 
 ChatID:"public",
 
-Message:text,
+Message:message,
 
 Sender:currentUser,
 
@@ -231,7 +350,7 @@ const data=doc.data();
 
 
 
-box.innerHTML += `
+box.innerHTML +=`
 
 <div class="message">
 
@@ -246,14 +365,14 @@ ${data.Message || ""}
 `;
 
 
-
 });
 
 
 
 if(snapshot.empty){
 
-box.innerHTML="<p>No messages yet ❤️</p>";
+box.innerHTML=
+"<p>No messages yet ❤️</p>";
 
 }
 
@@ -273,92 +392,7 @@ box.innerHTML="<p>No messages yet ❤️</p>";
 
 
 
-// SAVE HOW WE MET STORY
-
-window.saveMeetingStory = async function(){
-
-
-const story =
-document.getElementById("meetingStory").value;
-
-
-
-await setDoc(
-
-doc(db,"story","howWeMet"),
-
-{
-
-content:story,
-
-updatedAt:serverTimestamp()
-
-}
-
-);
-
-
-
-document
-.getElementById("storySaved")
-.innerHTML=
-"Saved successfully ❤️";
-
-
-};
-
-
-
-
-
-
-
-
-
-// LOAD HOW WE MET STORY
-
-async function loadMeetingStory(){
-
-
-const storyBox =
-document.getElementById("meetingStory");
-
-
-
-if(!storyBox) return;
-
-
-
-const storyDoc =
-await getDoc(
-
-doc(db,"story","howWeMet")
-
-);
-
-
-
-if(storyDoc.exists()){
-
-
-storyBox.value =
-storyDoc.data().content;
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-// GALLERY EXPAND
+// GALLERY
 
 window.expandPhoto=function(photo){
 
@@ -384,12 +418,12 @@ window.openWhatsApp=function(){
 const phone="254797147155";
 
 
-const message=
+const text=
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const link=
+const url=
 
 "https://wa.me/"
 +
@@ -397,11 +431,11 @@ phone
 +
 "?text="
 +
-encodeURIComponent(message);
+encodeURIComponent(text);
 
 
 
-window.open(link,"_blank");
+window.open(url,"_blank");
 
 
 };
