@@ -13,22 +13,22 @@ serverTimestamp
 let currentUser = "";
 
 
+
 // LOGIN
 
 window.login = function(){
 
-const name = document
-.getElementById("visitorName")
-.value
-.trim();
-
-const password = document
-.getElementById("password")
-.value;
+const name =
+document.getElementById("visitorName").value.trim();
 
 
-const error = document
-.getElementById("error");
+const password =
+document.getElementById("password").value;
+
+
+const error =
+document.getElementById("error");
+
 
 
 if(name === ""){
@@ -39,6 +39,7 @@ return;
 }
 
 
+
 if(password !== "LOVE"){
 
 error.innerHTML = "Wrong password ❤️";
@@ -47,7 +48,9 @@ return;
 }
 
 
+
 currentUser = name;
+
 
 
 document
@@ -55,15 +58,18 @@ document
 .classList.add("hidden");
 
 
+
 document
 .getElementById("mainPage")
 .classList.remove("hidden");
+
 
 
 document
 .getElementById("welcome")
 .innerHTML =
 "Welcome " + name + " ❤️";
+
 
 
 loadMessages();
@@ -75,7 +81,8 @@ loadMessages();
 
 
 
-// SHOW SECTIONS
+
+// OPEN SECTIONS
 
 window.showSection = function(sectionID){
 
@@ -89,12 +96,14 @@ section.classList.add("hidden");
 });
 
 
+
 document
 .getElementById(sectionID)
 .classList.remove("hidden");
 
 
 };
+
 
 
 
@@ -115,11 +124,7 @@ input.value.trim();
 
 
 
-if(text === ""){
-
-return;
-
-}
+if(text === "") return;
 
 
 
@@ -127,7 +132,9 @@ try{
 
 
 await addDoc(
+
 collection(db,"messages"),
+
 {
 
 sender: currentUser,
@@ -145,6 +152,7 @@ time: serverTimestamp()
 input.value = "";
 
 
+
 }
 
 catch(error){
@@ -156,6 +164,7 @@ alert("Message failed to send");
 }
 
 
+
 };
 
 
@@ -164,7 +173,9 @@ alert("Message failed to send");
 
 
 
-// LOAD REAL TIME MESSAGES
+
+
+// REAL TIME CHAT DISPLAY
 
 function loadMessages(){
 
@@ -173,11 +184,17 @@ const chatBox =
 document.querySelector(".chat-box");
 
 
+
 const q =
 query(
+
 collection(db,"messages"),
+
 orderBy("time","asc")
+
 );
+
+
 
 
 
@@ -195,17 +212,31 @@ const data = doc.data();
 
 
 
+const position =
+
+data.sender === currentUser
+
+? "my-message"
+
+: "other-message";
+
+
+
+
+
 chatBox.innerHTML += `
 
-<div class="message">
 
-❤️ <b>${data.sender}</b>
+<div class="${position}">
+
+<b>${data.sender}</b>
 
 <br>
 
 ${data.message}
 
 </div>
+
 
 `;
 
@@ -215,8 +246,12 @@ ${data.message}
 
 
 
-});
+chatBox.scrollTop =
+chatBox.scrollHeight;
 
+
+
+});
 
 
 }
@@ -231,8 +266,10 @@ ${data.message}
 
 window.logout = function(){
 
+
 currentUser = "";
 
 location.reload();
+
 
 };
