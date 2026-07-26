@@ -52,7 +52,6 @@ Enter Our Story
 
 
 
-
 <!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
@@ -75,11 +74,10 @@ Our memories, dreams and conversations
 
 
 
-
 <section class="profile-card">
 
 
-<img src="IMG_3939.jpg" alt="Our photo">
+<img src="IMG_3939.jpg">
 
 
 <h2>
@@ -88,7 +86,7 @@ Our Beautiful Journey ❤️
 
 
 <p>
-A small corner of the internet made for us.
+A small corner of the internet made for memories.
 </p>
 
 
@@ -119,7 +117,6 @@ How everything began
 
 
 
-
 <div class="app-card" onclick="showSection('love')">
 
 <span>💕</span>
@@ -135,7 +132,6 @@ Reasons you are special
 
 
 
-
 <div class="app-card" onclick="showSection('meeting')">
 
 <span>🤝</span>
@@ -143,11 +139,10 @@ Reasons you are special
 <h3>How We Met</h3>
 
 <p>
-Our beginning
+Write our beginning
 </p>
 
 </div>
-
 
 
 
@@ -167,7 +162,6 @@ Our memories
 
 
 
-
 <div class="app-card" onclick="showSection('dreams')">
 
 <span>✨</span>
@@ -179,7 +173,6 @@ The future we imagine
 </p>
 
 </div>
-
 
 
 
@@ -212,11 +205,16 @@ Leave a message
 
 <section id="story" class="content hidden">
 
+
 <h2>📖 Our Story</h2>
 
+
 <p>
+
 Our journey, memories and moments together will be written here.
+
 </p>
+
 
 </section>
 
@@ -232,10 +230,12 @@ Our journey, memories and moments together will be written here.
 
 <section id="love" class="content hidden">
 
+
 <h2>💕 Why I Love You</h2>
 
 
 <div class="love-list">
+
 
 <p>❤️ Your smile</p>
 
@@ -244,6 +244,7 @@ Our journey, memories and moments together will be written here.
 <p>❤️ Your personality</p>
 
 <p>❤️ The happiness you bring</p>
+
 
 </div>
 
@@ -258,16 +259,41 @@ Our journey, memories and moments together will be written here.
 
 
 
-<!-- MEETING -->
+<!-- HOW WE MET EDITABLE -->
 
 <section id="meeting" class="content hidden">
 
+
 <h2>🤝 How We Met</h2>
 
-<p>
+
+
+<textarea 
+id="meetingStory"
+placeholder="Write your story here ❤️">
+
 Every beautiful story has a beginning.
 This is where ours will be written.
-</p>
+
+</textarea>
+
+
+
+<br><br>
+
+
+
+<button onclick="saveMeetingStory()">
+
+Save Story ❤️
+
+</button>
+
+
+
+<p id="storySaved"></p>
+
+
 
 </section>
 
@@ -283,7 +309,9 @@ This is where ours will be written.
 
 <section id="gallery" class="content hidden">
 
+
 <h2>📸 Our Gallery</h2>
+
 
 
 <div class="gallery-grid">
@@ -296,7 +324,6 @@ This is where ours will be written.
 <img src="photo3.jpg" onclick="expandPhoto(this)">
 
 
-
 <img src="photo4.jpg" onclick="expandPhoto(this)">
 
 <img src="photo5.jpg" onclick="expandPhoto(this)">
@@ -304,13 +331,11 @@ This is where ours will be written.
 <img src="photo6.jpg" onclick="expandPhoto(this)">
 
 
-
 <img src="photo7.jpg" onclick="expandPhoto(this)">
 
 <img src="photo8.jpg" onclick="expandPhoto(this)">
 
 <img src="photo9.jpg" onclick="expandPhoto(this)">
-
 
 
 </div>
@@ -335,9 +360,11 @@ This is where ours will be written.
 
 
 <p>
+
 Places we want to visit.
 Things we want to experience.
 Memories we are yet to create.
+
 </p>
 
 
@@ -359,20 +386,23 @@ Memories we are yet to create.
 <h2>💬 Public Chat</h2>
 
 
+
 <div class="chat-box">
 
-<p>
-No messages yet ❤️
-</p>
-
+<p>No messages yet ❤️</p>
 
 </div>
+
 
 
 
 <input 
 id="messageInput"
 placeholder="Write a message...">
+
+
+
+<br><br>
 
 
 
@@ -407,7 +437,9 @@ Send ❤️
 <footer>
 
 <p>
+
 Forever creating memories ❤️
+
 </p>
 
 
@@ -428,4 +460,4 @@ Forever creating memories ❤️
 
 </body>
 
-                </html>
+</html>
