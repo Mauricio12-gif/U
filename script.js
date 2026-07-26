@@ -1,7 +1,10 @@
 import { db, auth } from "./firebase.js";
 
 import {
+signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
+import {
 collection,
 addDoc,
 onSnapshot,
@@ -9,26 +12,25 @@ serverTimestamp,
 doc,
 setDoc,
 getDoc
-
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
 
 let currentUser = "";
+
+
 const OWNER_EMAIL = "lovermax876@gmail.com";
-
-
 
 
 
 
 // LOGIN
 
-window.login = function(){
+window.login = async function(){
 
 
-const name =
-document.getElementById("visitorName").value.trim();
+const email =
+document.getElementById("email").value.trim();
 
 
 const password =
@@ -36,29 +38,29 @@ document.getElementById("password").value;
 
 
 
-if(name===""){
-
-document.getElementById("error").innerHTML =
-"Enter your name ❤️";
-
-return;
-
-}
+const error =
+document.getElementById("error");
 
 
 
-if(password !== "LOVE"){
-
-document.getElementById("error").innerHTML =
-"Wrong password ❤️";
-
-return;
-
-}
+try{
 
 
+const userCredential =
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-currentUser = name;
+
+
+const user =
+userCredential.user;
+
+
+
+currentUser = user.email;
 
 
 
@@ -82,9 +84,9 @@ document
 
 
 
-// ONLY MAURICIO GETS EDIT BUTTONS
+// SHOW EDIT BUTTONS ONLY TO MAURICIO
 
-if(name.toLowerCase()==="mauricio"){
+if(user.email === OWNER_EMAIL){
 
 
 document
@@ -105,6 +107,22 @@ loadStories();
 loadMessages();
 
 
+}
+
+
+catch(e){
+
+
+console.log(e);
+
+
+error.innerHTML =
+"Wrong email or password ❤️";
+
+
+}
+
+
 };
 
 
@@ -115,9 +133,10 @@ loadMessages();
 
 
 
-// OPEN SECTIONS
+// SHOW PAGE SECTIONS
 
 window.showSection=function(id){
+
 
 
 document
@@ -175,28 +194,28 @@ const stories=[
 
 
 {
-collection:"ourStory",
+name:"ourStory",
 display:"ourStoryDisplay",
 input:"ourStoryText"
 },
 
 
 {
-collection:"love",
+name:"love",
 display:"loveDisplay",
 input:"loveText"
 },
 
 
 {
-collection:"howWeMet",
+name:"howWeMet",
 display:"meetingDisplay",
 input:"meetingText"
 },
 
 
 {
-collection:"dreams",
+name:"dreams",
 display:"dreamsDisplay",
 input:"dreamsText"
 }
@@ -206,15 +225,18 @@ input:"dreamsText"
 
 
 
+
 for(let story of stories){
 
 
-const result = await getDoc(
+
+const result =
+await getDoc(
 
 doc(
 db,
 "story",
-story.collection
+story.name
 )
 
 );
@@ -224,45 +246,53 @@ story.collection
 if(result.exists()){
 
 
-let text =
+const text =
 result.data().content;
 
 
 
-document
-.getElementById(story.display)
-.innerText=text;
+const display =
+document.getElementById(story.display);
 
 
 
-if(document.getElementById(story.input)){
+if(display){
 
-document
-.getElementById(story.input)
-.value=text;
+display.innerText=text;
 
 }
 
 
 
+const input =
+document.getElementById(story.input);
+
+
+
+if(input){
+
+input.value=text;
+
+}
+
+
+}
+
+
+}
+
+
 }
 
 
 
-}
-
-
-}
 
 
 
 
 
 
-
-
-
-// SHOW EDIT BOX
+// OPEN EDIT AREA
 
 window.editStory=function(type){
 
@@ -271,26 +301,47 @@ let box;
 
 
 
-if(type==="ourStory")
+if(type==="ourStory"){
+
 box="ourStoryEdit";
 
+}
 
-if(type==="love")
+
+
+if(type==="love"){
+
 box="loveEdit";
 
+}
 
-if(type==="howWeMet")
+
+
+if(type==="howWeMet"){
+
 box="meetingEdit";
 
+}
 
-if(type==="dreams")
+
+
+if(type==="dreams"){
+
 box="dreamsEdit";
 
+}
+
+
+
+if(box){
 
 
 document
 .getElementById(box)
 .classList.remove("hidden");
+
+
+}
 
 
 };
@@ -303,12 +354,13 @@ document
 
 
 
-// SAVE STORIES
+// SAVE STORY TO FIREBASE
 
 window.saveStorySection = async function(
 collectionName,
 inputId
 ){
+
 
 
 const text =
@@ -354,9 +406,10 @@ loadStories();
 
 
 
-// PUBLIC CHAT
+// SEND PUBLIC MESSAGE
 
 window.sendMessage = async function(){
+
 
 
 const input =
@@ -406,9 +459,10 @@ input.value="";
 
 
 
-// LOAD CHAT
+// LOAD PUBLIC CHAT
 
 function loadMessages(){
+
 
 
 const box =
@@ -434,7 +488,8 @@ box.innerHTML="";
 snapshot.forEach(item=>{
 
 
-let data=item.data();
+const data =
+item.data();
 
 
 
@@ -481,11 +536,13 @@ box.innerHTML =
 
 
 
-// GALLERY
+// GALLERY IMAGE EXPAND
 
 window.expandPhoto=function(photo){
 
+
 photo.classList.toggle("expanded");
+
 
 };
 
@@ -497,13 +554,14 @@ photo.classList.toggle("expanded");
 
 
 
-// WHATSAPP
+// WHATSAPP BUTTON
 
 window.openWhatsApp=function(){
 
 
+
 const phone =
-"254797147255";
+"254797147155";
 
 
 
@@ -514,12 +572,9 @@ const text =
 
 window.open(
 
-"https://wa.me/"
-+
-phone
-+
-"?text="
-+
+"https://wa.me/" +
+phone +
+"?text=" +
 encodeURIComponent(text),
 
 "_blank"
