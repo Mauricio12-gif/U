@@ -652,18 +652,16 @@ const VISITOR_PASSWORD = "LOVE";
 
 window.checkVisitorPassword = function(){
 
-
     const password =
     document.getElementById("visitorPassword").value;
 
 
-
     if(password === VISITOR_PASSWORD){
-
 
         document
         .getElementById("welcomePage")
-        .style.display="none";
+        .classList
+        .add("hidden");
 
 
         document
@@ -675,14 +673,11 @@ window.checkVisitorPassword = function(){
     }
     else{
 
-
         document
         .getElementById("visitorError")
         .innerHTML =
         "Wrong password ❤️";
 
-
     }
-
 
 };
