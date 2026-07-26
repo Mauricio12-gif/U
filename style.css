@@ -7,14 +7,16 @@
 
 
 body{
-    background:#fff5f8;
-    color:#4a2030;
+
     min-height:100vh;
+    color:#4a2030;
+    background:#fff5f8;
+
 }
 
 
 
-/* LOGIN PAGE */
+/* LOGIN */
 
 .login{
 
@@ -24,12 +26,14 @@ body{
     align-items:center;
     padding:20px;
 
+
     background:
     linear-gradient(
-    rgba(0,0,0,.45),
-    rgba(0,0,0,.45)
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.55)
     ),
-    url("IMG_3939.jpg");
+    url("romantic.jpg");
+
 
     background-size:cover;
     background-position:center;
@@ -38,32 +42,50 @@ body{
 
 
 
+
 .login-card{
 
     width:100%;
-    max-width:400px;
-    padding:35px;
+    max-width:420px;
 
-    background:rgba(255,255,255,.15);
+    padding:40px;
 
-    backdrop-filter:blur(15px);
 
-    border-radius:25px;
+    background:
+    rgba(255,255,255,.18);
+
+
+    backdrop-filter:blur(20px);
+
+
+    border:1px solid rgba(255,255,255,.3);
+
+
+    border-radius:30px;
+
 
     text-align:center;
 
+
     color:white;
 
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.3);
+
 }
+
 
 
 
 .login-card h1{
 
-    font-size:35px;
+    font-size:38px;
+
     margin-bottom:15px;
 
 }
+
 
 
 
@@ -75,22 +97,28 @@ body{
 
 
 
+
 .login-card input{
 
     width:100%;
-    padding:15px;
+
+    padding:16px;
 
     margin:10px 0;
 
+
     border:none;
 
-    border-radius:25px;
-
     outline:none;
+
+
+    border-radius:30px;
+
 
     font-size:16px;
 
 }
+
 
 
 
@@ -99,33 +127,45 @@ body{
 
 button{
 
+
     border:none;
 
-    padding:14px 25px;
+
+    padding:15px 30px;
+
 
     border-radius:30px;
 
-    background:#e91e63;
+
+    background:
+    linear-gradient(135deg,#ec407a,#ad1457);
+
 
     color:white;
 
+
     font-size:16px;
+
 
     cursor:pointer;
 
+
     transition:.3s;
 
+
 }
+
 
 
 
 button:hover{
 
-    transform:translateY(-3px);
 
-    background:#c2185b;
+    transform:scale(1.05);
+
 
 }
+
 
 
 
@@ -137,16 +177,30 @@ button:hover{
 
 .top{
 
+
     text-align:center;
 
-    padding:30px 20px;
+
+    padding:35px 20px;
+
 
     background:
-    linear-gradient(135deg,#ec407a,#ad1457);
+
+    linear-gradient(
+    135deg,
+    #ec407a,
+    #880e4f
+    );
+
 
     color:white;
 
-    border-radius:0 0 30px 30px;
+
+    border-radius:0 0 35px 35px;
+
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.2);
 
 }
 
@@ -161,35 +215,58 @@ button:hover{
 
 .profile-card{
 
+
     margin:25px;
 
-    padding:25px;
+
+    padding:30px;
+
 
     text-align:center;
 
-    background:white;
 
-    border-radius:25px;
+    background:
 
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
+    rgba(255,255,255,.75);
+
+
+    backdrop-filter:blur(15px);
+
+
+    border-radius:30px;
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.12);
 
 }
+
 
 
 
 .profile-card img{
 
-    width:130px;
 
-    height:130px;
+    width:140px;
+
+
+    height:140px;
+
 
     object-fit:cover;
 
+
     border-radius:50%;
 
-    border:5px solid #f8bbd0;
+
+    border:
+
+    5px solid #f8bbd0;
+
 
     margin-bottom:15px;
+
 
 }
 
@@ -198,68 +275,104 @@ button:hover{
 
 
 
-/* MENU CARDS */
+
+/* DASHBOARD */
 
 
 .dashboard{
 
+
     display:grid;
+
 
     grid-template-columns:repeat(2,1fr);
 
-    gap:18px;
+
+    gap:20px;
+
 
     padding:25px;
 
+
 }
+
 
 
 
 .app-card{
 
-    background:white;
 
-    padding:25px 15px;
+    background:
 
-    border-radius:25px;
+    rgba(255,255,255,.85);
+
+
+    backdrop-filter:blur(10px);
+
+
+    padding:28px 15px;
+
+
+    border-radius:30px;
+
 
     text-align:center;
 
+
     cursor:pointer;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.1);
+
 
     transition:.3s;
 
+
 }
+
 
 
 
 .app-card:hover{
 
-    transform:translateY(-8px);
+
+    transform:translateY(-10px);
+
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.15);
+
 
 }
+
 
 
 
 .app-card span{
 
-    font-size:35px;
+
+    font-size:40px;
 
 }
+
 
 
 
 .app-card h3{
 
-    margin:10px 0;
+
+    margin:12px 0;
 
 }
 
 
 
+
 .app-card p{
+
 
     color:#777;
 
@@ -273,22 +386,32 @@ button:hover{
 
 
 
+
 /* CONTENT */
 
 
 .content{
 
+
     margin:25px;
+
 
     padding:30px;
 
+
     background:white;
 
-    border-radius:25px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-radius:30px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.1);
+
 
     animation:fade .5s;
+
 
     text-align:center;
 
@@ -296,29 +419,45 @@ button:hover{
 
 
 
+
+
 .love-list p{
+
 
     background:#ffe4ec;
 
+
     padding:15px;
+
 
     margin:10px;
 
-    border-radius:20px;
+
+    border-radius:25px;
+
 
 }
+
+
+
+
 
 
 
 .memory-photo{
 
+
     width:100%;
+
 
     max-width:400px;
 
-    border-radius:25px;
+
+    border-radius:30px;
+
 
 }
+
 
 
 
@@ -330,90 +469,75 @@ button:hover{
 
 .chat-box{
 
-    height:300px;
+
+    height:350px;
+
 
     background:#fff0f5;
 
-    border-radius:20px;
+
+    border-radius:25px;
+
 
     padding:20px;
 
+
     margin-bottom:15px;
+
 
     overflow-y:auto;
 
-    display:flex;
-
-    flex-direction:column;
 
 }
+
+
+
+
+.message{
+
+
+    background:white;
+
+
+    padding:15px;
+
+
+    margin:12px 0;
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 5px 15px rgba(0,0,0,.08);
+
+
+    text-align:left;
+
+}
+
+
+
 
 
 
 #messageInput{
 
+
     width:70%;
 
-    padding:14px;
 
-    border-radius:25px;
+    padding:15px;
+
+
+    border-radius:30px;
+
 
     border:1px solid #ddd;
 
+
     outline:none;
-
-}
-
-
-
-
-
-
-/* NEW CHAT DESIGN */
-
-
-.my-message{
-
-    background:#e91e63;
-
-    color:white;
-
-    padding:12px 18px;
-
-    margin:10px;
-
-    border-radius:20px 20px 5px 20px;
-
-    max-width:75%;
-
-    margin-left:auto;
-
-    text-align:right;
-
-    box-shadow:0 5px 10px rgba(0,0,0,.1);
-
-}
-
-
-
-
-.other-message{
-
-    background:white;
-
-    color:#4a2030;
-
-    padding:12px 18px;
-
-    margin:10px;
-
-    border-radius:20px 20px 20px 5px;
-
-    max-width:75%;
-
-    margin-right:auto;
-
-    box-shadow:0 5px 10px rgba(0,0,0,.1);
 
 }
 
@@ -425,11 +549,15 @@ button:hover{
 
 footer{
 
+
     text-align:center;
+
 
     padding:40px;
 
+
     color:#ad1457;
+
 
 }
 
@@ -440,7 +568,7 @@ footer{
 
 .hidden{
 
-    display:none;
+display:none;
 
 }
 
@@ -448,7 +576,10 @@ footer{
 
 
 
+
+
 @keyframes fade{
+
 
 from{
 
@@ -466,6 +597,7 @@ opacity:1;
 transform:translateY(0);
 
 }
+
 
 }
 
@@ -486,14 +618,6 @@ grid-template-columns:1fr 1fr;
 
 
 
-.app-card{
-
-padding:20px 10px;
-
-}
-
-
-
 .profile-card{
 
 margin:15px;
@@ -502,10 +626,19 @@ margin:15px;
 
 
 
-.my-message,
-.other-message{
+.app-card{
 
-max-width:90%;
+padding:20px 10px;
+
+}
+
+
+
+#messageInput{
+
+width:100%;
+
+margin-bottom:10px;
 
 }
 
