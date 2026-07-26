@@ -53,6 +53,8 @@ Enter Our Story
 
 
 
+
+
 <!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
@@ -64,11 +66,15 @@ Enter Our Story
 Welcome ❤️
 </h2>
 
+
 <p>
 Our memories, dreams and conversations
 </p>
 
+
 </header>
+
+
 
 
 
@@ -93,6 +99,8 @@ A small corner of the internet made for us.
 
 
 </section>
+
+
 
 
 
@@ -191,28 +199,10 @@ The future we imagine
 <h3>Private Chat</h3>
 
 <p>
-Talk with me
+Leave a message
 </p>
 
 </div>
-
-
-
-
-
-
-<div id="adminCard" class="app-card hidden" onclick="showSection('admin')">
-
-<span>👑</span>
-
-<h3>Admin Inbox</h3>
-
-<p>
-Manage conversations
-</p>
-
-</div>
-
 
 
 
@@ -323,11 +313,13 @@ This is where ours will be written.
 
 <h2>✨ Our Dreams</h2>
 
+
 <p>
 Places we want to visit.
 Things we want to experience.
 Memories we are yet to create.
 </p>
+
 
 </section>
 
@@ -339,9 +331,9 @@ Memories we are yet to create.
 
 
 
-<!-- USER CHAT -->
+<!-- PRIVATE CHAT -->
 
-<section id="chat" class="content">
+<section id="chat" class="content hidden">
 
 
 <h2>💬 Private Chat</h2>
@@ -349,9 +341,14 @@ Memories we are yet to create.
 
 <div class="chat-box">
 
-<p>No messages yet ❤️</p>
+
+<p>
+No messages yet ❤️
+</p>
+
 
 </div>
+
 
 
 
@@ -375,7 +372,7 @@ Send ❤️
 
 <button onclick="openWhatsApp()">
 
-💚 Chat with Mauricio on WhatsApp
+💚 Chat on WhatsApp
 
 </button>
 
@@ -383,54 +380,6 @@ Send ❤️
 
 </section>
 
-
-
-
-
-
-
-
-
-<!-- ADMIN -->
-
-<section id="admin" class="content hidden">
-
-
-<h2>👑 Admin Inbox</h2>
-
-
-<div id="usersList">
-
-No users yet
-
-</div>
-
-
-
-<div id="adminChat" class="chat-box">
-
-Select a user
-
-</div>
-
-
-
-
-<input 
-id="adminMessage"
-placeholder="Reply message...">
-
-
-
-<button onclick="adminSend()">
-
-Send ❤️
-
-</button>
-
-
-
-</section>
 
 
 
@@ -444,6 +393,7 @@ Send ❤️
 <p>
 Forever creating memories ❤️
 </p>
+
 
 </footer>
 
@@ -462,4 +412,4 @@ Forever creating memories ❤️
 
 </body>
 
-</html>
+  </html>
