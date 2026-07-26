@@ -120,7 +120,7 @@ document
 window.openWhatsApp=function(){
 
 
-let phone = "254797147155";
+let phone = "254797147255";
 
 
 let message =
