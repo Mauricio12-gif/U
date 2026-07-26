@@ -1,20 +1,36 @@
 import { db } from "./firebase.js";
 
 import {
+
 collection,
+
 addDoc,
+
 onSnapshot,
-serverTimestamp
+
+serverTimestamp,
+
+doc,
+
+setDoc,
+
+getDoc
+
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
 
 
 let currentUser = "";
 
 
 
+
+
+
 // LOGIN
 
 window.login = function(){
+
 
 const name =
 document.getElementById("visitorName").value.trim();
@@ -31,7 +47,8 @@ document.getElementById("error");
 
 if(name === ""){
 
-error.innerHTML = "Enter your name ❤️";
+error.innerHTML="Enter your name ❤️";
+
 return;
 
 }
@@ -40,7 +57,8 @@ return;
 
 if(password !== "LOVE"){
 
-error.innerHTML = "Wrong password ❤️";
+error.innerHTML="Wrong password ❤️";
+
 return;
 
 }
@@ -65,11 +83,13 @@ document
 
 document
 .getElementById("welcome")
-.innerHTML = "Welcome ❤️";
+.innerHTML="Welcome ❤️";
 
 
 
 loadMessages();
+
+loadMeetingStory();
 
 
 };
@@ -81,9 +101,10 @@ loadMessages();
 
 
 
+
 // SECTION SWITCH
 
-window.showSection = function(id){
+window.showSection=function(id){
 
 
 document
@@ -102,9 +123,17 @@ document
 
 
 
-if(id === "chat"){
+if(id==="chat"){
 
 loadMessages();
+
+}
+
+
+
+if(id==="meeting"){
+
+loadMeetingStory();
 
 }
 
@@ -119,7 +148,7 @@ loadMessages();
 
 
 
-// SEND PUBLIC ANONYMOUS MESSAGE
+// PUBLIC CHAT SEND
 
 window.sendMessage = async function(){
 
@@ -133,7 +162,7 @@ input.value.trim();
 
 
 
-if(text === "") return;
+if(text==="") return;
 
 
 
@@ -157,7 +186,8 @@ Time:serverTimestamp()
 
 
 
-input.value = "";
+input.value="";
+
 
 };
 
@@ -169,7 +199,7 @@ input.value = "";
 
 
 
-// DISPLAY PUBLIC CHAT
+// LOAD CHAT
 
 function loadMessages(){
 
@@ -190,25 +220,14 @@ collection(db,"messages"),
 (snapshot)=>{
 
 
-box.innerHTML = "";
-
-
-
-if(snapshot.empty){
-
-box.innerHTML =
-"<p>No messages yet ❤️</p>";
-
-return;
-
-}
+box.innerHTML="";
 
 
 
 snapshot.forEach(doc=>{
 
 
-const data = doc.data();
+const data=doc.data();
 
 
 
@@ -231,6 +250,14 @@ ${data.Message || ""}
 });
 
 
+
+if(snapshot.empty){
+
+box.innerHTML="<p>No messages yet ❤️</p>";
+
+}
+
+
 }
 
 );
@@ -246,9 +273,94 @@ ${data.Message || ""}
 
 
 
+// SAVE HOW WE MET STORY
+
+window.saveMeetingStory = async function(){
+
+
+const story =
+document.getElementById("meetingStory").value;
+
+
+
+await setDoc(
+
+doc(db,"story","howWeMet"),
+
+{
+
+content:story,
+
+updatedAt:serverTimestamp()
+
+}
+
+);
+
+
+
+document
+.getElementById("storySaved")
+.innerHTML=
+"Saved successfully ❤️";
+
+
+};
+
+
+
+
+
+
+
+
+
+// LOAD HOW WE MET STORY
+
+async function loadMeetingStory(){
+
+
+const storyBox =
+document.getElementById("meetingStory");
+
+
+
+if(!storyBox) return;
+
+
+
+const storyDoc =
+await getDoc(
+
+doc(db,"story","howWeMet")
+
+);
+
+
+
+if(storyDoc.exists()){
+
+
+storyBox.value =
+storyDoc.data().content;
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
 // GALLERY EXPAND
 
-window.expandPhoto = function(photo){
+window.expandPhoto=function(photo){
 
 
 photo.classList.toggle("expanded");
@@ -266,19 +378,19 @@ photo.classList.toggle("expanded");
 
 // WHATSAPP
 
-window.openWhatsApp = function(){
+window.openWhatsApp=function(){
 
 
-const phone =
-"254797147155";
+const phone="254797147155";
 
 
-const message =
+const message=
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const link =
+const link=
+
 "https://wa.me/"
 +
 phone
