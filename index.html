@@ -15,26 +15,22 @@
 
 
 <body>
-  <body>
+
+
+<!-- WELCOME COVER PAGE -->
 
 <div id="welcomePage" class="welcome-page">
 
 <div class="welcome-box">
 
-<h1>Our Little Story ❤️</h1>
-
-<p>A collection of memories, dreams and moments.</p>
-
-<button onclick="enterWebsite()">
-Enter Our Story ❤️
-</button>
-
-</div>
-
-</div>
+<h1>
+Our Little Story ❤️
+</h1>
 
 
-<div id="mainPage" class="hidden">
+<p>
+A collection of memories, dreams and moments.
+</p>
 
 
 <button onclick="enterWebsite()">
@@ -45,6 +41,9 @@ Enter Our Story ❤️
 </div>
 
 </div>
+
+
+
 
 
 <!-- OWNER LOGIN -->
@@ -53,15 +52,30 @@ Enter Our Story ❤️
 
 <div class="login-card">
 
-<h1>Owner Login ❤️</h1>
 
-<p>Mauricio only</p>
-
-
-<input id="email" type="email" placeholder="Email address">
+<h1>
+Owner Login 🔐
+</h1>
 
 
-<input id="password" type="password" placeholder="Password">
+<p>
+Mauricio only
+</p>
+
+
+
+<input 
+id="email" 
+type="email" 
+placeholder="Email address">
+
+
+
+<input 
+id="password" 
+type="password" 
+placeholder="Password">
+
 
 
 <button onclick="login()">
@@ -69,7 +83,9 @@ Login
 </button>
 
 
+
 <p id="error"></p>
+
 
 
 </div>
@@ -84,13 +100,16 @@ Login
 
 <!-- MAIN WEBSITE -->
 
-<div id="mainPage class="hidden">
+<div id="mainPage" class="hidden">
+
+
 
 
 
 <header class="top">
 
-<h2 id="welcome>
+
+<h2 id="welcome">
 Welcome ❤️
 </h2>
 
@@ -98,9 +117,12 @@ Welcome ❤️
 <p>
 Our memories, dreams and conversations
 </p>
-  <button onclick="openOwnerLogin()">
+
+
+
+<button onclick="openOwnerLogin()">
 🔐 Mauricio
-  </button>
+</button>
 
 
 </header>
@@ -117,9 +139,11 @@ Our memories, dreams and conversations
 <img src="IMG_3939.jpg" alt="Our photo">
 
 
+
 <h2>
 Our Beautiful Journey ❤️
 </h2>
+
 
 
 <p>
@@ -127,18 +151,10 @@ A small corner of the internet made for our memories.
 </p>
 
 
-</section>
 
-
-
-
-
-
-
-<!-- MENU -->
+</section><!-- MENU -->
 
 <section class="dashboard">
-
 
 
 <div class="app-card" onclick="showSection('story')">
@@ -229,13 +245,24 @@ Leave a message
 </div>
 
 
-
 </section>
+
+
+
+
+
+
+
+
 <!-- OUR STORY -->
 
 <section id="story" class="content hidden">
 
-<h2>📖 Our Story</h2>
+
+<h2>
+📖 Our Story
+</h2>
+
 
 
 <div class="story-display">
@@ -248,13 +275,20 @@ Loading our story ❤️
 
 
 
+
+
 <div id="ourStoryEdit" class="hidden">
 
-<textarea id="ourStoryText"
-placeholder="Write your story here..."></textarea>
+
+<textarea 
+id="ourStoryText"
+placeholder="Write your story here...">
+</textarea>
+
 
 
 <br><br>
+
 
 
 <button onclick="saveStorySection('ourStory','ourStoryText')">
@@ -264,10 +298,15 @@ Save Story ❤️
 </button>
 
 
+
 </div>
 
 
-<button id="ourStoryButton" class="hidden"
+
+
+<button 
+id="ourStoryButton" 
+class="hidden"
 onclick="editStory('ourStory')">
 
 ✍️ Edit
@@ -290,17 +329,23 @@ onclick="editStory('ourStory')">
 <section id="love" class="content hidden">
 
 
-<h2>💕 Why I Love You</h2>
+<h2>
+💕 Why I Love You
+</h2>
+
 
 
 
 <div class="story-display">
 
+
 <p id="loveDisplay">
 Loading reasons ❤️
 </p>
 
+
 </div>
+
 
 
 
@@ -308,11 +353,14 @@ Loading reasons ❤️
 <div id="loveEdit" class="hidden">
 
 
-<textarea id="loveText"
-placeholder="Write why you love her..."></textarea>
+<textarea 
+id="loveText"
+placeholder="Write why you love her...">
+</textarea>
 
 
 <br><br>
+
 
 
 <button onclick="saveStorySection('love','loveText')">
@@ -325,7 +373,12 @@ Save Love ❤️
 </div>
 
 
-<button id="loveButton" class="hidden"
+
+
+
+<button 
+id="loveButton" 
+class="hidden"
 onclick="editStory('love')">
 
 ✍️ Edit
@@ -333,8 +386,8 @@ onclick="editStory('love')">
 </button>
 
 
-</section>
 
+</section>
 
 
 
@@ -348,17 +401,23 @@ onclick="editStory('love')">
 <section id="meeting" class="content hidden">
 
 
-<h2>🤝 How We Met</h2>
+<h2>
+🤝 How We Met
+</h2>
+
 
 
 
 <div class="story-display">
 
+
 <p id="meetingDisplay">
 Loading story ❤️
 </p>
 
+
 </div>
+
 
 
 
@@ -366,11 +425,15 @@ Loading story ❤️
 <div id="meetingEdit" class="hidden">
 
 
-<textarea id="meetingText"
-placeholder="Write how you met..."></textarea>
+<textarea 
+id="meetingText"
+placeholder="Write how you met...">
+</textarea>
+
 
 
 <br><br>
+
 
 
 <button onclick="saveStorySection('howWeMet','meetingText')">
@@ -383,7 +446,11 @@ Save Story ❤️
 </div>
 
 
-<button id="meetingButton" class="hidden"
+
+
+<button 
+id="meetingButton" 
+class="hidden"
 onclick="editStory('howWeMet')">
 
 ✍️ Edit
@@ -391,22 +458,15 @@ onclick="editStory('howWeMet')">
 </button>
 
 
-</section>
 
-
-
-
-
-
-
-
-
-<!-- GALLERY -->
+</section><!-- GALLERY -->
 
 <section id="gallery" class="content hidden">
 
 
-<h2>📸 Our Gallery</h2>
+<h2>
+📸 Our Gallery
+</h2>
 
 
 
@@ -446,23 +506,28 @@ onclick="editStory('howWeMet')">
 
 
 
-
 <!-- DREAMS -->
 
 <section id="dreams" class="content hidden">
 
 
-<h2>✨ Our Dreams</h2>
+<h2>
+✨ Our Dreams
+</h2>
+
 
 
 
 <div class="story-display">
 
+
 <p id="dreamsDisplay">
 Loading dreams ❤️
 </p>
 
+
 </div>
+
 
 
 
@@ -470,11 +535,15 @@ Loading dreams ❤️
 <div id="dreamsEdit" class="hidden">
 
 
-<textarea id="dreamsText"
-placeholder="Write your dreams..."></textarea>
+<textarea 
+id="dreamsText"
+placeholder="Write your dreams...">
+</textarea>
+
 
 
 <br><br>
+
 
 
 <button onclick="saveStorySection('dreams','dreamsText')">
@@ -487,7 +556,12 @@ Save Dreams ❤️
 </div>
 
 
-<button id="dreamsButton" class="hidden"
+
+
+
+<button 
+id="dreamsButton" 
+class="hidden"
 onclick="editStory('dreams')">
 
 ✍️ Edit
@@ -495,20 +569,38 @@ onclick="editStory('dreams')">
 </button>
 
 
-</section><!-- PUBLIC CHAT -->
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PUBLIC CHAT -->
 
 <section id="chat" class="content hidden">
 
 
-<h2>💬 Public Chat</h2>
+<h2>
+💬 Public Chat
+</h2>
+
 
 
 
 <div class="chat-box" id="chatBox">
 
-<p>No messages yet ❤️</p>
+<p>
+No messages yet ❤️
+</p>
+
 
 </div>
+
 
 
 
@@ -528,6 +620,7 @@ placeholder="Write a message...">
 Send ❤️
 
 </button>
+
 
 
 
@@ -556,17 +649,15 @@ Send ❤️
 <footer>
 
 <p>
-
 Forever creating memories ❤️
-
 </p>
 
 </footer>
 
 
 
-</div>
 
+</div>
 
 
 
@@ -580,4 +671,5 @@ Forever creating memories ❤️
 
 </body>
 
-  </html>
+
+</html>
