@@ -16,31 +16,27 @@
 <body>
 
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
-<div id="loginPage" class="login-page">
+<div id="loginPage" class="login">
 
 <div class="login-card">
 
 <h1>Our Little Story ❤️</h1>
 
-<p>A private place for memories and conversations</p>
+<p>A private place for our memories</p>
 
 
-<input 
-id="visitorName"
-type="text"
-placeholder="Enter your name">
+<input id="visitorName" type="text" placeholder="Your name">
 
 
-<input 
-id="password"
-type="password"
-placeholder="Password">
+<input id="password" type="password" placeholder="Password">
 
 
 <button onclick="login()">
-Enter Story
+
+Enter Our Story
+
 </button>
 
 
@@ -57,32 +53,20 @@ Enter Story
 
 
 
-<!-- MAIN WEBSITE -->
+<!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
 
 
-<header class="top-bar">
-
-<div>
+<header class="top">
 
 <h2 id="welcome">
 Welcome ❤️
 </h2>
 
 <p>
-Memories • Stories • Conversations
+Our memories, dreams and conversations
 </p>
-
-</div>
-
-
-<button onclick="logout()" class="logout">
-
-Logout
-
-</button>
-
 
 </header>
 
@@ -92,16 +76,11 @@ Logout
 
 
 
-
-<!-- PROFILE -->
-
-<section class="hero-card">
+<section class="profile-card">
 
 
-<img src="IMG_3939.jpg">
+<img src="IMG_3939.jpg" alt="Our photo">
 
-
-<div>
 
 <h2>
 Our Beautiful Journey ❤️
@@ -109,10 +88,8 @@ Our Beautiful Journey ❤️
 
 
 <p>
-A special place where our story continues.
+A small corner of the internet made for us.
 </p>
-
-</div>
 
 
 </section>
@@ -123,20 +100,18 @@ A special place where our story continues.
 
 
 
-
-<!-- MENU -->
-
 <section class="dashboard">
+
 
 
 <div class="app-card" onclick="showSection('story')">
 
-<div class="icon">📖</div>
+<span>📖</span>
 
 <h3>Our Story</h3>
 
 <p>
-How everything started
+How everything began
 </p>
 
 </div>
@@ -147,12 +122,28 @@ How everything started
 
 <div class="app-card" onclick="showSection('love')">
 
-<div class="icon">💕</div>
+<span>💕</span>
 
 <h3>Why I Love You</h3>
 
 <p>
-Things that make you special
+Reasons you are special
+</p>
+
+</div>
+
+
+
+
+
+<div class="app-card" onclick="showSection('meeting')">
+
+<span>🤝</span>
+
+<h3>How We Met</h3>
+
+<p>
+Our beginning
 </p>
 
 </div>
@@ -163,12 +154,28 @@ Things that make you special
 
 <div class="app-card" onclick="showSection('gallery')">
 
-<div class="icon">📸</div>
+<span>📸</span>
 
 <h3>Gallery</h3>
 
 <p>
-Our favourite memories
+Our memories
+</p>
+
+</div>
+
+
+
+
+
+<div class="app-card" onclick="showSection('dreams')">
+
+<span>✨</span>
+
+<h3>Our Dreams</h3>
+
+<p>
+The future we imagine
 </p>
 
 </div>
@@ -179,12 +186,12 @@ Our favourite memories
 
 <div class="app-card" onclick="showSection('chat')">
 
-<div class="icon">💬</div>
+<span>💬</span>
 
 <h3>Private Chat</h3>
 
 <p>
-Send a message
+Talk with me
 </p>
 
 </div>
@@ -193,9 +200,12 @@ Send a message
 
 
 
+
+<!-- ONLY MAURICIO WILL SEE THIS -->
+
 <div id="adminCard" class="app-card hidden" onclick="showSection('admin')">
 
-<div class="icon">👑</div>
+<span>👑</span>
 
 <h3>Admin Inbox</h3>
 
@@ -207,6 +217,7 @@ Manage conversations
 
 
 
+
 </section>
 
 
@@ -217,17 +228,15 @@ Manage conversations
 
 
 
-<!-- STORY SECTION -->
+<!-- STORY -->
 
 <section id="story" class="content hidden">
 
 <h2>📖 Our Story</h2>
 
-
 <p>
-Every beautiful journey has a beginning.
+Our journey, memories and moments together will be written here.
 </p>
-
 
 </section>
 
@@ -238,14 +247,15 @@ Every beautiful journey has a beginning.
 
 
 
-<!-- LOVE SECTION -->
+
+<!-- LOVE -->
 
 <section id="love" class="content hidden">
 
 <h2>💕 Why I Love You</h2>
 
 
-<div class="love-items">
+<div class="love-list">
 
 <p>❤️ Your smile</p>
 
@@ -267,16 +277,36 @@ Every beautiful journey has a beginning.
 
 
 
+
+<!-- MEETING -->
+
+<section id="meeting" class="content hidden">
+
+<h2>🤝 How We Met</h2>
+
+<p>
+Every beautiful story has a beginning.
+This is where ours will be written.
+</p>
+
+</section>
+
+
+
+
+
+
+
+
+
 <!-- GALLERY -->
 
 <section id="gallery" class="content hidden">
 
-<h2>📸 Gallery</h2>
+<h2>📸 Our Gallery</h2>
 
 
-<img 
-src="IMG_3939.jpg"
-class="memory-photo">
+<img class="memory-photo" src="IMG_3939.jpg">
 
 
 </section>
@@ -289,7 +319,29 @@ class="memory-photo">
 
 
 
-<!-- CHAT -->
+<!-- DREAMS -->
+
+<section id="dreams" class="content hidden">
+
+<h2>✨ Our Dreams</h2>
+
+<p>
+Places we want to visit.
+Things we want to experience.
+Memories we are yet to create.
+</p>
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- USER CHAT -->
 
 <section id="chat" class="content hidden">
 
@@ -297,20 +349,12 @@ class="memory-photo">
 <h2>💬 Private Chat</h2>
 
 
-<div id="chatBox" class="chat-box">
+<div class="chat-box">
 
-<p class="empty">
-No messages yet ❤️
-</p>
-
+<p>No messages yet ❤️</p>
 
 </div>
 
-
-
-
-
-<div class="message-area">
 
 
 <input 
@@ -318,14 +362,13 @@ id="messageInput"
 placeholder="Write a message...">
 
 
+
 <button onclick="sendMessage()">
 
-Send
+Send ❤️
 
 </button>
 
-
-</div>
 
 
 </section>
@@ -346,18 +389,12 @@ Send
 <h2>👑 Admin Inbox</h2>
 
 
-<div class="admin-layout">
+<div id="usersList">
 
-
-
-<div id="usersList" class="users-list">
+No users yet
 
 </div>
 
-
-
-
-<div>
 
 
 <div id="adminChat" class="chat-box">
@@ -368,35 +405,22 @@ Select a user
 
 
 
-<div class="message-area">
-
 
 <input 
 id="adminMessage"
-placeholder="Reply...">
+placeholder="Reply message...">
 
 
 
 <button onclick="adminSend()">
 
-Send
+Send ❤️
 
 </button>
 
 
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
 
 </section>
-
 
 
 
@@ -412,6 +436,7 @@ Forever creating memories ❤️
 </p>
 
 </footer>
+
 
 
 </div>
