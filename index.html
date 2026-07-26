@@ -17,7 +17,6 @@
 <body>
 
 
-
 <!-- LOGIN -->
 
 <div id="loginPage" class="login">
@@ -56,7 +55,7 @@ Enter Our Story
 
 
 
-<!-- MAIN APP -->
+<!-- MAIN -->
 
 <div id="mainPage" class="hidden">
 
@@ -65,12 +64,18 @@ Enter Our Story
 <header class="top">
 
 <h2 id="welcome">
+
 Welcome ❤️
+
 </h2>
 
+
 <p>
+
 Our memories, dreams and conversations
+
 </p>
+
 
 </header>
 
@@ -87,12 +92,16 @@ Our memories, dreams and conversations
 
 
 <h2>
+
 Our Beautiful Journey ❤️
+
 </h2>
 
 
 <p>
+
 A small corner of the internet made for our memories.
+
 </p>
 
 
@@ -106,6 +115,8 @@ A small corner of the internet made for our memories.
 
 
 
+<!-- MENU -->
+
 <section class="dashboard">
 
 
@@ -117,7 +128,9 @@ A small corner of the internet made for our memories.
 <h3>Our Story</h3>
 
 <p>
+
 How everything began
+
 </p>
 
 </div>
@@ -133,7 +146,9 @@ How everything began
 <h3>Why I Love You</h3>
 
 <p>
+
 Reasons you are special
+
 </p>
 
 </div>
@@ -149,7 +164,9 @@ Reasons you are special
 <h3>How We Met</h3>
 
 <p>
+
 Our beginning
+
 </p>
 
 </div>
@@ -165,7 +182,9 @@ Our beginning
 <h3>Gallery</h3>
 
 <p>
+
 Our memories
+
 </p>
 
 </div>
@@ -181,7 +200,9 @@ Our memories
 <h3>Our Dreams</h3>
 
 <p>
-Future plans
+
+The future we imagine
+
 </p>
 
 </div>
@@ -197,11 +218,12 @@ Future plans
 <h3>Public Chat</h3>
 
 <p>
+
 Leave a message
+
 </p>
 
 </div>
-
 
 
 
@@ -223,25 +245,15 @@ Leave a message
 <h2>📖 Our Story</h2>
 
 
-<textarea id="ourStoryText">
+<div class="story-display">
 
-Write our journey here ❤️
+<p id="ourStoryDisplay">
 
-</textarea>
+Our story will appear here ❤️
 
+</p>
 
-
-<br><br>
-
-
-<button onclick="saveStorySection('ourStory','ourStoryText','storySaved')">
-
-Save Story ❤️
-
-</button>
-
-
-<p id="storySaved"></p>
+</div>
 
 
 </section>
@@ -262,26 +274,15 @@ Save Story ❤️
 <h2>💕 Why I Love You</h2>
 
 
+<div class="story-display">
 
-<textarea id="loveText">
+<p id="loveDisplay">
 
-Write reasons you are special here ❤️
+Reasons will appear here ❤️
 
-</textarea>
+</p>
 
-
-
-<br><br>
-
-
-<button onclick="saveStorySection('love','loveText','loveSaved')">
-
-Save Love ❤️
-
-</button>
-
-
-<p id="loveSaved"></p>
+</div>
 
 
 </section>
@@ -302,26 +303,15 @@ Save Love ❤️
 <h2>🤝 How We Met</h2>
 
 
+<div class="story-display">
 
-<textarea id="meetingText">
+<p id="meetingDisplay">
 
-Write how everything started ❤️
+Our beginning will appear here ❤️
 
-</textarea>
+</p>
 
-
-
-<br><br>
-
-
-<button onclick="saveStorySection('howWeMet','meetingText','meetingSaved')">
-
-Save Story ❤️
-
-</button>
-
-
-<p id="meetingSaved"></p>
+</div>
 
 
 </section>
@@ -388,26 +378,15 @@ Save Story ❤️
 <h2>✨ Our Dreams</h2>
 
 
+<div class="story-display">
 
-<textarea id="dreamsText">
+<p id="dreamsDisplay">
 
-Write our dreams here ❤️
+Our dreams will appear here ❤️
 
-</textarea>
+</p>
 
-
-
-<br><br>
-
-
-<button onclick="saveStorySection('dreams','dreamsText','dreamsSaved')">
-
-Save Dreams ❤️
-
-</button>
-
-
-<p id="dreamsSaved"></p>
+</div>
 
 
 </section>
@@ -428,7 +407,6 @@ Save Dreams ❤️
 <h2>💬 Public Chat</h2>
 
 
-
 <div class="chat-box">
 
 <p>No messages yet ❤️</p>
@@ -440,7 +418,6 @@ Save Dreams ❤️
 <input 
 id="messageInput"
 placeholder="Write a message...">
-
 
 
 <br><br>
@@ -464,7 +441,6 @@ Send ❤️
 </button>
 
 
-
 </section>
 
 
@@ -478,7 +454,9 @@ Send ❤️
 <footer>
 
 <p>
+
 Forever creating memories ❤️
+
 </p>
 
 </footer>
