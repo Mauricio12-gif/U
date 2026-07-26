@@ -16,8 +16,6 @@
 <body>
 
 
-<!-- LOGIN -->
-
 <div id="loginPage" class="login">
 
 <div class="login-card">
@@ -27,16 +25,14 @@
 <p>A private place for our memories</p>
 
 
-<input id="visitorName" type="text" placeholder="Your name">
+<input id="visitorName" placeholder="Your name">
 
 
 <input id="password" type="password" placeholder="Password">
 
 
 <button onclick="login()">
-
 Enter Our Story
-
 </button>
 
 
@@ -52,8 +48,6 @@ Enter Our Story
 
 
 
-
-<!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
 
@@ -78,8 +72,7 @@ Our memories, dreams and conversations
 
 <section class="profile-card">
 
-
-<img src="IMG_3939.jpg" alt="Our photo">
+<img src="IMG_3939.jpg">
 
 
 <h2>
@@ -91,8 +84,8 @@ Our Beautiful Journey ❤️
 A small corner of the internet made for us.
 </p>
 
-
 </section>
+
 
 
 
@@ -103,19 +96,15 @@ A small corner of the internet made for us.
 <section class="dashboard">
 
 
-
 <div class="app-card" onclick="showSection('story')">
 
 <span>📖</span>
 
 <h3>Our Story</h3>
 
-<p>
-How everything began
-</p>
+<p>How everything began</p>
 
 </div>
-
 
 
 
@@ -126,28 +115,9 @@ How everything began
 
 <h3>Why I Love You</h3>
 
-<p>
-Reasons you are special
-</p>
+<p>Reasons you are special</p>
 
 </div>
-
-
-
-
-
-<div class="app-card" onclick="showSection('meeting')">
-
-<span>🤝</span>
-
-<h3>How We Met</h3>
-
-<p>
-Our beginning
-</p>
-
-</div>
-
 
 
 
@@ -158,28 +128,9 @@ Our beginning
 
 <h3>Gallery</h3>
 
-<p>
-Our memories
-</p>
+<p>Our memories</p>
 
 </div>
-
-
-
-
-
-<div class="app-card" onclick="showSection('dreams')">
-
-<span>✨</span>
-
-<h3>Our Dreams</h3>
-
-<p>
-The future we imagine
-</p>
-
-</div>
-
 
 
 
@@ -190,18 +141,12 @@ The future we imagine
 
 <h3>Private Chat</h3>
 
-<p>
-Talk with me
-</p>
+<p>Talk with me</p>
 
 </div>
 
 
 
-
-
-
-<!-- ONLY MAURICIO WILL SEE THIS -->
 
 <div id="adminCard" class="app-card" onclick="showSection('admin')">
 
@@ -209,12 +154,9 @@ Talk with me
 
 <h3>Admin Inbox</h3>
 
-<p>
-Manage conversations
-</p>
+<p>Manage conversations</p>
 
 </div>
-
 
 
 
@@ -226,16 +168,13 @@ Manage conversations
 
 
 
-
-
-<!-- STORY -->
 
 <section id="story" class="content hidden">
 
 <h2>📖 Our Story</h2>
 
 <p>
-Our journey, memories and moments together will be written here.
+Our journey will be written here.
 </p>
 
 </section>
@@ -246,16 +185,9 @@ Our journey, memories and moments together will be written here.
 
 
 
-
-
-<!-- LOVE -->
-
 <section id="love" class="content hidden">
 
 <h2>💕 Why I Love You</h2>
-
-
-<div class="love-list">
 
 <p>❤️ Your smile</p>
 
@@ -263,11 +195,6 @@ Our journey, memories and moments together will be written here.
 
 <p>❤️ Your personality</p>
 
-<p>❤️ The happiness you bring</p>
-
-</div>
-
-
 </section>
 
 
@@ -275,40 +202,13 @@ Our journey, memories and moments together will be written here.
 
 
 
-
-
-
-<!-- MEETING -->
-
-<section id="meeting" class="content hidden">
-
-<h2>🤝 How We Met</h2>
-
-<p>
-Every beautiful story has a beginning.
-This is where ours will be written.
-</p>
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- GALLERY -->
 
 <section id="gallery" class="content hidden">
 
-<h2>📸 Our Gallery</h2>
-
+<h2>📸 Gallery</h2>
 
 <img class="memory-photo" src="IMG_3939.jpg">
 
-
 </section>
 
 
@@ -316,32 +216,6 @@ This is where ours will be written.
 
 
 
-
-
-
-<!-- DREAMS -->
-
-<section id="dreams" class="content hidden">
-
-<h2>✨ Our Dreams</h2>
-
-<p>
-Places we want to visit.
-Things we want to experience.
-Memories we are yet to create.
-</p>
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- USER CHAT -->
 
 <section id="chat" class="content hidden">
 
@@ -351,24 +225,16 @@ Memories we are yet to create.
 
 <div class="chat-box">
 
-<p>No messages yet ❤️</p>
-
 </div>
 
 
 
-<input 
-id="messageInput"
-placeholder="Write a message...">
-
+<input id="messageInput" placeholder="Write a message...">
 
 
 <button onclick="sendMessage()">
-
 Send ❤️
-
 </button>
-
 
 
 </section>
@@ -379,9 +245,6 @@ Send ❤️
 
 
 
-
-
-<!-- ADMIN -->
 
 <section id="admin" class="content hidden">
 
@@ -391,33 +254,24 @@ Send ❤️
 
 <div id="usersList">
 
-No users yet
-
 </div>
 
 
 
 <div id="adminChat" class="chat-box">
 
-Select a user
+Select a person
 
 </div>
 
 
 
-
-<input 
-id="adminMessage"
-placeholder="Reply message...">
-
+<input id="adminMessage" placeholder="Reply message...">
 
 
 <button onclick="adminSend()">
-
 Send ❤️
-
 </button>
-
 
 
 </section>
@@ -428,20 +282,14 @@ Send ❤️
 
 
 
-
 <footer>
 
-<p>
 Forever creating memories ❤️
-</p>
 
 </footer>
 
 
-
 </div>
-
-
 
 
 
