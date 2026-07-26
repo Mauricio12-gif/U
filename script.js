@@ -5,18 +5,22 @@ collection,
 addDoc,
 onSnapshot,
 query,
+where,
 orderBy,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
 let currentUser = "";
+let selectedUser = "";
+
 
 
 
 // LOGIN
 
 window.login = function(){
+
 
 const name =
 document.getElementById("visitorName").value.trim();
@@ -33,7 +37,7 @@ document.getElementById("error");
 
 if(name === ""){
 
-error.innerHTML = "Enter your name ❤️";
+error.innerHTML="Enter your name ❤️";
 return;
 
 }
@@ -42,7 +46,7 @@ return;
 
 if(password !== "LOVE"){
 
-error.innerHTML = "Wrong password ❤️";
+error.innerHTML="Wrong password ❤️";
 return;
 
 }
@@ -72,7 +76,12 @@ document
 
 
 
+saveUser();
+
+
 loadMessages();
+
+loadUsers();
 
 
 };
@@ -82,9 +91,36 @@ loadMessages();
 
 
 
-// OPEN SECTIONS
+// SAVE USERS
 
-window.showSection = function(sectionID){
+async function saveUser(){
+
+
+await addDoc(
+collection(db,"users"),
+{
+
+name:currentUser,
+
+time:serverTimestamp()
+
+}
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+// SHOW SECTIONS
+
+window.showSection=function(id){
 
 
 document
@@ -98,8 +134,9 @@ section.classList.add("hidden");
 
 
 document
-.getElementById(sectionID)
+.getElementById(id)
 .classList.remove("hidden");
+
 
 
 };
@@ -110,7 +147,10 @@ document
 
 
 
-// SEND MESSAGE
+
+
+// SEND USER MESSAGE
+
 
 window.sendMessage = async function(){
 
@@ -124,24 +164,21 @@ input.value.trim();
 
 
 
-if(text === "") return;
+if(text==="") return;
 
-
-
-try{
 
 
 await addDoc(
-
 collection(db,"messages"),
-
 {
 
-sender: currentUser,
+chatId:currentUser,
 
-message: text,
+sender:currentUser,
 
-time: serverTimestamp()
+message:text,
+
+time:serverTimestamp()
 
 }
 
@@ -149,20 +186,7 @@ time: serverTimestamp()
 
 
 
-input.value = "";
-
-
-
-}
-
-catch(error){
-
-console.log(error);
-
-alert("Message failed to send");
-
-}
-
+input.value="";
 
 
 };
@@ -175,20 +199,22 @@ alert("Message failed to send");
 
 
 
-// REAL TIME CHAT DISPLAY
+// LOAD USER CHAT
+
 
 function loadMessages(){
 
 
 const chatBox =
-document.querySelector(".chat-box");
+document.querySelector("#chat .chat-box");
 
 
 
-const q =
-query(
+const q=query(
 
 collection(db,"messages"),
+
+where("chatId","==",currentUser),
 
 orderBy("time","asc")
 
@@ -196,59 +222,42 @@ orderBy("time","asc")
 
 
 
-
-
 onSnapshot(q,(snapshot)=>{
 
 
-chatBox.innerHTML = "";
+chatBox.innerHTML="";
 
 
 
-snapshot.forEach((doc)=>{
+snapshot.forEach(doc=>{
 
 
-const data = doc.data();
+const data=doc.data();
 
 
 
-const position =
-
-data.sender === currentUser
-
-? "my-message"
-
-: "other-message";
-
-
+let type =
+data.sender===currentUser
+?"my-message"
+:"other-message";
 
 
 
 chatBox.innerHTML += `
 
+<div class="${type}">
 
-<div class="${position}">
-
-<b>${data.sender}</b>
-
-<br>
+<b>${data.sender}</b><br>
 
 ${data.message}
 
 </div>
-
 
 `;
 
 
 
 });
-
-
-
-chatBox.scrollTop =
-chatBox.scrollHeight;
-
 
 
 });
@@ -262,14 +271,219 @@ chatBox.scrollHeight;
 
 
 
+
+
+// LOAD USERS FOR ADMIN
+
+
+function loadUsers(){
+
+
+const usersList =
+document.getElementById("usersList");
+
+
+
+if(!usersList) return;
+
+
+
+const q =
+query(collection(db,"users"));
+
+
+
+onSnapshot(q,(snapshot)=>{
+
+
+usersList.innerHTML="";
+
+
+
+snapshot.forEach(doc=>{
+
+
+let user =
+doc.data();
+
+
+
+usersList.innerHTML += `
+
+<button onclick="openUser('${user.name}')">
+
+❤️ ${user.name}
+
+</button>
+
+<br><br>
+
+`;
+
+
+
+});
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// OPEN USER CHAT
+
+
+window.openUser=function(name){
+
+
+selectedUser=name;
+
+
+loadAdminChat();
+
+
+};
+
+
+
+
+
+
+
+
+
+// ADMIN CHAT
+
+
+function loadAdminChat(){
+
+
+const box =
+document.getElementById("adminChat");
+
+
+
+const q=query(
+
+collection(db,"messages"),
+
+where("chatId","==",selectedUser),
+
+orderBy("time","asc")
+
+);
+
+
+
+onSnapshot(q,(snapshot)=>{
+
+
+box.innerHTML="";
+
+
+
+snapshot.forEach(doc=>{
+
+
+let data=doc.data();
+
+
+
+box.innerHTML += `
+
+<div>
+
+<b>${data.sender}</b><br>
+
+${data.message}
+
+</div>
+
+<hr>
+
+`;
+
+
+
+});
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// ADMIN SEND
+
+
+window.adminSend=async function(){
+
+
+const input =
+document.getElementById("adminMessage");
+
+
+const text =
+input.value.trim();
+
+
+
+if(text==="") return;
+
+
+
+await addDoc(
+collection(db,"messages"),
+{
+
+chatId:selectedUser,
+
+sender:"Mauricio",
+
+message:text,
+
+time:serverTimestamp()
+
+}
+
+);
+
+
+
+input.value="";
+
+
+};
+
+
+
+
+
+
+
+
+
 // LOGOUT
 
-window.logout = function(){
 
-
-currentUser = "";
+window.logout=function(){
 
 location.reload();
-
 
 };
