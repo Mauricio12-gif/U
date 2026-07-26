@@ -57,11 +57,11 @@ Enter Our Story
 <header class="top">
 
 <h2 id="welcome">
-Welcome 
+Welcome
 </h2>
 
 <p>
-Our memories, dreams and conversations
+Our memories, dreams and conversations ❤️
 </p>
 
 </header>
@@ -203,6 +203,23 @@ Talk with me
 
 
 
+<!-- ADMIN -->
+
+<div class="app-card" onclick="showSection('admin')">
+
+<span>👑</span>
+
+<h3>Admin Inbox</h3>
+
+<p>
+Manage conversations
+</p>
+
+</div>
+
+
+
+
 </section>
 
 
@@ -313,7 +330,8 @@ Memories we are yet to create.
 
 
 
-<!-- CHAT PLACEHOLDER -->
+<!-- PRIVATE CHAT -->
+
 
 <section id="chat" class="content hidden">
 
@@ -321,11 +339,6 @@ Memories we are yet to create.
 
 
 <div class="chat-box">
-
-<p>
-Your private conversation will appear here ❤️
-</p>
-
 
 </div>
 
@@ -337,6 +350,52 @@ placeholder="Write a message...">
 
 <button onclick="sendMessage()">
 Send ❤️
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ADMIN SECTION -->
+
+
+<section id="admin" class="content hidden">
+
+<h2>👑 Admin Inbox</h2>
+
+
+<div id="usersList">
+
+No visitors yet
+
+</div>
+
+
+
+<div class="chat-box" id="adminChat">
+
+Select a person
+
+</div>
+
+
+
+<input 
+id="adminMessage"
+placeholder="Reply message...">
+
+
+<button onclick="adminSend()">
+
+Send ❤️
+
 </button>
 
 
