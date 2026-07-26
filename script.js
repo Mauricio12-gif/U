@@ -415,7 +415,7 @@ photo.classList.toggle("expanded");
 window.openWhatsApp=function(){
 
 
-const phone="254797147155";
+const phone="254797147255";
 
 
 const text=
