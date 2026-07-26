@@ -6,7 +6,6 @@ addDoc,
 onSnapshot,
 query,
 where,
-orderBy,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
@@ -22,14 +21,16 @@ let selectedUser = "";
 
 window.login = function(){
 
-const name =
-document.getElementById("visitorName").value.trim();
+const name = document
+.getElementById("visitorName")
+.value.trim();
 
-const password =
-document.getElementById("password").value;
+const password = document
+.getElementById("password")
+.value;
 
-const error =
-document.getElementById("error");
+const error = document
+.getElementById("error");
 
 
 if(name === ""){
@@ -51,17 +52,14 @@ return;
 currentUser = name;
 
 
-
 document
 .getElementById("loginPage")
 .classList.add("hidden");
 
 
-
 document
 .getElementById("mainPage")
 .classList.remove("hidden");
-
 
 
 document
@@ -70,14 +68,11 @@ document
 "Welcome " + name + " ❤️";
 
 
-
 saveUser();
 
 loadMessages();
 
-
 };
-
 
 
 
@@ -90,21 +85,14 @@ loadMessages();
 async function saveUser(){
 
 await addDoc(
-
 collection(db,"users"),
-
 {
-
-name:currentUser,
-
-time:serverTimestamp()
-
+name: currentUser,
+time: serverTimestamp()
 }
-
 );
 
 }
-
 
 
 
@@ -116,7 +104,6 @@ time:serverTimestamp()
 
 window.showSection = function(id){
 
-
 document
 .querySelectorAll(".content")
 .forEach(section=>{
@@ -126,11 +113,9 @@ section.classList.add("hidden");
 });
 
 
-
 document
 .getElementById(id)
 .classList.remove("hidden");
-
 
 };
 
@@ -141,11 +126,9 @@ document
 
 
 
-
-// SEND PRIVATE MESSAGE
+// SEND MESSAGE
 
 window.sendMessage = async function(){
-
 
 const input =
 document.getElementById("messageInput");
@@ -155,32 +138,26 @@ const text =
 input.value.trim();
 
 
-
 if(text === "") return;
 
 
-
 await addDoc(
-
 collection(db,"messages"),
-
 {
 
 chatId: currentUser,
 
 sender: currentUser,
 
-message: text,
+message:text,
 
-time: serverTimestamp()
+time:serverTimestamp()
 
 }
-
 );
 
 
-
-input.value = "";
+input.value="";
 
 };
 
@@ -192,23 +169,20 @@ input.value = "";
 
 
 
-// LOAD ONLY CURRENT USER CHAT
+// LOAD PRIVATE CHAT
 
 function loadMessages(){
-
 
 const chatBox =
 document.querySelector("#chat .chat-box");
 
 
-
-const q = query(
+const q =
+query(
 
 collection(db,"messages"),
 
-where("chatId","==",currentUser),
-
-orderBy("time","asc")
+where("chatId","==",currentUser)
 
 );
 
@@ -228,7 +202,7 @@ const data = doc.data();
 
 
 
-let type =
+const type =
 data.sender === currentUser
 ? "my-message"
 : "other-message";
@@ -256,7 +230,6 @@ ${data.message}
 
 });
 
-
 }
 
 
@@ -266,11 +239,9 @@ ${data.message}
 
 
 
-
-// ADMIN LOAD USERS
+// ADMIN USERS
 
 function loadUsers(){
-
 
 const usersList =
 document.getElementById("usersList");
@@ -318,22 +289,13 @@ usersList.innerHTML += `
 
 });
 
-
 }
 
 
 
+window.openUser=function(name){
 
-
-
-
-
-
-// OPEN USER CHAT FOR ADMIN
-
-window.openUser = function(name){
-
-selectedUser = name;
+selectedUser=name;
 
 loadAdminChat();
 
@@ -346,24 +308,20 @@ loadAdminChat();
 
 
 
-
 // ADMIN CHAT
 
 function loadAdminChat(){
-
 
 const box =
 document.getElementById("adminChat");
 
 
-
-const q=query(
+const q =
+query(
 
 collection(db,"messages"),
 
-where("chatId","==",selectedUser),
-
-orderBy("time","asc")
+where("chatId","==",selectedUser)
 
 );
 
@@ -375,17 +333,15 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
-
 snapshot.forEach(doc=>{
 
 
-const data = doc.data();
-
+const data=doc.data();
 
 
 box.innerHTML += `
 
-<div>
+<p>
 
 <b>${data.sender}</b>
 
@@ -393,7 +349,7 @@ box.innerHTML += `
 
 ${data.message}
 
-</div>
+</p>
 
 <hr>
 
@@ -415,11 +371,7 @@ ${data.message}
 
 
 
-
-// ADMIN SEND MESSAGE
-
-window.adminSend = async function(){
-
+window.adminSend=async function(){
 
 const input =
 document.getElementById("adminMessage");
@@ -427,7 +379,6 @@ document.getElementById("adminMessage");
 
 const text =
 input.value.trim();
-
 
 
 if(text==="") return;
@@ -456,7 +407,6 @@ time:serverTimestamp()
 
 input.value="";
 
-
 };
 
 
@@ -465,9 +415,6 @@ input.value="";
 
 
 
-
-
-// LOGOUT
 
 window.logout=function(){
 
