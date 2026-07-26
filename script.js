@@ -24,24 +24,25 @@ const name =
 document.getElementById("visitorName").value.trim();
 
 const password =
-document.getElementById("password").value;
+document.getElementById("password").value.trim();
+
+const error =
+document.getElementById("error");
 
 
-if(name===""){
 
-document.getElementById("error").innerHTML =
-"Enter your name ❤️";
+if(name === ""){
 
+error.innerHTML="Enter your name ❤️";
 return;
 
 }
 
 
-if(password!=="LOVE"){
 
-document.getElementById("error").innerHTML =
-"Wrong password ❤️";
+if(password !== "LOVE"){
 
+error.innerHTML="Wrong password ❤️";
 return;
 
 }
@@ -52,45 +53,57 @@ currentUser = name;
 
 
 
-document.getElementById("loginPage")
+document
+.getElementById("loginPage")
 .classList.add("hidden");
 
 
-document.getElementById("mainPage")
+document
+.getElementById("mainPage")
 .classList.remove("hidden");
 
 
-
-document.getElementById("welcome")
+document
+.getElementById("welcome")
 .innerHTML =
-"Welcome " + name + " ❤️";
+"Welcome " + currentUser + " ❤️";
 
 
 
 
-// SAVE USER
+// CREATE USER RECORD
 
 await addDoc(
 collection(db,"users"),
 {
-name:name,
-role:name.toLowerCase()==="mauricio"
-?"admin"
-:"member",
-time:serverTimestamp()
+
+name: currentUser,
+
+role:
+currentUser.toLowerCase() === "mauricio"
+? "admin"
+: "member",
+
+time: serverTimestamp()
+
 }
+
 );
 
 
 
+// SHOW ADMIN ONLY TO MAURICIO
 
-// ONLY MAURICIO SEES ADMIN
+if(currentUser.toLowerCase() === "mauricio"){
 
-if(name.toLowerCase()==="mauricio"){
+let admin =
+document.getElementById("adminCard");
 
-document
-.getElementById("adminCard")
-.classList.remove("hidden");
+if(admin){
+
+admin.classList.remove("hidden");
+
+}
 
 }
 
@@ -106,7 +119,7 @@ document
 
 
 
-// OPEN SECTIONS
+// SHOW SECTIONS
 
 window.showSection=function(id){
 
@@ -120,27 +133,25 @@ section.classList.add("hidden");
 });
 
 
-
 document
 .getElementById(id)
 .classList.remove("hidden");
 
 
 
-if(id==="chat"){
+if(id === "chat"){
 
-loadUserMessages();
+loadMessages();
 
 }
 
 
 
-if(id==="admin"){
+if(id === "admin"){
 
 loadUsers();
 
 }
-
 
 
 };
@@ -153,16 +164,16 @@ loadUsers();
 
 
 
-// MEMBER SEND MESSAGE
+// SEND MEMBER MESSAGE
 
 window.sendMessage = async function(){
 
 
-const input =
+let input =
 document.getElementById("messageInput");
 
 
-const text =
+let text =
 input.value.trim();
 
 
@@ -172,12 +183,14 @@ if(text==="") return;
 
 
 await addDoc(
+
 collection(db,"messages"),
+
 {
 
-chatId:currentUser,
+chatId: currentUser,
 
-sender:currentUser,
+sender: currentUser,
 
 message:text,
 
@@ -201,17 +214,20 @@ input.value="";
 
 
 
-// MEMBER VIEW CHAT
+// LOAD MEMBER CHAT
 
-function loadUserMessages(){
+function loadMessages(){
 
 
-const box =
+let box =
 document.querySelector("#chat .chat-box");
 
 
+if(!box) return;
 
-const q=query(
+
+
+let q=query(
 
 collection(db,"messages"),
 
@@ -231,7 +247,7 @@ box.innerHTML="";
 snapshot.forEach(doc=>{
 
 
-const data=doc.data();
+let data=doc.data();
 
 
 
@@ -239,7 +255,9 @@ box.innerHTML += `
 
 <div>
 
-<b>${data.sender}</b><br>
+<b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
@@ -267,13 +285,17 @@ ${data.message}
 
 
 
-// ADMIN LOAD USERS
+// ADMIN LOAD MEMBERS
 
 function loadUsers(){
 
 
-const list =
+let list =
 document.getElementById("usersList");
+
+
+if(!list) return;
+
 
 
 onSnapshot(collection(db,"users"),(snapshot)=>{
@@ -282,7 +304,7 @@ onSnapshot(collection(db,"users"),(snapshot)=>{
 list.innerHTML="";
 
 
-let users=[];
+let people=[];
 
 
 
@@ -296,22 +318,20 @@ let data=doc.data();
 if(
 data.role==="member"
 &&
-!users.includes(data.name)
+!people.includes(data.name)
 
 ){
 
-users.push(data.name);
+people.push(data.name);
 
 }
-
 
 
 });
 
 
 
-
-if(users.length===0){
+if(people.length===0){
 
 list.innerHTML="No members yet";
 
@@ -321,14 +341,14 @@ return;
 
 
 
-users.forEach(name=>{
+people.forEach(person=>{
 
 
 list.innerHTML += `
 
-<button onclick="openUser('${name}')">
+<button onclick="openUser('${person}')">
 
-❤️ ${name}
+❤️ ${person}
 
 </button>
 
@@ -354,13 +374,13 @@ list.innerHTML += `
 
 
 
-// ADMIN SELECT MEMBER
+// ADMIN SELECT USER
 
 window.openUser=function(name){
 
 selectedUser=name;
 
-loadAdminMessages();
+loadAdminChat();
 
 };
 
@@ -372,17 +392,16 @@ loadAdminMessages();
 
 
 
-// ADMIN VIEW SELECTED CHAT
+// ADMIN VIEW CHAT
 
-function loadAdminMessages(){
+function loadAdminChat(){
 
 
-const box =
+let box =
 document.getElementById("adminChat");
 
 
-
-const q=query(
+let q=query(
 
 collection(db,"messages"),
 
@@ -398,11 +417,10 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
-
 snapshot.forEach(doc=>{
 
 
-const data=doc.data();
+let data=doc.data();
 
 
 
@@ -410,7 +428,9 @@ box.innerHTML += `
 
 <div>
 
-<b>${data.sender}</b><br>
+<b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
@@ -438,16 +458,16 @@ ${data.message}
 
 
 
-// ADMIN REPLY
+// ADMIN SEND REPLY
 
-window.adminSend=async function(){
+window.adminSend = async function(){
 
 
-const input =
+let input =
 document.getElementById("adminMessage");
 
 
-const text =
+let text =
 input.value.trim();
 
 
