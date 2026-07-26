@@ -12,8 +12,6 @@ serverTimestamp
 
 let currentUser = "";
 
-let selectedUser = "";
-
 
 
 
@@ -21,21 +19,18 @@ let selectedUser = "";
 
 window.login = function(){
 
-const name = document
-.getElementById("visitorName")
-.value.trim();
+const name =
+document.getElementById("visitorName").value.trim();
 
-const password = document
-.getElementById("password")
-.value;
-
-const error = document
-.getElementById("error");
+const password =
+document.getElementById("password").value;
 
 
 if(name === ""){
 
-error.innerHTML = "Enter your name ❤️";
+document.getElementById("error").innerHTML =
+"Enter your name ❤️";
+
 return;
 
 }
@@ -43,7 +38,9 @@ return;
 
 if(password !== "LOVE"){
 
-error.innerHTML = "Wrong password ❤️";
+document.getElementById("error").innerHTML =
+"Wrong password ❤️";
+
 return;
 
 }
@@ -52,23 +49,18 @@ return;
 currentUser = name;
 
 
-document
-.getElementById("loginPage")
+document.getElementById("loginPage")
 .classList.add("hidden");
 
 
-document
-.getElementById("mainPage")
+document.getElementById("mainPage")
 .classList.remove("hidden");
 
 
-document
-.getElementById("welcome")
+document.getElementById("welcome")
 .innerHTML =
 "Welcome " + name + " ❤️";
 
-
-saveUser();
 
 loadMessages();
 
@@ -80,32 +72,12 @@ loadMessages();
 
 
 
-// SAVE USER
-
-async function saveUser(){
-
-await addDoc(
-collection(db,"users"),
-{
-name: currentUser,
-time: serverTimestamp()
-}
-);
-
-}
-
-
-
-
-
-
 
 // SHOW SECTIONS
 
-window.showSection = function(id){
+window.showSection=function(id){
 
-document
-.querySelectorAll(".content")
+document.querySelectorAll(".content")
 .forEach(section=>{
 
 section.classList.add("hidden");
@@ -113,8 +85,7 @@ section.classList.add("hidden");
 });
 
 
-document
-.getElementById(id)
+document.getElementById(id)
 .classList.remove("hidden");
 
 };
@@ -138,7 +109,8 @@ const text =
 input.value.trim();
 
 
-if(text === "") return;
+if(text==="") return;
+
 
 
 await addDoc(
@@ -154,10 +126,12 @@ message:text,
 time:serverTimestamp()
 
 }
+
 );
 
 
 input.value="";
+
 
 };
 
@@ -169,12 +143,24 @@ input.value="";
 
 
 
-// LOAD PRIVATE CHAT
+// DISPLAY MESSAGES
 
 function loadMessages(){
 
+
 const chatBox =
-document.querySelector("#chat .chat-box");
+document.querySelector(".chat-box");
+
+
+
+if(!chatBox){
+
+console.log("Chat box not found");
+
+return;
+
+}
+
 
 
 const q =
@@ -195,6 +181,17 @@ chatBox.innerHTML="";
 
 
 
+if(snapshot.empty){
+
+chatBox.innerHTML =
+"<p>No messages yet ❤️</p>";
+
+return;
+
+}
+
+
+
 snapshot.forEach(doc=>{
 
 
@@ -202,7 +199,7 @@ const data = doc.data();
 
 
 
-const type =
+let messageStyle =
 data.sender === currentUser
 ? "my-message"
 : "other-message";
@@ -211,7 +208,7 @@ data.sender === currentUser
 
 chatBox.innerHTML += `
 
-<div class="${type}">
+<div class="${messageStyle}">
 
 <b>${data.sender}</b>
 
@@ -228,186 +225,12 @@ ${data.message}
 });
 
 
-});
-
-}
-
-
-
-
-
-
-
-
-// ADMIN USERS
-
-function loadUsers(){
-
-const usersList =
-document.getElementById("usersList");
-
-
-if(!usersList) return;
-
-
-
-const q =
-query(collection(db,"users"));
-
-
-
-onSnapshot(q,(snapshot)=>{
-
-
-usersList.innerHTML="";
-
-
-
-snapshot.forEach(doc=>{
-
-
-const user = doc.data();
-
-
-
-usersList.innerHTML += `
-
-<button onclick="openUser('${user.name}')">
-
-❤️ ${user.name}
-
-</button>
-
-<br><br>
-
-`;
-
-
 
 });
 
-
-});
-
-}
-
-
-
-window.openUser=function(name){
-
-selectedUser=name;
-
-loadAdminChat();
-
-};
-
-
-
-
-
-
-
-
-// ADMIN CHAT
-
-function loadAdminChat(){
-
-const box =
-document.getElementById("adminChat");
-
-
-const q =
-query(
-
-collection(db,"messages"),
-
-where("chatId","==",selectedUser)
-
-);
-
-
-
-onSnapshot(q,(snapshot)=>{
-
-
-box.innerHTML="";
-
-
-snapshot.forEach(doc=>{
-
-
-const data=doc.data();
-
-
-box.innerHTML += `
-
-<p>
-
-<b>${data.sender}</b>
-
-<br>
-
-${data.message}
-
-</p>
-
-<hr>
-
-`;
-
-
-
-});
-
-
-});
 
 
 }
-
-
-
-
-
-
-
-window.adminSend=async function(){
-
-const input =
-document.getElementById("adminMessage");
-
-
-const text =
-input.value.trim();
-
-
-if(text==="") return;
-
-
-
-await addDoc(
-
-collection(db,"messages"),
-
-{
-
-chatId:selectedUser,
-
-sender:"Mauricio",
-
-message:text,
-
-time:serverTimestamp()
-
-}
-
-);
-
-
-
-input.value="";
-
-};
 
 
 
