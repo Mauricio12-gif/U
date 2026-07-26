@@ -5,7 +5,6 @@ collection,
 addDoc,
 onSnapshot,
 query,
-where,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
@@ -18,7 +17,7 @@ let selectedUser = "";
 
 // LOGIN
 
-window.login = function(){
+window.login = async function(){
 
 const name =
 document.getElementById("visitorName").value.trim();
@@ -40,6 +39,7 @@ return;
 }
 
 
+
 currentUser=name;
 
 
@@ -52,7 +52,6 @@ document.getElementById("mainPage")
 .classList.remove("hidden");
 
 
-
 document.getElementById("welcome")
 .innerHTML =
 "Welcome "+name+" ❤️";
@@ -60,48 +59,37 @@ document.getElementById("welcome")
 
 
 
-// SHOW ADMIN ONLY TO MAURICIO
+// SAVE USER
 
-if(currentUser.toLowerCase()==="mauricio"){
+await addDoc(collection(db,"users"),{
+
+name:name,
+
+time:serverTimestamp()
+
+});
+
+
+
+// ONLY MAURICIO GETS ADMIN
+
+if(name.toLowerCase()==="mauricio"){
 
 document
 .getElementById("adminCard")
 .classList.remove("hidden");
-
 
 loadUsers();
 
 }
 
 
+
 loadMessages();
-
-
-saveUser();
 
 
 };
 
-
-
-
-
-
-
-
-// SAVE USER
-
-async function saveUser(){
-
-await addDoc(
-collection(db,"users"),
-{
-name:currentUser,
-time:serverTimestamp()
-}
-);
-
-}
 
 
 
@@ -125,6 +113,7 @@ section.classList.add("hidden");
 
 document.getElementById(id)
 .classList.remove("hidden");
+
 
 
 if(id==="admin"){
@@ -151,28 +140,25 @@ loadMessages();
 
 
 
-// USER SEND MESSAGE
+// SEND MESSAGE
 
-window.sendMessage = async function(){
+window.sendMessage=async function(){
 
 
-const input =
+let input =
 document.getElementById("messageInput");
 
 
-const text =
+let text =
 input.value.trim();
+
 
 
 if(text==="") return;
 
 
 
-await addDoc(
-
-collection(db,"messages"),
-
-{
+await addDoc(collection(db,"messages"),{
 
 chatId:currentUser,
 
@@ -182,13 +168,12 @@ message:text,
 
 time:serverTimestamp()
 
-}
-
-);
+});
 
 
 
 input.value="";
+
 
 };
 
@@ -209,13 +194,9 @@ const box =
 document.querySelector("#chat .chat-box");
 
 
-const q=query(
 
-collection(db,"messages"),
-
-where("chatId","==",currentUser)
-
-);
+const q =
+collection(db,"messages");
 
 
 
@@ -225,7 +206,6 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
-
 snapshot.forEach(doc=>{
 
 
@@ -233,17 +213,14 @@ let data=doc.data();
 
 
 
+if(data.chatId===currentUser){
+
+
 box.innerHTML+=`
 
-<div class="${
-data.sender===currentUser
-?"my-message"
-:"other-message"
-}">
+<div>
 
-<b>${data.sender}</b>
-
-<br>
+<b>${data.sender}</b><br>
 
 ${data.message}
 
@@ -251,6 +228,7 @@ ${data.message}
 
 `;
 
+}
 
 
 });
@@ -269,7 +247,7 @@ ${data.message}
 
 
 
-// ADMIN SHOW USERS
+// ADMIN LOAD USERS
 
 function loadUsers(){
 
@@ -278,34 +256,31 @@ const list =
 document.getElementById("usersList");
 
 
-
-const q =
-query(collection(db,"users"));
-
-
-
-onSnapshot(q,(snapshot)=>{
+onSnapshot(collection(db,"users"),(snapshot)=>{
 
 
 list.innerHTML="";
 
 
-
-let users=[];
+let names=[];
 
 
 
 snapshot.forEach(doc=>{
 
 
-let data=doc.data();
+let user=doc.data();
 
 
 
-if(!users.includes(data.name)
-&& data.name.toLowerCase()!=="mauricio"){
+if(
+user.name.toLowerCase()!=="mauricio"
+&&
+!names.includes(user.name)
 
-users.push(data.name);
+){
+
+names.push(user.name);
 
 }
 
@@ -315,7 +290,18 @@ users.push(data.name);
 
 
 
-users.forEach(name=>{
+
+if(names.length===0){
+
+list.innerHTML="No visitors yet";
+
+return;
+
+}
+
+
+
+names.forEach(name=>{
 
 
 list.innerHTML+=`
@@ -335,7 +321,6 @@ list.innerHTML+=`
 });
 
 
-
 });
 
 
@@ -349,7 +334,7 @@ list.innerHTML+=`
 
 
 
-// ADMIN SELECT USER
+// SELECT USER
 
 window.openUser=function(name){
 
@@ -369,8 +354,7 @@ loadAdminMessages();
 
 
 
-
-// ADMIN VIEW CHAT
+// ADMIN VIEW MESSAGES
 
 function loadAdminMessages(){
 
@@ -379,18 +363,7 @@ const box =
 document.getElementById("adminChat");
 
 
-
-const q=query(
-
-collection(db,"messages"),
-
-where("chatId","==",selectedUser)
-
-);
-
-
-
-onSnapshot(q,(snapshot)=>{
+onSnapshot(collection(db,"messages"),(snapshot)=>{
 
 
 box.innerHTML="";
@@ -403,21 +376,24 @@ let data=doc.data();
 
 
 
+if(data.chatId===selectedUser){
+
+
 box.innerHTML+=`
 
-<div>
+<p>
 
-<b>${data.sender}</b>
-
-<br>
+<b>${data.sender}</b><br>
 
 ${data.message}
 
-</div>
+</p>
 
 <hr>
 
 `;
+
+}
 
 
 
@@ -436,17 +412,16 @@ ${data.message}
 
 
 
-
-// ADMIN SEND REPLY
+// ADMIN SEND
 
 window.adminSend=async function(){
 
 
-const input =
+let input =
 document.getElementById("adminMessage");
 
 
-const text =
+let text =
 input.value.trim();
 
 
@@ -455,11 +430,7 @@ if(text==="" || selectedUser==="") return;
 
 
 
-await addDoc(
-
-collection(db,"messages"),
-
-{
+await addDoc(collection(db,"messages"),{
 
 chatId:selectedUser,
 
@@ -469,25 +440,11 @@ message:text,
 
 time:serverTimestamp()
 
-}
-
-);
+});
 
 
 
 input.value="";
 
-};
-
-
-
-
-
-
-
-
-window.logout=function(){
-
-location.reload();
 
 };
