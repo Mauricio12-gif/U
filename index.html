@@ -33,9 +33,18 @@ A collection of memories, dreams and moments.
 </p>
 
 
-<button onclick="document.getElementById('welcomePage').style.display='none'; document.getElementById('mainPage').classList.remove('hidden');">
+<input 
+id="visitorPassword"
+type="password"
+placeholder="Enter secret password ❤️">
+
+
+<button onclick="checkVisitorPassword()">
 Enter Our Story ❤️
 </button>
+
+
+<p id="visitorError"></p>
 
 
 </div>
