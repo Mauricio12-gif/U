@@ -20,20 +20,17 @@ let selectedUser = "";
 
 window.login = function(){
 
-
 const name =
 document.getElementById("visitorName").value.trim();
-
 
 const password =
 document.getElementById("password").value;
 
 
-if(name === "") return;
+if(name==="") return;
 
 
-
-if(password !== "LOVE"){
+if(password!=="LOVE"){
 
 document.getElementById("error").innerHTML =
 "Wrong password ❤️";
@@ -43,14 +40,12 @@ return;
 }
 
 
-
-currentUser = name;
+currentUser=name;
 
 
 
 document.getElementById("loginPage")
 .classList.add("hidden");
-
 
 
 document.getElementById("mainPage")
@@ -60,27 +55,32 @@ document.getElementById("mainPage")
 
 document.getElementById("welcome")
 .innerHTML =
-"Welcome " + name + " ❤️";
+"Welcome "+name+" ❤️";
 
 
 
 
-saveUser();
+// SHOW ADMIN ONLY TO MAURICIO
 
-
-
-if(currentUser === "Mauricio"){
+if(currentUser.toLowerCase()==="mauricio"){
 
 document
 .getElementById("adminCard")
 .classList.remove("hidden");
 
+
+loadUsers();
+
 }
 
 
+loadMessages();
+
+
+saveUser();
+
 
 };
-
 
 
 
@@ -93,20 +93,14 @@ document
 
 async function saveUser(){
 
-
 await addDoc(
 collection(db,"users"),
 {
-
 name:currentUser,
-
 time:serverTimestamp()
-
 }
-
 );
 
-
 }
 
 
@@ -116,14 +110,12 @@ time:serverTimestamp()
 
 
 
-
-// SHOW SECTION
+// SHOW SECTIONS
 
 window.showSection=function(id){
 
 
-document
-.querySelectorAll(".content")
+document.querySelectorAll(".content")
 .forEach(section=>{
 
 section.classList.add("hidden");
@@ -131,24 +123,20 @@ section.classList.add("hidden");
 });
 
 
-
-document
-.getElementById(id)
+document.getElementById(id)
 .classList.remove("hidden");
-
-
-
-if(id==="chat"){
-
-loadUserMessages();
-
-}
-
 
 
 if(id==="admin"){
 
 loadUsers();
+
+}
+
+
+if(id==="chat"){
+
+loadMessages();
 
 }
 
@@ -176,13 +164,14 @@ const text =
 input.value.trim();
 
 
-
 if(text==="") return;
 
 
 
 await addDoc(
+
 collection(db,"messages"),
+
 {
 
 chatId:currentUser,
@@ -201,7 +190,6 @@ time:serverTimestamp()
 
 input.value="";
 
-
 };
 
 
@@ -212,14 +200,13 @@ input.value="";
 
 
 
-// USER CHAT DISPLAY
+// LOAD USER CHAT
 
-function loadUserMessages(){
+function loadMessages(){
 
 
 const box =
 document.querySelector("#chat .chat-box");
-
 
 
 const q=query(
@@ -246,11 +233,17 @@ let data=doc.data();
 
 
 
-box.innerHTML += `
+box.innerHTML+=`
 
-<div class="${data.sender===currentUser ? "my-message":"other-message"}">
+<div class="${
+data.sender===currentUser
+?"my-message"
+:"other-message"
+}">
 
-<b>${data.sender}</b><br>
+<b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
@@ -276,12 +269,12 @@ ${data.message}
 
 
 
-// ADMIN SEE ALL USERS
+// ADMIN SHOW USERS
 
 function loadUsers(){
 
 
-const box =
+const list =
 document.getElementById("usersList");
 
 
@@ -294,30 +287,42 @@ query(collection(db,"users"));
 onSnapshot(q,(snapshot)=>{
 
 
-box.innerHTML="";
+list.innerHTML="";
 
 
 
-let users = [];
+let users=[];
 
 
 
 snapshot.forEach(doc=>{
 
 
-let user = doc.data();
+let data=doc.data();
 
 
-if(!users.includes(user.name) && user.name !== "Mauricio"){
 
-users.push(user.name);
+if(!users.includes(data.name)
+&& data.name.toLowerCase()!=="mauricio"){
+
+users.push(data.name);
+
+}
 
 
-box.innerHTML += `
 
-<button onclick="openUser('${user.name}')">
+});
 
-❤️ ${user.name}
+
+
+users.forEach(name=>{
+
+
+list.innerHTML+=`
+
+<button onclick="openUser('${name}')">
+
+❤️ ${name}
 
 </button>
 
@@ -325,7 +330,6 @@ box.innerHTML += `
 
 `;
 
-}
 
 
 });
@@ -353,7 +357,7 @@ window.openUser=function(name){
 selectedUser=name;
 
 
-loadSelectedChat();
+loadAdminMessages();
 
 
 };
@@ -366,9 +370,9 @@ loadSelectedChat();
 
 
 
-// ADMIN VIEW SELECTED CHAT
+// ADMIN VIEW CHAT
 
-function loadSelectedChat(){
+function loadAdminMessages(){
 
 
 const box =
@@ -392,7 +396,6 @@ onSnapshot(q,(snapshot)=>{
 box.innerHTML="";
 
 
-
 snapshot.forEach(doc=>{
 
 
@@ -400,11 +403,13 @@ let data=doc.data();
 
 
 
-box.innerHTML += `
+box.innerHTML+=`
 
 <div>
 
-<b>${data.sender}</b><br>
+<b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
@@ -451,7 +456,9 @@ if(text==="" || selectedUser==="") return;
 
 
 await addDoc(
+
 collection(db,"messages"),
+
 {
 
 chatId:selectedUser,
@@ -470,5 +477,17 @@ time:serverTimestamp()
 
 input.value="";
 
+};
+
+
+
+
+
+
+
+
+window.logout=function(){
+
+location.reload();
 
 };
