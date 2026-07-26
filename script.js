@@ -563,6 +563,18 @@ photo.classList.toggle("expanded");
 // WHATSAPP BUTTON
 
 window.openWhatsApp=function(){
+  window.enterWebsite = function(){
+
+document
+.getElementById("welcomePage")
+.classList.add("hidden");
+
+
+document
+.getElementById("mainPage")
+.classList.remove("hidden");
+
+};
 
 
 
@@ -605,6 +617,7 @@ encodeURIComponent(text),
 // AUTO LOAD STORIES WHEN PAGE OPENS
 
 window.addEventListener("load",()=>{
+  
 
 
 loadStories();
@@ -620,17 +633,5 @@ alert("Saved ❤️");
 loadStories();
 
 
-
-};
-window.enterWebsite = function(){
-
-document
-.getElementById("welcomePage")
-.classList.add("hidden");
-
-
-document
-.getElementById("mainPage")
-.classList.remove("hidden");
 
 };
