@@ -68,7 +68,7 @@ document
 document
 .getElementById("welcome")
 .innerHTML =
-"Welcome " + name + " ❤️";
+"Welcome ❤️";
 
 
 
@@ -123,7 +123,7 @@ loadMessages();
 
 
 
-// SEND MESSAGE
+// SEND ANONYMOUS MESSAGE
 
 window.sendMessage = async function(){
 
@@ -147,13 +147,13 @@ collection(db,"messages"),
 
 {
 
-ChatID: currentUser,
+ChatID:"public",
 
-Message: text,
+Message:text,
 
-Sender: currentUser,
+Sender:currentUser,
 
-Time: serverTimestamp()
+Time:serverTimestamp()
 
 }
 
@@ -175,7 +175,7 @@ input.value="";
 
 
 
-// LOAD USER MESSAGES ONLY
+// LOAD PUBLIC CHAT
 
 function loadMessages(){
 
@@ -203,15 +203,11 @@ const data = doc.data();
 
 
 
-if(data.ChatID === currentUser){
-
-
-
 box.innerHTML += `
 
 <div class="message">
 
-<b>❤️ You</b>
+<b>❤️ Anonymous</b>
 
 <br>
 
@@ -225,17 +221,14 @@ ${data.Message}
 
 
 
-}
-
-
-
 });
 
 
 
 if(box.innerHTML===""){
 
-box.innerHTML="<p>No messages yet ❤️</p>";
+box.innerHTML =
+"<p>No messages yet ❤️</p>";
 
 }
 
@@ -260,7 +253,7 @@ window.openWhatsApp = function(){
 
 
 const phone =
-"254797147255";
+"254797147155";
 
 
 const message =
