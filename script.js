@@ -1,11 +1,8 @@
 import { db, auth } from "./firebase.js";
 
-
 import {
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-console.log("SCRIPT IS WORKING");
-
 
 import {
     collection,
@@ -19,73 +16,29 @@ import {
 
 
 
-// OWNER ACCOUNT
-
 const OWNER_EMAIL = "lovermax876@gmail.com";
-
 
 let currentUser = null;
 
 
 
-
-
-
-// ===============================
-// WELCOME PAGE
-// ===============================
-
-
-window.enterWebsite = function(){
-
-
-    document
-    .getElementById("welcomePage")
-    .classList.add("hidden");
-
-
-    document
-    .getElementById("mainPage")
-    .classList.remove("hidden");
-
-
-};
-
-
-
-
-
-
-
-// ===============================
-// OPEN OWNER LOGIN
-// ===============================
-
+// OWNER LOGIN BUTTON
 
 window.openOwnerLogin = function(){
 
-
     document
     .getElementById("loginPage")
-    .classList.remove("hidden");
-
+    .classList
+    .remove("hidden");
 
 };
 
 
 
 
-
-
-
-
-// ===============================
-// OWNER LOGIN
-// ===============================
-
+// LOGIN
 
 window.login = async function(){
-
 
     const email =
     document.getElementById("email").value.trim();
@@ -97,7 +50,6 @@ window.login = async function(){
 
     const error =
     document.getElementById("error");
-
 
 
     try{
@@ -126,11 +78,9 @@ window.login = async function(){
             .querySelectorAll("[id$='Button']")
             .forEach(button=>{
 
-
                 button
                 .classList
                 .remove("hidden");
-
 
             });
 
@@ -138,29 +88,17 @@ window.login = async function(){
 
             document
             .getElementById("loginPage")
-            .classList.add("hidden");
+            .classList
+            .add("hidden");
 
 
-
-            alert("Welcome Mauricio ❤️ Editing unlocked");
-
-
-        }
-
-
-        else{
-
-
-            alert("Login successful but editing is disabled");
+            showNotice("Welcome Mauricio ❤️");
 
 
         }
-
 
 
     }
-
-
     catch(errorMessage){
 
 
@@ -174,34 +112,23 @@ window.login = async function(){
     }
 
 
-
 };
 
 
 
 
-
-
-
-
-// ===============================
-// PAGE SECTIONS
-// ===============================
-
+// PAGE NAVIGATION
 
 window.showSection = function(id){
-
 
 
     document
     .querySelectorAll(".content")
     .forEach(section=>{
 
-
         section
         .classList
         .add("hidden");
-
 
     });
 
@@ -214,39 +141,32 @@ window.showSection = function(id){
 
 
 
-
-
     if(
-        id === "story" ||
-        id === "love" ||
-        id === "meeting" ||
-        id === "dreams"
+        id==="story" ||
+        id==="love" ||
+        id==="meeting" ||
+        id==="dreams"
     ){
-
 
         loadStories();
 
-
     }
 
 
 
-
-
-    if(id === "chat"){
-
+    if(id==="chat"){
 
         loadMessages();
 
-
     }
 
 
+};
+/
 
-};// ===============================
-// LOAD STORIES FROM FIREBASE
-// ===============================
 
+
+// LOAD STORIES
 
 async function loadStories(){
 
@@ -286,64 +206,53 @@ async function loadStories(){
 
 
 
-
     for(let story of stories){
 
 
-        try{
+        const result =
+        await getDoc(
+
+            doc(
+                db,
+                "story",
+                story.name
+            )
+
+        );
 
 
-            const result =
-            await getDoc(
 
-                doc(
-                    db,
-                    "story",
-                    story.name
-                )
+        if(result.exists()){
 
+
+            const text =
+            result.data().content;
+
+
+
+            const display =
+            document.getElementById(
+                story.display
             );
 
 
+            if(display){
 
-            if(result.exists()){
+                display.innerText = text;
 
-
-                const text =
-                result.data().content;
-
-
-
-                const display =
-                document.getElementById(
-                    story.display
-                );
+            }
 
 
 
-                if(display){
-
-                    display.innerText = text;
-
-                }
-
+            const input =
+            document.getElementById(
+                story.input
+            );
 
 
+            if(input){
 
-                const input =
-                document.getElementById(
-                    story.input
-                );
-
-
-
-                if(input){
-
-                    input.value = text;
-
-                }
-
-
+                input.value = text;
 
             }
 
@@ -352,21 +261,8 @@ async function loadStories(){
         }
 
 
-        catch(error){
-
-
-            console.log(
-                "Story loading error:",
-                error
-            );
-
-
-        }
-
-
 
     }
-
 
 
 }
@@ -376,52 +272,41 @@ async function loadStories(){
 
 
 
-
-
-// ===============================
 // OPEN EDIT BOX
-// ===============================
-
 
 window.editStory = function(type){
-
 
 
     let box = "";
 
 
 
-    if(type === "ourStory"){
+    if(type==="ourStory"){
 
-        box = "ourStoryEdit";
-
-    }
-
-
-
-    if(type === "love"){
-
-        box = "loveEdit";
+        box="ourStoryEdit";
 
     }
 
 
+    if(type==="love"){
 
-    if(type === "howWeMet"){
-
-        box = "meetingEdit";
-
-    }
-
-
-
-    if(type === "dreams"){
-
-        box = "dreamsEdit";
+        box="loveEdit";
 
     }
 
 
+    if(type==="howWeMet"){
+
+        box="meetingEdit";
+
+    }
+
+
+    if(type==="dreams"){
+
+        box="dreamsEdit";
+
+    }
 
 
 
@@ -445,12 +330,7 @@ window.editStory = function(type){
 
 
 
-
-
-// ===============================
-// SAVE STORIES TO FIREBASE
-// ===============================
-
+// SAVE STORY
 
 window.saveStorySection = async function(
     collectionName,
@@ -458,79 +338,53 @@ window.saveStorySection = async function(
 ){
 
 
-
     const text =
-
     document
     .getElementById(inputId)
     .value;
 
 
 
-    try{
+    await setDoc(
+
+        doc(
+            db,
+            "story",
+            collectionName
+        ),
 
 
-        await setDoc(
+        {
 
-            doc(
-                db,
-                "story",
-                collectionName
-            ),
+            content:text,
 
+            updatedAt:
+            serverTimestamp()
 
-            {
-
-                content:text,
-
-                updatedAt:
-                serverTimestamp()
-
-            }
+        }
 
 
-        );
+    );
 
 
 
-        alert("Saved ❤️");
+    showNotice("Saved ❤️");
+
+
+    loadStories();
+
+
+};
 
 
 
-        loadStories();
-
-
-
-    }
-
-
-    catch(error){
-
-
-        console.log(error);
-
-
-        alert(
-            "Could not save story"
-        );
-
-
-    }
-
-
-
-};// ===============================
-// PUBLIC CHAT
-// ===============================
-
+// SEND PUBLIC MESSAGE
 
 window.sendMessage = async function(){
 
 
-
     const input =
     document.getElementById("messageInput");
-
 
 
     const message =
@@ -538,56 +392,37 @@ window.sendMessage = async function(){
 
 
 
-
-    if(message === "") return;
-
+    if(message==="") return;
 
 
 
-    try{
+    await addDoc(
+
+        collection(
+            db,
+            "messages"
+        ),
 
 
-        await addDoc(
+        {
 
-            collection(
-                db,
-                "messages"
-            ),
+            ChatID:"public",
 
+            Message:message,
 
-            {
+            Sender:"Anonymous",
 
-                ChatID:"public",
+            Time:
+            serverTimestamp()
 
-                Message:message,
-
-                Sender:"Anonymous",
-
-                Time:
-                serverTimestamp()
+        }
 
 
-            }
-
-
-        );
+    );
 
 
 
-        input.value = "";
-
-
-
-    }
-
-
-    catch(error){
-
-
-        console.log(error);
-
-
-    }
+    input.value="";
 
 
 
@@ -599,14 +434,9 @@ window.sendMessage = async function(){
 
 
 
-
-// ===============================
-// LOAD CHAT
-// ===============================
-
+// LOAD PUBLIC CHAT
 
 function loadMessages(){
-
 
 
     const box =
@@ -618,7 +448,6 @@ function loadMessages(){
 
 
 
-
     onSnapshot(
 
         collection(
@@ -627,11 +456,10 @@ function loadMessages(){
         ),
 
 
-
         (snapshot)=>{
 
 
-            box.innerHTML = "";
+            box.innerHTML="";
 
 
 
@@ -662,8 +490,6 @@ function loadMessages(){
 
 
 
-
-
             if(snapshot.empty){
 
 
@@ -690,12 +516,7 @@ function loadMessages(){
 
 
 
-
-
-// ===============================
-// GALLERY IMAGE EXPAND
-// ===============================
-
+// IMAGE EXPAND
 
 window.expandPhoto = function(photo){
 
@@ -713,20 +534,13 @@ window.expandPhoto = function(photo){
 
 
 
-
-
-// ===============================
-// WHATSAPP
-// ===============================
-
+// WHATSAPP BUTTON
 
 window.openWhatsApp = function(){
 
 
-
     const phone =
     "254797147155";
-
 
 
     const text =
@@ -737,18 +551,13 @@ window.openWhatsApp = function(){
     window.open(
 
         "https://wa.me/" +
-
         phone +
-
         "?text=" +
-
         encodeURIComponent(text),
-
 
         "_blank"
 
     );
-
 
 
 };
@@ -759,12 +568,72 @@ window.openWhatsApp = function(){
 
 
 
+// SMALL NOTIFICATION
+
+function showNotice(message){
 
 
-// ===============================
-// STARTUP
-// ===============================
+    const notice =
+    document.createElement("div");
 
+
+
+    notice.innerHTML =
+    message;
+
+
+
+    notice.style.position="fixed";
+
+    notice.style.bottom="30px";
+
+    notice.style.left="50%";
+
+    notice.style.transform=
+    "translateX(-50%)";
+
+
+
+    notice.style.background="white";
+
+    notice.style.color="#d6336c";
+
+    notice.style.padding="15px 25px";
+
+    notice.style.borderRadius="30px";
+
+    notice.style.boxShadow=
+    "0 5px 20px rgba(0,0,0,0.2)";
+
+    notice.style.zIndex="99999";
+
+
+
+    document
+    .body
+    .appendChild(notice);
+
+
+
+    setTimeout(()=>{
+
+
+        notice.remove();
+
+
+    },3000);
+
+
+
+}
+
+
+
+
+
+
+
+// LOAD DATA WHEN OPENED
 
 window.addEventListener(
     "load",
@@ -776,40 +645,3 @@ window.addEventListener(
 
     }
 );
-function showNotice(message){
-
-const notice = document.createElement("div");
-
-notice.innerHTML = message;
-
-notice.style.position = "fixed";
-notice.style.bottom = "30px";
-notice.style.left = "50%";
-notice.style.transform = "translateX(-50%)";
-
-notice.style.background = "#ffffff";
-notice.style.color = "#d6336c";
-
-notice.style.padding = "15px 25px";
-
-notice.style.borderRadius = "30px";
-
-notice.style.boxShadow = "0 5px 20px rgba(0,0,0,0.2)";
-
-notice.style.zIndex = "99999";
-
-notice.style.fontSize = "16px";
-
-
-document.body.appendChild(notice);
-
-
-
-setTimeout(()=>{
-
-notice.remove();
-
-},3000);
-
-
-}
