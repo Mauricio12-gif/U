@@ -645,3 +645,44 @@ window.addEventListener(
 
     }
 );
+// VISITOR PASSWORD
+
+const VISITOR_PASSWORD = "LOVE";
+
+
+window.checkVisitorPassword = function(){
+
+
+    const password =
+    document.getElementById("visitorPassword").value;
+
+
+
+    if(password === VISITOR_PASSWORD){
+
+
+        document
+        .getElementById("welcomePage")
+        .style.display="none";
+
+
+        document
+        .getElementById("mainPage")
+        .classList
+        .remove("hidden");
+
+
+    }
+    else{
+
+
+        document
+        .getElementById("visitorError")
+        .innerHTML =
+        "Wrong password ❤️";
+
+
+    }
+
+
+};
