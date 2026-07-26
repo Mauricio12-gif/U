@@ -16,23 +16,31 @@
 <body>
 
 
-<div id="loginPage" class="login">
+<!-- LOGIN PAGE -->
+
+<div id="loginPage" class="login-page">
 
 <div class="login-card">
 
 <h1>Our Little Story ❤️</h1>
 
-<p>A private place for our memories</p>
+<p>A private place for memories and conversations</p>
 
 
-<input id="visitorName" placeholder="Your name">
+<input 
+id="visitorName"
+type="text"
+placeholder="Enter your name">
 
 
-<input id="password" type="password" placeholder="Password">
+<input 
+id="password"
+type="password"
+placeholder="Password">
 
 
 <button onclick="login()">
-Enter Our Story
+Enter Story
 </button>
 
 
@@ -49,18 +57,32 @@ Enter Our Story
 
 
 
+<!-- MAIN WEBSITE -->
+
 <div id="mainPage" class="hidden">
 
 
-<header class="top">
+<header class="top-bar">
+
+<div>
 
 <h2 id="welcome">
 Welcome ❤️
 </h2>
 
 <p>
-Our memories, dreams and conversations
+Memories • Stories • Conversations
 </p>
+
+</div>
+
+
+<button onclick="logout()" class="logout">
+
+Logout
+
+</button>
+
 
 </header>
 
@@ -70,10 +92,16 @@ Our memories, dreams and conversations
 
 
 
-<section class="profile-card">
+
+<!-- PROFILE -->
+
+<section class="hero-card">
+
 
 <img src="IMG_3939.jpg">
 
+
+<div>
 
 <h2>
 Our Beautiful Journey ❤️
@@ -81,8 +109,11 @@ Our Beautiful Journey ❤️
 
 
 <p>
-A small corner of the internet made for us.
+A special place where our story continues.
 </p>
+
+</div>
+
 
 </section>
 
@@ -92,69 +123,85 @@ A small corner of the internet made for us.
 
 
 
+
+<!-- MENU -->
 
 <section class="dashboard">
 
 
 <div class="app-card" onclick="showSection('story')">
 
-<span>📖</span>
+<div class="icon">📖</div>
 
 <h3>Our Story</h3>
 
-<p>How everything began</p>
+<p>
+How everything started
+</p>
 
 </div>
+
 
 
 
 
 <div class="app-card" onclick="showSection('love')">
 
-<span>💕</span>
+<div class="icon">💕</div>
 
 <h3>Why I Love You</h3>
 
-<p>Reasons you are special</p>
+<p>
+Things that make you special
+</p>
 
 </div>
+
 
 
 
 
 <div class="app-card" onclick="showSection('gallery')">
 
-<span>📸</span>
+<div class="icon">📸</div>
 
 <h3>Gallery</h3>
 
-<p>Our memories</p>
+<p>
+Our favourite memories
+</p>
 
 </div>
+
 
 
 
 
 <div class="app-card" onclick="showSection('chat')">
 
-<span>💬</span>
+<div class="icon">💬</div>
 
 <h3>Private Chat</h3>
 
-<p>Talk with me</p>
+<p>
+Send a message
+</p>
 
 </div>
 
 
 
 
-<div id="adminCard" class="app-card" onclick="showSection('admin')">
 
-<span>👑</span>
+<div id="adminCard" class="app-card hidden" onclick="showSection('admin')">
+
+<div class="icon">👑</div>
 
 <h3>Admin Inbox</h3>
 
-<p>Manage conversations</p>
+<p>
+Manage conversations
+</p>
 
 </div>
 
@@ -168,14 +215,19 @@ A small corner of the internet made for us.
 
 
 
+
+
+<!-- STORY SECTION -->
 
 <section id="story" class="content hidden">
 
 <h2>📖 Our Story</h2>
 
+
 <p>
-Our journey will be written here.
+Every beautiful journey has a beginning.
 </p>
+
 
 </section>
 
@@ -185,9 +237,15 @@ Our journey will be written here.
 
 
 
+
+<!-- LOVE SECTION -->
+
 <section id="love" class="content hidden">
 
 <h2>💕 Why I Love You</h2>
+
+
+<div class="love-items">
 
 <p>❤️ Your smile</p>
 
@@ -195,6 +253,11 @@ Our journey will be written here.
 
 <p>❤️ Your personality</p>
 
+<p>❤️ The happiness you bring</p>
+
+</div>
+
+
 </section>
 
 
@@ -202,12 +265,19 @@ Our journey will be written here.
 
 
 
+
+
+<!-- GALLERY -->
 
 <section id="gallery" class="content hidden">
 
 <h2>📸 Gallery</h2>
 
-<img class="memory-photo" src="IMG_3939.jpg">
+
+<img 
+src="IMG_3939.jpg"
+class="memory-photo">
+
 
 </section>
 
@@ -216,6 +286,10 @@ Our journey will be written here.
 
 
 
+
+
+
+<!-- CHAT -->
 
 <section id="chat" class="content hidden">
 
@@ -223,18 +297,35 @@ Our journey will be written here.
 <h2>💬 Private Chat</h2>
 
 
-<div class="chat-box">
+<div id="chatBox" class="chat-box">
+
+<p class="empty">
+No messages yet ❤️
+</p>
+
 
 </div>
 
 
 
-<input id="messageInput" placeholder="Write a message...">
+
+
+<div class="message-area">
+
+
+<input 
+id="messageInput"
+placeholder="Write a message...">
 
 
 <button onclick="sendMessage()">
-Send ❤️
+
+Send
+
 </button>
+
+
+</div>
 
 
 </section>
@@ -245,6 +336,9 @@ Send ❤️
 
 
 
+
+
+<!-- ADMIN -->
 
 <section id="admin" class="content hidden">
 
@@ -252,29 +346,58 @@ Send ❤️
 <h2>👑 Admin Inbox</h2>
 
 
-<div id="usersList">
+<div class="admin-layout">
+
+
+
+<div id="usersList" class="users-list">
 
 </div>
 
+
+
+
+<div>
 
 
 <div id="adminChat" class="chat-box">
 
-Select a person
+Select a user
 
 </div>
 
 
 
-<input id="adminMessage" placeholder="Reply message...">
+<div class="message-area">
+
+
+<input 
+id="adminMessage"
+placeholder="Reply...">
+
 
 
 <button onclick="adminSend()">
-Send ❤️
+
+Send
+
 </button>
 
 
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
 </section>
+
+
 
 
 
@@ -284,12 +407,16 @@ Send ❤️
 
 <footer>
 
+<p>
 Forever creating memories ❤️
+</p>
 
 </footer>
 
 
 </div>
+
+
 
 
 
