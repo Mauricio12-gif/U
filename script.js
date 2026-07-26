@@ -8,7 +8,7 @@ serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
-let currentUser = "";
+let currentUser="";
 
 
 
@@ -17,58 +17,53 @@ let currentUser = "";
 
 window.login = async function(){
 
-const name =
+let name =
 document.getElementById("visitorName").value.trim();
 
-const password =
+let password =
 document.getElementById("password").value;
-
-const error =
-document.getElementById("error");
-
-
-
-if(name===""){
-
-error.innerHTML="Enter your name ❤️";
-return;
-
-}
 
 
 
 if(password!=="LOVE"){
 
-error.innerHTML="Wrong password ❤️";
+document.getElementById("error").innerHTML="Wrong password ❤️";
 return;
 
 }
 
 
 
-currentUser = name;
+currentUser=name;
 
 
 
-document
-.getElementById("loginPage")
+document.getElementById("loginPage")
 .classList.add("hidden");
 
 
-document
-.getElementById("mainPage")
+document.getElementById("mainPage")
 .classList.remove("hidden");
 
 
+document.getElementById("welcome")
+.innerHTML="Welcome "+name+" ❤️";
 
-document
-.getElementById("welcome")
-.innerHTML =
-"Welcome " + name + " ❤️";
+
+
+// Show admin only for Mauricio
+
+if(name.toLowerCase()==="mauricio"){
+
+document.getElementById("adminCard")
+.classList.remove("hidden");
+
+}
 
 
 
 loadMessages();
+
 
 };
 
@@ -80,30 +75,32 @@ loadMessages();
 
 
 
-// SHOW SECTIONS
+// SECTIONS
 
-window.showSection=function(sectionID){
+window.showSection=function(id){
 
 
-document
-.querySelectorAll(".content")
-.forEach(section=>{
-
-section.classList.add("hidden");
-
-});
+document.querySelectorAll(".content")
+.forEach(x=>x.classList.add("hidden"));
 
 
 
-document
-.getElementById(sectionID)
+document.getElementById(id)
 .classList.remove("hidden");
 
 
 
-if(sectionID==="chat"){
+if(id==="chat"){
 
 loadMessages();
+
+}
+
+
+
+if(id==="admin"){
+
+loadAllMessages();
 
 }
 
@@ -118,17 +115,13 @@ loadMessages();
 
 
 
-// SEND MESSAGE
+// SEND MEMBER MESSAGE
 
-window.sendMessage = async function(){
-
-
-const input =
-document.getElementById("messageInput");
+window.sendMessage=async function(){
 
 
-const text =
-input.value.trim();
+let text=
+document.getElementById("messageInput").value.trim();
 
 
 
@@ -137,18 +130,16 @@ if(text==="") return;
 
 
 await addDoc(
-
 collection(db,"messages"),
-
 {
 
-ChatID: currentUser,
+ChatID:currentUser,
 
-Message: text,
+Message:text,
 
-Sender: currentUser,
+Sender:currentUser,
 
-Time: serverTimestamp()
+Time:serverTimestamp()
 
 }
 
@@ -156,7 +147,8 @@ Time: serverTimestamp()
 
 
 
-input.value="";
+document.getElementById("messageInput").value="";
+
 
 };
 
@@ -168,40 +160,95 @@ input.value="";
 
 
 
-// LOAD MESSAGES
+// MEMBER CHAT
 
 function loadMessages(){
 
 
-const box =
+let box=
 document.querySelector("#chat .chat-box");
 
 
-if(!box) return;
+if(!box)return;
 
 
 
-onSnapshot(collection(db,"messages"),(snapshot)=>{
+onSnapshot(collection(db,"messages"),(snap)=>{
+
+
+box.innerHTML="";
+
+
+snap.forEach(doc=>{
+
+
+let data=doc.data();
+
+
+
+if(data.ChatID===currentUser){
+
+
+box.innerHTML+=`
+
+<p>
+<b>You</b><br>
+${data.Message}
+</p>
+
+<hr>
+
+`;
+
+
+
+}
+
+
+});
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// ADMIN VIEW ALL
+
+function loadAllMessages(){
+
+
+let box=
+document.getElementById("adminChat");
+
+
+if(!box)return;
+
+
+
+onSnapshot(collection(db,"messages"),(snap)=>{
 
 
 box.innerHTML="";
 
 
 
-snapshot.forEach(doc=>{
+snap.forEach(doc=>{
 
 
-const data = doc.data();
+let data=doc.data();
 
 
 
-
-// MAURICIO SEES EVERYTHING
-
-if(currentUser.toLowerCase()==="mauricio"){
-
-
-box.innerHTML += `
+box.innerHTML+=`
 
 <p>
 
@@ -216,38 +263,6 @@ ${data.Message}
 <hr>
 
 `;
-
-
-
-}
-
-
-
-
-// OTHER USERS ONLY SEE THEIR OWN
-
-else if(data.ChatID === currentUser){
-
-
-box.innerHTML += `
-
-<p>
-
-<b>❤️ You</b>
-
-<br>
-
-${data.Message}
-
-</p>
-
-<hr>
-
-`;
-
-
-
-}
 
 
 
@@ -272,42 +287,16 @@ ${data.Message}
 window.openWhatsApp=function(){
 
 
-let phone="254797147155";
-
-
-let message =
-"Hello Mauricio ❤️ I visited your website.";
-
-
-
-let link =
-"https://wa.me/"
+let link=
+"https://wa.me/254797147155?text="
 +
-phone
-+
-"?text="
-+
-encodeURIComponent(message);
+encodeURIComponent(
+"Hello Mauricio ❤️ I visited your website."
+);
 
 
 
 window.open(link,"_blank");
 
-
-};
-
-
-
-
-
-
-
-
-
-// LOGOUT
-
-window.logout=function(){
-
-location.reload();
 
 };
