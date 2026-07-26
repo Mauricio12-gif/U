@@ -27,24 +27,26 @@ const error =
 document.getElementById("error");
 
 
-if(name === ""){
 
-error.innerHTML = "Enter your name ❤️";
-return;
+if(name===""){
 
-}
-
-
-if(password !== "LOVE"){
-
-error.innerHTML = "Wrong password ❤️";
+error.innerHTML="Enter your name ❤️";
 return;
 
 }
 
 
 
-currentUser = name;
+if(password!=="LOVE"){
+
+error.innerHTML="Wrong password ❤️";
+return;
+
+}
+
+
+
+currentUser=name;
 
 
 
@@ -62,12 +64,11 @@ document
 
 document
 .getElementById("welcome")
-.innerHTML = "Welcome ❤️";
+.innerHTML="Welcome ❤️";
 
 
 
 loadMessages();
-
 
 };
 
@@ -78,9 +79,9 @@ loadMessages();
 
 
 
-// SHOW SECTIONS
+// PAGE SECTIONS
 
-window.showSection = function(sectionID){
+window.showSection=function(id){
 
 
 document
@@ -94,12 +95,12 @@ section.classList.add("hidden");
 
 
 document
-.getElementById(sectionID)
+.getElementById(id)
 .classList.remove("hidden");
 
 
 
-if(sectionID === "chat"){
+if(id==="chat"){
 
 loadMessages();
 
@@ -115,7 +116,8 @@ loadMessages();
 
 
 
-// SEND MESSAGE
+
+// SEND PUBLIC ANONYMOUS MESSAGE
 
 window.sendMessage = async function(){
 
@@ -129,7 +131,7 @@ input.value.trim();
 
 
 
-if(text === "") return;
+if(text==="") return;
 
 
 
@@ -153,9 +155,7 @@ Time:serverTimestamp()
 
 
 
-input.value = "";
-
-
+input.value="";
 
 };
 
@@ -166,7 +166,8 @@ input.value = "";
 
 
 
-// LOAD ALL PUBLIC MESSAGES
+
+// LOAD PUBLIC CHAT
 
 function loadMessages(){
 
@@ -176,13 +177,7 @@ document.querySelector(".chat-box");
 
 
 
-if(!box){
-
-console.log("Chat box missing");
-
-return;
-
-}
+if(!box) return;
 
 
 
@@ -193,36 +188,18 @@ collection(db,"messages"),
 (snapshot)=>{
 
 
-box.innerHTML = "";
+box.innerHTML="";
 
 
 
-if(snapshot.empty){
+snapshot.forEach(doc=>{
 
 
-box.innerHTML =
-"<p>No messages yet ❤️</p>";
-
-return;
-
-
-}
+const data=doc.data();
 
 
 
-snapshot.forEach((doc)=>{
-
-
-const data = doc.data();
-
-
-
-const message =
-data.Message || "No message";
-
-
-
-box.innerHTML += `
+box.innerHTML +=`
 
 <div class="message">
 
@@ -230,17 +207,23 @@ box.innerHTML += `
 
 <br>
 
-${message}
+${data.Message || ""}
 
 </div>
-
-<hr>
 
 `;
 
 
 
 });
+
+
+
+if(box.innerHTML===""){
+
+box.innerHTML="<p>No messages yet ❤️</p>";
+
+}
 
 
 }
@@ -257,32 +240,50 @@ ${message}
 
 
 
+
+// GALLERY PHOTO EXPAND
+
+window.expandPhoto=function(photo){
+
+
+photo.classList.toggle("expanded");
+
+
+};
+
+
+
+
+
+
+
+
+
 // WHATSAPP
 
-window.openWhatsApp = function(){
+window.openWhatsApp=function(){
 
 
-const phone =
-"254797147155";
+const phone="254797147255";
 
 
-const text =
+const message=
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const url =
+const link=
 "https://wa.me/"
 +
 phone
 +
 "?text="
 +
-encodeURIComponent(text);
+encodeURIComponent(message);
 
 
 
-window.open(url,"_blank");
+window.open(link,"_blank");
 
 
 };
