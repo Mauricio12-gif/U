@@ -635,3 +635,12 @@ loadStories();
 
 
 };
+window.enterWebsite = function(){
+
+alert("Button works");
+
+document.getElementById("welcomePage").style.display="none";
+
+document.getElementById("mainPage").style.display="block";
+
+};
