@@ -34,7 +34,9 @@
 
 
 <button onclick="login()">
+
 Enter Our Story
+
 </button>
 
 
@@ -51,11 +53,9 @@ Enter Our Story
 
 
 
-
 <!-- MAIN APP -->
 
 <div id="mainPage" class="hidden">
-
 
 
 <header class="top">
@@ -69,7 +69,6 @@ Our memories, dreams and conversations
 </p>
 
 </header>
-
 
 
 
@@ -94,7 +93,6 @@ A small corner of the internet made for us.
 
 
 </section>
-
 
 
 
@@ -202,7 +200,10 @@ Talk with me
 
 
 
-<div class="app-card" onclick="showSection('admin')">
+
+<!-- ONLY MAURICIO WILL SEE THIS -->
+
+<div id="adminCard" class="app-card hidden" onclick="showSection('admin')">
 
 <span>👑</span>
 
@@ -213,6 +214,7 @@ Manage conversations
 </p>
 
 </div>
+
 
 
 
@@ -339,33 +341,25 @@ Memories we are yet to create.
 
 
 
-<!-- CHAT -->
+<!-- USER CHAT -->
 
 <section id="chat" class="content hidden">
 
 
-<h2>💬 Our Private Chat</h2>
-
+<h2>💬 Private Chat</h2>
 
 
 <div class="chat-box">
 
-<p>
-No messages yet ❤️
-</p>
-
+<p>No messages yet ❤️</p>
 
 </div>
-
-
 
 
 
 <input 
 id="messageInput"
 placeholder="Write a message...">
-
-
 
 
 
@@ -397,7 +391,7 @@ Send ❤️
 
 <div id="usersList">
 
-No visitors yet
+No users yet
 
 </div>
 
@@ -405,7 +399,7 @@ No visitors yet
 
 <div id="adminChat" class="chat-box">
 
-Select a person
+Select a user
 
 </div>
 
@@ -435,7 +429,6 @@ Send ❤️
 
 
 
-
 <footer>
 
 <p>
@@ -447,8 +440,6 @@ Forever creating memories ❤️
 
 
 </div>
-
-
 
 
 
