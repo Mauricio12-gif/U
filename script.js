@@ -12,7 +12,6 @@ let currentUser = "";
 
 
 
-
 // LOGIN
 
 window.login = function(){
@@ -20,33 +19,35 @@ window.login = function(){
 const name =
 document.getElementById("visitorName").value.trim();
 
+
 const password =
 document.getElementById("password").value;
+
 
 const error =
 document.getElementById("error");
 
 
 
-if(name===""){
+if(name === ""){
 
-error.innerHTML="Enter your name ❤️";
+error.innerHTML = "Enter your name ❤️";
 return;
 
 }
 
 
 
-if(password!=="LOVE"){
+if(password !== "LOVE"){
 
-error.innerHTML="Wrong password ❤️";
+error.innerHTML = "Wrong password ❤️";
 return;
 
 }
 
 
 
-currentUser=name;
+currentUser = name;
 
 
 
@@ -64,11 +65,12 @@ document
 
 document
 .getElementById("welcome")
-.innerHTML="Welcome ❤️";
+.innerHTML = "Welcome ❤️";
 
 
 
 loadMessages();
+
 
 };
 
@@ -79,9 +81,9 @@ loadMessages();
 
 
 
-// PAGE SECTIONS
+// SECTION SWITCH
 
-window.showSection=function(id){
+window.showSection = function(id){
 
 
 document
@@ -100,7 +102,7 @@ document
 
 
 
-if(id==="chat"){
+if(id === "chat"){
 
 loadMessages();
 
@@ -131,7 +133,7 @@ input.value.trim();
 
 
 
-if(text==="") return;
+if(text === "") return;
 
 
 
@@ -155,7 +157,7 @@ Time:serverTimestamp()
 
 
 
-input.value="";
+input.value = "";
 
 };
 
@@ -167,7 +169,7 @@ input.value="";
 
 
 
-// LOAD PUBLIC CHAT
+// DISPLAY PUBLIC CHAT
 
 function loadMessages(){
 
@@ -188,18 +190,29 @@ collection(db,"messages"),
 (snapshot)=>{
 
 
-box.innerHTML="";
+box.innerHTML = "";
+
+
+
+if(snapshot.empty){
+
+box.innerHTML =
+"<p>No messages yet ❤️</p>";
+
+return;
+
+}
 
 
 
 snapshot.forEach(doc=>{
 
 
-const data=doc.data();
+const data = doc.data();
 
 
 
-box.innerHTML +=`
+box.innerHTML += `
 
 <div class="message">
 
@@ -218,14 +231,6 @@ ${data.Message || ""}
 });
 
 
-
-if(box.innerHTML===""){
-
-box.innerHTML="<p>No messages yet ❤️</p>";
-
-}
-
-
 }
 
 );
@@ -241,9 +246,9 @@ box.innerHTML="<p>No messages yet ❤️</p>";
 
 
 
-// GALLERY PHOTO EXPAND
+// GALLERY EXPAND
 
-window.expandPhoto=function(photo){
+window.expandPhoto = function(photo){
 
 
 photo.classList.toggle("expanded");
@@ -261,18 +266,19 @@ photo.classList.toggle("expanded");
 
 // WHATSAPP
 
-window.openWhatsApp=function(){
+window.openWhatsApp = function(){
 
 
-const phone="254797147255";
+const phone =
+"254797147155";
 
 
-const message=
+const message =
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const link=
+const link =
 "https://wa.me/"
 +
 phone
