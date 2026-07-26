@@ -175,7 +175,7 @@ input.value="";
 
 
 
-// LOAD PUBLIC CHAT
+// LOAD PUBLIC ANONYMOUS CHAT
 
 function loadMessages(){
 
@@ -196,10 +196,31 @@ box.innerHTML="";
 
 
 
+if(snapshot.empty){
+
+
+box.innerHTML =
+"<p>No messages yet ❤️</p>";
+
+
+return;
+
+
+}
+
+
+
 snapshot.forEach(doc=>{
 
 
 const data = doc.data();
+
+
+
+const message =
+data.Message ||
+data.message ||
+"";
 
 
 
@@ -211,7 +232,7 @@ box.innerHTML += `
 
 <br>
 
-${data.Message}
+${message}
 
 </div>
 
@@ -222,16 +243,6 @@ ${data.Message}
 
 
 });
-
-
-
-if(box.innerHTML===""){
-
-box.innerHTML =
-"<p>No messages yet ❤️</p>";
-
-}
-
 
 
 });
@@ -253,7 +264,7 @@ window.openWhatsApp = function(){
 
 
 const phone =
-"254797147155";
+"254797147255";
 
 
 const message =
