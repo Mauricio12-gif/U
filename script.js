@@ -7,6 +7,7 @@ addDoc,
 onSnapshot,
 serverTimestamp,
 doc,
+setDoc,
 getDoc
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -14,7 +15,6 @@ getDoc
 
 
 let currentUser = "";
-
 
 
 
@@ -34,14 +34,11 @@ const password =
 document.getElementById("password").value;
 
 
-const error =
-document.getElementById("error");
 
+if(name===""){
 
-
-if(name === ""){
-
-error.innerHTML="Enter your name ❤️";
+document.getElementById("error").innerHTML =
+"Enter your name ❤️";
 
 return;
 
@@ -51,7 +48,8 @@ return;
 
 if(password !== "LOVE"){
 
-error.innerHTML="Wrong password ❤️";
+document.getElementById("error").innerHTML =
+"Wrong password ❤️";
 
 return;
 
@@ -68,6 +66,7 @@ document
 .classList.add("hidden");
 
 
+
 document
 .getElementById("mainPage")
 .classList.remove("hidden");
@@ -78,6 +77,25 @@ document
 .getElementById("welcome")
 .innerHTML =
 "Welcome ❤️";
+
+
+
+
+// ONLY MAURICIO GETS EDIT BUTTONS
+
+if(name.toLowerCase()==="mauricio"){
+
+
+document
+.querySelectorAll("[id$='Button']")
+.forEach(button=>{
+
+button.classList.remove("hidden");
+
+});
+
+
+}
 
 
 
@@ -96,10 +114,9 @@ loadMessages();
 
 
 
-// SHOW SECTIONS
+// OPEN SECTIONS
 
 window.showSection=function(id){
-
 
 
 document
@@ -148,41 +165,47 @@ loadMessages();
 
 
 
-// LOAD STORIES FROM FIREBASE
+// LOAD STORIES
 
 async function loadStories(){
 
 
+const stories=[
 
-const stories = [
 
 {
-firebase:"ourStory",
-element:"ourStoryDisplay"
+collection:"ourStory",
+display:"ourStoryDisplay",
+input:"ourStoryText"
 },
 
-{
-firebase:"love",
-element:"loveDisplay"
-},
 
 {
-firebase:"howWeMet",
-element:"meetingDisplay"
+collection:"love",
+display:"loveDisplay",
+input:"loveText"
 },
 
+
 {
-firebase:"dreams",
-element:"dreamsDisplay"
+collection:"howWeMet",
+display:"meetingDisplay",
+input:"meetingText"
+},
+
+
+{
+collection:"dreams",
+display:"dreamsDisplay",
+input:"dreamsText"
 }
+
 
 ];
 
 
 
-
 for(let story of stories){
-
 
 
 const result = await getDoc(
@@ -190,58 +213,147 @@ const result = await getDoc(
 doc(
 db,
 "story",
-story.firebase
+story.collection
 )
 
 );
 
 
 
-const display =
-document.getElementById(story.element);
-
-
-
-if(display){
-
-
-
 if(result.exists()){
 
 
-display.innerHTML =
+let text =
 result.data().content;
 
 
-}
 
-else{
-
-
-display.innerHTML =
-"Nothing written yet ❤️";
+document
+.getElementById(story.display)
+.innerText=text;
 
 
-}
 
+if(document.getElementById(story.input)){
 
-}
-
-
-}
-
+document
+.getElementById(story.input)
+.value=text;
 
 }
 
 
 
+}
+
+
+
+}
+
+
+}
 
 
 
 
 
 
-// PUBLIC CHAT SEND
+
+
+
+// SHOW EDIT BOX
+
+window.editStory=function(type){
+
+
+let box;
+
+
+
+if(type==="ourStory")
+box="ourStoryEdit";
+
+
+if(type==="love")
+box="loveEdit";
+
+
+if(type==="howWeMet")
+box="meetingEdit";
+
+
+if(type==="dreams")
+box="dreamsEdit";
+
+
+
+document
+.getElementById(box)
+.classList.remove("hidden");
+
+
+};
+
+
+
+
+
+
+
+
+
+// SAVE STORIES
+
+window.saveStorySection = async function(
+collectionName,
+inputId
+){
+
+
+const text =
+document
+.getElementById(inputId)
+.value;
+
+
+
+await setDoc(
+
+doc(
+db,
+"story",
+collectionName
+),
+
+{
+
+content:text,
+
+updatedAt:serverTimestamp()
+
+}
+
+);
+
+
+
+alert("Saved ❤️");
+
+
+loadStories();
+
+
+};
+
+
+
+
+
+
+
+
+
+// PUBLIC CHAT
 
 window.sendMessage = async function(){
 
@@ -251,12 +363,12 @@ document.getElementById("messageInput");
 
 
 
-const text =
+const message =
 input.value.trim();
 
 
 
-if(text==="") return;
+if(message==="") return;
 
 
 
@@ -268,7 +380,7 @@ collection(db,"messages"),
 
 ChatID:"public",
 
-Message:text,
+Message:message,
 
 Sender:"Anonymous",
 
@@ -293,14 +405,13 @@ input.value="";
 
 
 
-// LOAD PUBLIC CHAT
+// LOAD CHAT
 
 function loadMessages(){
 
 
-
 const box =
-document.querySelector(".chat-box");
+document.getElementById("chatBox");
 
 
 
@@ -322,7 +433,7 @@ box.innerHTML="";
 snapshot.forEach(item=>{
 
 
-const data=item.data();
+let data=item.data();
 
 
 
@@ -341,7 +452,6 @@ ${data.Message || ""}
 `;
 
 
-
 });
 
 
@@ -349,12 +459,13 @@ ${data.Message || ""}
 if(snapshot.empty){
 
 box.innerHTML =
-"<p>No messages yet ❤️</p>";
+"No messages yet ❤️";
 
 }
 
 
 }
+
 
 );
 
@@ -369,13 +480,11 @@ box.innerHTML =
 
 
 
-// GALLERY EXPAND
+// GALLERY
 
 window.expandPhoto=function(photo){
 
-
 photo.classList.toggle("expanded");
-
 
 };
 
@@ -392,17 +501,17 @@ photo.classList.toggle("expanded");
 window.openWhatsApp=function(){
 
 
+const phone =
+"254797147155";
 
-const phone="254797147155";
 
 
-
-const message=
+const text =
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const link=
+window.open(
 
 "https://wa.me/"
 +
@@ -410,11 +519,11 @@ phone
 +
 "?text="
 +
-encodeURIComponent(message);
+encodeURIComponent(text),
 
+"_blank"
 
-
-window.open(link,"_blank");
+);
 
 
 };
