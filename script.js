@@ -12,24 +12,15 @@ let currentUser = "";
 
 
 
-
-
 // LOGIN
 
 window.login = async function(){
 
+let name = document.getElementById("visitorName").value.trim();
 
-let name =
-document.getElementById("visitorName").value.trim();
+let password = document.getElementById("password").value;
 
-
-let password =
-document.getElementById("password").value;
-
-
-let error =
-document.getElementById("error");
-
+let error = document.getElementById("error");
 
 
 if(name===""){
@@ -38,7 +29,6 @@ error.innerHTML="Enter your name ❤️";
 return;
 
 }
-
 
 
 if(password!=="LOVE"){
@@ -50,52 +40,29 @@ return;
 
 
 
-currentUser=name;
+currentUser = name;
 
 
 
-document
-.getElementById("loginPage")
-.classList.add("hidden");
+document.getElementById("loginPage").classList.add("hidden");
+
+document.getElementById("mainPage").classList.remove("hidden");
 
 
-
-document
-.getElementById("mainPage")
-.classList.remove("hidden");
-
-
-
-document
-.getElementById("welcome")
-.innerHTML =
+document.getElementById("welcome").innerHTML =
 "Welcome " + name + " ❤️";
 
 
 
-
-// SHOW ADMIN FOR MAURICIO
-
 if(name.toLowerCase()==="mauricio"){
 
-
-let admin =
-document.getElementById("adminCard");
-
-
-if(admin){
-
-admin.classList.remove("hidden");
+document.getElementById("adminCard")
+.classList.remove("hidden");
 
 }
-
-
-}
-
 
 
 loadMessages();
-
 
 };
 
@@ -103,18 +70,11 @@ loadMessages();
 
 
 
-
-
-
-
-// SHOW SECTIONS
-
+// SECTION CONTROL
 
 window.showSection=function(id){
 
-
-document
-.querySelectorAll(".content")
+document.querySelectorAll(".content")
 .forEach(section=>{
 
 section.classList.add("hidden");
@@ -122,11 +82,8 @@ section.classList.add("hidden");
 });
 
 
-
-document
-.getElementById(id)
+document.getElementById(id)
 .classList.remove("hidden");
-
 
 
 if(id==="chat"){
@@ -134,7 +91,6 @@ if(id==="chat"){
 loadMessages();
 
 }
-
 
 
 if(id==="admin"){
@@ -152,21 +108,13 @@ loadAllMessages();
 
 
 
-
-
 // SEND MESSAGE
-
 
 window.sendMessage = async function(){
 
 
-let input =
-document.getElementById("messageInput");
-
-
 let text =
-input.value.trim();
-
+document.getElementById("messageInput").value.trim();
 
 
 if(text==="") return;
@@ -193,7 +141,7 @@ Time: serverTimestamp()
 
 
 
-input.value="";
+document.getElementById("messageInput").value="";
 
 
 };
@@ -205,9 +153,7 @@ input.value="";
 
 
 
-
-// MEMBER CHAT ONLY
-
+// MEMBER VIEW
 
 function loadMessages(){
 
@@ -226,17 +172,10 @@ onSnapshot(collection(db,"messages"),(snapshot)=>{
 box.innerHTML="";
 
 
-
 snapshot.forEach(doc=>{
 
 
 let data = doc.data();
-
-
-
-let sender = data.Sender || "";
-
-let message = data.Message || "";
 
 
 
@@ -251,7 +190,7 @@ box.innerHTML += `
 
 <br>
 
-${message}
+${data.Message}
 
 </div>
 
@@ -259,9 +198,7 @@ ${message}
 
 `;
 
-
 }
-
 
 
 });
@@ -279,16 +216,13 @@ ${message}
 
 
 
-
-// ADMIN SEE ALL MESSAGES
-
+// ADMIN VIEW
 
 function loadAllMessages(){
 
 
 let box =
 document.getElementById("adminChat");
-
 
 
 if(!box) return;
@@ -309,34 +243,19 @@ let data = doc.data();
 
 
 
-let sender =
-data.Sender || "Unknown";
-
-
-
-let message =
-data.Message || "No message";
-
-
-
 box.innerHTML += `
 
-<div class="message-card">
+<div>
 
+<b>❤️ ${data.Sender}</b>
 
-<b>❤️ ${sender}</b>
+<br>
 
-
-<p>
-${message}
-</p>
-
+${data.Message}
 
 </div>
 
-
 <hr>
-
 
 `;
 
@@ -357,50 +276,20 @@ ${message}
 
 
 
-
 // WHATSAPP
-
 
 window.openWhatsApp=function(){
 
 
-let phone =
-"254797147155";
-
-
-let text =
-"Hello Mauricio ❤️ I visited your website.";
-
-
-
 let link =
-"https://wa.me/"
+"https://wa.me/254797147155?text="
 +
-phone
-+
-"?text="
-+
-encodeURIComponent(text);
-
+encodeURIComponent(
+"Hello Mauricio ❤️ I visited your website."
+);
 
 
 window.open(link,"_blank");
 
-
-};
-
-
-
-
-
-
-
-
-// LOGOUT
-
-
-window.logout=function(){
-
-location.reload();
 
 };
