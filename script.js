@@ -492,7 +492,7 @@ window.saveStorySection = async function(
 
 
 
-        showNotice("Saved ❤️");
+        alert("Saved ❤️");
 
 
 
