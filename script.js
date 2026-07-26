@@ -3,17 +3,10 @@ import { db } from "./firebase.js";
 import {
 
 collection,
-
 addDoc,
-
 onSnapshot,
-
 serverTimestamp,
-
 doc,
-
-setDoc,
-
 getDoc
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -21,6 +14,7 @@ getDoc
 
 
 let currentUser = "";
+
 
 
 
@@ -45,7 +39,7 @@ document.getElementById("error");
 
 
 
-if(name===""){
+if(name === ""){
 
 error.innerHTML="Enter your name ❤️";
 
@@ -55,7 +49,7 @@ return;
 
 
 
-if(password!=="LOVE"){
+if(password !== "LOVE"){
 
 error.innerHTML="Wrong password ❤️";
 
@@ -65,14 +59,13 @@ return;
 
 
 
-currentUser=name;
+currentUser = name;
 
 
 
 document
 .getElementById("loginPage")
 .classList.add("hidden");
-
 
 
 document
@@ -83,12 +76,12 @@ document
 
 document
 .getElementById("welcome")
-.innerHTML=
+.innerHTML =
 "Welcome ❤️";
 
 
 
-loadAllStories();
+loadStories();
 
 loadMessages();
 
@@ -103,9 +96,10 @@ loadMessages();
 
 
 
-// CHANGE SECTION
+// SHOW SECTIONS
 
 window.showSection=function(id){
+
 
 
 document
@@ -124,13 +118,6 @@ document
 
 
 
-if(id==="chat"){
-
-loadMessages();
-
-}
-
-
 if(
 id==="story" ||
 id==="love" ||
@@ -138,7 +125,15 @@ id==="meeting" ||
 id==="dreams"
 ){
 
-loadAllStories();
+loadStories();
+
+}
+
+
+
+if(id==="chat"){
+
+loadMessages();
 
 }
 
@@ -153,102 +148,78 @@ loadAllStories();
 
 
 
-// SAVE ANY STORY SECTION
+// LOAD STORIES FROM FIREBASE
 
-window.saveStorySection = async function(
-sectionName,
-inputId,
-savedId
-){
-
-
-const text =
-document.getElementById(inputId).value;
+async function loadStories(){
 
 
 
-await setDoc(
-
-doc(db,"story",sectionName),
+const stories = [
 
 {
-
-content:text,
-
-updatedAt:serverTimestamp()
-
-}
-
-);
-
-
-
-document
-.getElementById(savedId)
-.innerHTML=
-"Saved ❤️";
-
-
-};
-
-
-
-
-
-
-
-
-
-// LOAD ALL STORIES
-
-async function loadAllStories(){
-
-
-const sections=[
-
-{
-name:"ourStory",
-input:"ourStoryText"
+firebase:"ourStory",
+element:"ourStoryDisplay"
 },
 
 {
-name:"love",
-input:"loveText"
+firebase:"love",
+element:"loveDisplay"
 },
 
 {
-name:"howWeMet",
-input:"meetingText"
+firebase:"howWeMet",
+element:"meetingDisplay"
 },
 
 {
-name:"dreams",
-input:"dreamsText"
+firebase:"dreams",
+element:"dreamsDisplay"
 }
 
 ];
 
 
 
-for(let item of sections){
+
+for(let story of stories){
 
 
-const story =
-await getDoc(
 
-doc(db,"story",item.name)
+const result = await getDoc(
+
+doc(
+db,
+"story",
+story.firebase
+)
 
 );
 
 
 
-if(story.exists()){
+const display =
+document.getElementById(story.element);
 
 
-document
-.getElementById(item.input)
-.value =
-story.data().content;
+
+if(display){
+
+
+
+if(result.exists()){
+
+
+display.innerHTML =
+result.data().content;
+
+
+}
+
+else{
+
+
+display.innerHTML =
+"Nothing written yet ❤️";
 
 
 }
@@ -260,6 +231,7 @@ story.data().content;
 }
 
 
+}
 
 
 
@@ -267,7 +239,9 @@ story.data().content;
 
 
 
-// SEND CHAT MESSAGE
+
+
+// PUBLIC CHAT SEND
 
 window.sendMessage = async function(){
 
@@ -276,12 +250,13 @@ const input =
 document.getElementById("messageInput");
 
 
-const message =
+
+const text =
 input.value.trim();
 
 
 
-if(message==="") return;
+if(text==="") return;
 
 
 
@@ -293,9 +268,9 @@ collection(db,"messages"),
 
 ChatID:"public",
 
-Message:message,
+Message:text,
 
-Sender:currentUser,
+Sender:"Anonymous",
 
 Time:serverTimestamp()
 
@@ -318,9 +293,10 @@ input.value="";
 
 
 
-// LOAD CHAT
+// LOAD PUBLIC CHAT
 
 function loadMessages(){
+
 
 
 const box =
@@ -343,20 +319,20 @@ box.innerHTML="";
 
 
 
-snapshot.forEach(doc=>{
+snapshot.forEach(item=>{
 
 
-const data=doc.data();
+const data=item.data();
 
 
 
-box.innerHTML +=`
+box.innerHTML += `
 
 <div class="message">
 
-<b>❤️ Anonymous</b>
+❤️ Anonymous
 
-<br>
+<br><br>
 
 ${data.Message || ""}
 
@@ -365,13 +341,14 @@ ${data.Message || ""}
 `;
 
 
+
 });
 
 
 
 if(snapshot.empty){
 
-box.innerHTML=
+box.innerHTML =
 "<p>No messages yet ❤️</p>";
 
 }
@@ -392,7 +369,7 @@ box.innerHTML=
 
 
 
-// GALLERY
+// GALLERY EXPAND
 
 window.expandPhoto=function(photo){
 
@@ -415,15 +392,17 @@ photo.classList.toggle("expanded");
 window.openWhatsApp=function(){
 
 
-const phone="254797147255";
+
+const phone="254797147155";
 
 
-const text=
+
+const message=
 "Hello Mauricio ❤️ I visited your website.";
 
 
 
-const url=
+const link=
 
 "https://wa.me/"
 +
@@ -431,11 +410,11 @@ phone
 +
 "?text="
 +
-encodeURIComponent(text);
+encodeURIComponent(message);
 
 
 
-window.open(url,"_blank");
+window.open(link,"_blank");
 
 
 };
