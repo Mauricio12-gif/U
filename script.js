@@ -12,6 +12,7 @@ serverTimestamp
 
 
 let currentUser = "";
+
 let selectedUser = "";
 
 
@@ -21,36 +22,30 @@ let selectedUser = "";
 
 window.login = function(){
 
-
 const name =
 document.getElementById("visitorName").value.trim();
 
-
 const password =
 document.getElementById("password").value;
-
 
 const error =
 document.getElementById("error");
 
 
-
 if(name === ""){
 
-error.innerHTML="Enter your name ❤️";
+error.innerHTML = "Enter your name ❤️";
 return;
 
 }
-
 
 
 if(password !== "LOVE"){
 
-error.innerHTML="Wrong password ❤️";
+error.innerHTML = "Wrong password ❤️";
 return;
 
 }
-
 
 
 currentUser = name;
@@ -78,10 +73,7 @@ document
 
 saveUser();
 
-
 loadMessages();
-
-loadUsers();
 
 
 };
@@ -91,13 +83,16 @@ loadUsers();
 
 
 
-// SAVE USERS
+
+
+// SAVE USER
 
 async function saveUser(){
 
-
 await addDoc(
+
 collection(db,"users"),
+
 {
 
 name:currentUser,
@@ -107,7 +102,6 @@ time:serverTimestamp()
 }
 
 );
-
 
 }
 
@@ -120,7 +114,7 @@ time:serverTimestamp()
 
 // SHOW SECTIONS
 
-window.showSection=function(id){
+window.showSection = function(id){
 
 
 document
@@ -138,7 +132,6 @@ document
 .classList.remove("hidden");
 
 
-
 };
 
 
@@ -149,8 +142,7 @@ document
 
 
 
-// SEND USER MESSAGE
-
+// SEND PRIVATE MESSAGE
 
 window.sendMessage = async function(){
 
@@ -164,21 +156,23 @@ input.value.trim();
 
 
 
-if(text==="") return;
+if(text === "") return;
 
 
 
 await addDoc(
+
 collection(db,"messages"),
+
 {
 
-chatId:currentUser,
+chatId: currentUser,
 
-sender:currentUser,
+sender: currentUser,
 
-message:text,
+message: text,
 
-time:serverTimestamp()
+time: serverTimestamp()
 
 }
 
@@ -186,8 +180,7 @@ time:serverTimestamp()
 
 
 
-input.value="";
-
+input.value = "";
 
 };
 
@@ -199,8 +192,7 @@ input.value="";
 
 
 
-// LOAD USER CHAT
-
+// LOAD ONLY CURRENT USER CHAT
 
 function loadMessages(){
 
@@ -210,7 +202,7 @@ document.querySelector("#chat .chat-box");
 
 
 
-const q=query(
+const q = query(
 
 collection(db,"messages"),
 
@@ -232,14 +224,14 @@ chatBox.innerHTML="";
 snapshot.forEach(doc=>{
 
 
-const data=doc.data();
+const data = doc.data();
 
 
 
 let type =
-data.sender===currentUser
-?"my-message"
-:"other-message";
+data.sender === currentUser
+? "my-message"
+: "other-message";
 
 
 
@@ -247,7 +239,9 @@ chatBox.innerHTML += `
 
 <div class="${type}">
 
-<b>${data.sender}</b><br>
+<b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
@@ -273,15 +267,13 @@ ${data.message}
 
 
 
-// LOAD USERS FOR ADMIN
-
+// ADMIN LOAD USERS
 
 function loadUsers(){
 
 
 const usersList =
 document.getElementById("usersList");
-
 
 
 if(!usersList) return;
@@ -303,8 +295,7 @@ usersList.innerHTML="";
 snapshot.forEach(doc=>{
 
 
-let user =
-doc.data();
+const user = doc.data();
 
 
 
@@ -338,17 +329,13 @@ usersList.innerHTML += `
 
 
 
-// OPEN USER CHAT
+// OPEN USER CHAT FOR ADMIN
 
+window.openUser = function(name){
 
-window.openUser=function(name){
-
-
-selectedUser=name;
-
+selectedUser = name;
 
 loadAdminChat();
-
 
 };
 
@@ -361,7 +348,6 @@ loadAdminChat();
 
 
 // ADMIN CHAT
-
 
 function loadAdminChat(){
 
@@ -393,7 +379,7 @@ box.innerHTML="";
 snapshot.forEach(doc=>{
 
 
-let data=doc.data();
+const data = doc.data();
 
 
 
@@ -401,7 +387,9 @@ box.innerHTML += `
 
 <div>
 
-<b>${data.sender}</b><br>
+<b>${data.sender}</b>
+
+<br>
 
 ${data.message}
 
@@ -428,11 +416,9 @@ ${data.message}
 
 
 
+// ADMIN SEND MESSAGE
 
-// ADMIN SEND
-
-
-window.adminSend=async function(){
+window.adminSend = async function(){
 
 
 const input =
@@ -449,7 +435,9 @@ if(text==="") return;
 
 
 await addDoc(
+
 collection(db,"messages"),
+
 {
 
 chatId:selectedUser,
@@ -480,7 +468,6 @@ input.value="";
 
 
 // LOGOUT
-
 
 window.logout=function(){
 
