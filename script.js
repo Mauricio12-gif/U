@@ -1,4 +1,4 @@
-import { db } from "./firebase.js";
+import { db, auth } from "./firebase.js";
 
 import {
 
@@ -15,6 +15,7 @@ getDoc
 
 
 let currentUser = "";
+const OWNER_EMAIL = "lovermax876@gmail.com";
 
 
 
