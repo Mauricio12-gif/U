@@ -141,7 +141,7 @@ window.login = async function(){
 
 
 
-            showNotice("Welcome Mauricio ❤️ Editing unlocked");
+            alert("Welcome Mauricio ❤️ Editing unlocked");
 
 
         }
@@ -775,40 +775,3 @@ window.addEventListener(
 
     }
 );
-function showNotice(message){
-
-const notice = document.createElement("div");
-
-notice.innerHTML = message;
-
-notice.style.position = "fixed";
-notice.style.bottom = "30px";
-notice.style.left = "50%";
-notice.style.transform = "translateX(-50%)";
-
-notice.style.background = "#ffffff";
-notice.style.color = "#d6336c";
-
-notice.style.padding = "15px 25px";
-
-notice.style.borderRadius = "30px";
-
-notice.style.boxShadow = "0 5px 20px rgba(0,0,0,0.2)";
-
-notice.style.zIndex = "99999";
-
-notice.style.fontSize = "16px";
-
-
-document.body.appendChild(notice);
-
-
-
-setTimeout(()=>{
-
-notice.remove();
-
-},3000);
-
-
-}
