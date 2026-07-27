@@ -690,19 +690,19 @@ function showNotice(message){
 
 const galleryPhotos = [
 
-    "IMG-20251228-WA00030.jpg",
+    "IMG-20251228-WA0030.jpg",
 
-    "IMG-20251228-WA00032.jpg",
+    "IMG-20251228-WA0032.jpg",
 
-    "IMG-2026215-WA00036.jpg",
+    "IMG-2026215-WA0036.jpg",
 
-    "photo4.jpg",
+    "IMG_20260726-WA0006.jpg",
 
-    "photo5.jpg",
+    "IMG_20260726-WA0007.jpg",
 
-    "photo6.jpg",
+    "IMG_20260726-WA0008.jpg",
 
-    "photo7.jpg",
+    "IMG_20260726-WA0009.jpg",
 
     "photo8.jpg",
 
