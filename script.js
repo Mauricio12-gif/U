@@ -43,9 +43,9 @@ const galleryPhotos = [
     "IMG-20260726-WA0009.jpg",
 
     "IMG_2960.jpg",
-    "photo9.jpg",
-    "photo10.jpg",
-    "photo11.jpg",
+    "photo4.jpg",
+    "photo5.jpg",
+    "photo6.jpg",
     "photo12.jpg",
     "photo13.jpg",
     "photo14.jpg",
