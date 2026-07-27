@@ -521,7 +521,6 @@ function loadMessages(){
 
 function loadGallery(){
 
-function loadGallery(){
 
 
     const gallery =
