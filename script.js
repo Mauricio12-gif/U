@@ -1032,3 +1032,26 @@ window.addEventListener(
 
     }
 );
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+        .register("service-worker.js")
+        .then(() => {
+
+            console.log("App ready");
+
+        })
+        .catch(error => {
+
+            console.log(
+                "Service worker error:",
+                error
+            );
+
+        });
+
+    });
+
+}
