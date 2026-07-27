@@ -516,14 +516,35 @@ function loadMessages(){
 
 
 
-// IMAGE EXPAND
+// PHOTO VIEWER
 
 window.expandPhoto = function(photo){
 
 
-    photo.classList.toggle(
-        "expanded"
-    );
+    const viewer =
+    document.getElementById("photoViewer");
+
+
+    const fullPhoto =
+    document.getElementById("fullPhoto");
+
+
+    fullPhoto.src = photo.src;
+
+
+    viewer.style.display = "flex";
+
+
+};
+
+
+
+window.closePhoto = function(){
+
+
+    document
+    .getElementById("photoViewer")
+    .style.display = "none";
 
 
 };
