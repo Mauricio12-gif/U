@@ -975,6 +975,43 @@ function showNotice(message){
 // START WEBSITE
 // ===============================
 
+// ===============================
+// LOAD VIDEOS
+// ===============================
+
+function loadVideos(){
+
+
+    const videoGrid =
+    document.getElementById("videoGrid");
+
+
+    if(!videoGrid) return;
+
+
+    videoGrid.innerHTML = "";
+
+
+    galleryVideos.forEach(video=>{
+
+
+        videoGrid.innerHTML += `
+
+        <video controls>
+
+            <source 
+            src="${video}" 
+            type="video/mp4">
+
+        </video>
+
+        `;
+
+
+    });
+
+
+}
 window.addEventListener(
     "load",
     ()=>{
@@ -983,6 +1020,8 @@ window.addEventListener(
         loadStories();
 
         loadGallery();
+
+        loadVideos();
 
 
     }
