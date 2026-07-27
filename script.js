@@ -15,41 +15,168 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
+// ===============================
+// SETTINGS
+// ===============================
 
 const OWNER_EMAIL = "lovermax876@gmail.com";
+
+const VISITOR_PASSWORD = "LOVE";
 
 let currentUser = null;
 
 
 
+// ===============================
+// GALLERY PHOTOS LIST
+// ===============================
+
+const galleryPhotos = [
+
+    "IMG-20251228-WA0030.jpg",
+    "IMG-20251228-WA0032.jpg",
+    "IMG-20260215-WA0036.jpg",
+
+    "IMG-20260726-WA0006.jpg",
+    "IMG-20260726-WA0007.jpg",
+    "IMG-20260726-WA0008.jpg",
+    "IMG-20260726-WA0009.jpg",
+
+    "photo8.jpg",
+    "photo9.jpg",
+    "photo10.jpg",
+    "photo11.jpg",
+    "photo12.jpg",
+    "photo13.jpg",
+    "photo14.jpg",
+    "photo15.jpg",
+    "photo16.jpg",
+    "photo17.jpg",
+    "photo18.jpg",
+    "photo19.jpg",
+    "photo20.jpg",
+    "photo21.jpg",
+    "photo22.jpg",
+    "photo23.jpg",
+    "photo24.jpg",
+    "photo25.jpg",
+    "photo26.jpg",
+    "photo27.jpg",
+    "photo28.jpg",
+    "photo29.jpg",
+    "photo30.jpg",
+    "photo31.jpg",
+    "photo32.jpg",
+    "photo33.jpg",
+    "photo34.jpg",
+    "photo35.jpg",
+    "photo36.jpg",
+    "photo37.jpg",
+    "photo38.jpg",
+    "photo39.jpg",
+    "photo40.jpg",
+    "photo41.jpg",
+    "photo42.jpg",
+    "photo43.jpg",
+    "photo44.jpg",
+    "photo45.jpg"
+
+];
+
+
+
+// ===============================
+// VISITOR PASSWORD
+// ===============================
+
+window.checkVisitorPassword = function(){
+
+
+    const password =
+    document
+    .getElementById("visitorPassword")
+    .value;
+
+
+
+    if(password === VISITOR_PASSWORD){
+
+
+        document
+        .getElementById("welcomePage")
+        .classList
+        .add("hidden");
+
+
+
+        document
+        .getElementById("mainPage")
+        .classList
+        .remove("hidden");
+
+
+    }
+
+    else{
+
+
+        document
+        .getElementById("visitorError")
+        .innerHTML =
+        "Wrong password ❤️";
+
+
+    }
+
+
+};
+
+
+
+// ===============================
 // OWNER LOGIN BUTTON
+// ===============================
 
 window.openOwnerLogin = function(){
+
 
     document
     .getElementById("loginPage")
     .classList
     .remove("hidden");
 
+
 };
 
 
 
 
-// LOGIN
+// ===============================
+// OWNER LOGIN
+// ===============================
 
 window.login = async function(){
 
+
     const email =
-    document.getElementById("email").value.trim();
+    document
+    .getElementById("email")
+    .value
+    .trim();
+
 
 
     const password =
-    document.getElementById("password").value;
+    document
+    .getElementById("password")
+    .value;
+
 
 
     const error =
-    document.getElementById("error");
+    document
+    .getElementById("error");
+
 
 
     try{
@@ -63,11 +190,14 @@ window.login = async function(){
         );
 
 
+
         const user =
         userCredential.user;
 
 
-        currentUser = user.email;
+
+        currentUser =
+        user.email;
 
 
 
@@ -78,9 +208,11 @@ window.login = async function(){
             .querySelectorAll("[id$='Button']")
             .forEach(button=>{
 
+
                 button
                 .classList
                 .remove("hidden");
+
 
             });
 
@@ -92,17 +224,23 @@ window.login = async function(){
             .add("hidden");
 
 
-            showNotice("Welcome Mauricio ❤️");
+
+            showNotice(
+                "Welcome Mauricio ❤️"
+            );
 
 
         }
 
 
     }
+
+
     catch(errorMessage){
 
 
         console.log(errorMessage);
+
 
 
         error.innerHTML =
@@ -112,12 +250,9 @@ window.login = async function(){
     }
 
 
-};
-
-
-
-
+};// ===============================
 // PAGE NAVIGATION
+// ===============================
 
 window.showSection = function(id){
 
@@ -126,9 +261,11 @@ window.showSection = function(id){
     .querySelectorAll(".content")
     .forEach(section=>{
 
+
         section
         .classList
         .add("hidden");
+
 
     });
 
@@ -142,10 +279,10 @@ window.showSection = function(id){
 
 
     if(
-        id==="story" ||
-        id==="love" ||
-        id==="meeting" ||
-        id==="dreams"
+        id === "story" ||
+        id === "love" ||
+        id === "meeting" ||
+        id === "dreams"
     ){
 
         loadStories();
@@ -154,7 +291,7 @@ window.showSection = function(id){
 
 
 
-    if(id==="chat"){
+    if(id === "chat"){
 
         loadMessages();
 
@@ -166,7 +303,9 @@ window.showSection = function(id){
 
 
 
+// ===============================
 // LOAD STORIES
+// ===============================
 
 async function loadStories(){
 
@@ -209,57 +348,78 @@ async function loadStories(){
     for(let story of stories){
 
 
-        const result =
-        await getDoc(
-
-            doc(
-                db,
-                "story",
-                story.name
-            )
-
-        );
+        try{
 
 
+            const result =
+            await getDoc(
 
-        if(result.exists()){
+                doc(
+                    db,
+                    "story",
+                    story.name
+                )
 
-
-            const text =
-            result.data().content;
-
-
-
-            const display =
-            document.getElementById(
-                story.display
             );
 
 
-            if(display){
 
-                display.innerText = text;
+            if(result.exists()){
+
+
+                const text =
+                result
+                .data()
+                .content;
+
+
+
+                const display =
+                document
+                .getElementById(
+                    story.display
+                );
+
+
+
+                if(display){
+
+                    display.innerText = text;
+
+                }
+
+
+
+                const input =
+                document
+                .getElementById(
+                    story.input
+                );
+
+
+
+                if(input){
+
+                    input.value = text;
+
+                }
+
+
 
             }
-
-
-
-            const input =
-            document.getElementById(
-                story.input
-            );
-
-
-            if(input){
-
-                input.value = text;
-
-            }
-
 
 
         }
 
+
+        catch(error){
+
+            console.log(
+                "Story error:",
+                error
+            );
+
+        }
 
 
     }
@@ -271,8 +431,9 @@ async function loadStories(){
 
 
 
-
-// OPEN EDIT BOX
+// ===============================
+// EDIT STORIES
+// ===============================
 
 window.editStory = function(type){
 
@@ -281,30 +442,30 @@ window.editStory = function(type){
 
 
 
-    if(type==="ourStory"){
+    if(type === "ourStory"){
 
-        box="ourStoryEdit";
-
-    }
-
-
-    if(type==="love"){
-
-        box="loveEdit";
+        box = "ourStoryEdit";
 
     }
 
 
-    if(type==="howWeMet"){
+    if(type === "love"){
 
-        box="meetingEdit";
+        box = "loveEdit";
 
     }
 
 
-    if(type==="dreams"){
+    if(type === "howWeMet"){
 
-        box="dreamsEdit";
+        box = "meetingEdit";
+
+    }
+
+
+    if(type === "dreams"){
+
+        box = "dreamsEdit";
 
     }
 
@@ -322,7 +483,6 @@ window.editStory = function(type){
     }
 
 
-
 };
 
 
@@ -330,7 +490,9 @@ window.editStory = function(type){
 
 
 
-// SAVE STORY
+// ===============================
+// SAVE STORIES
+// ===============================
 
 window.saveStorySection = async function(
     collectionName,
@@ -345,85 +507,246 @@ window.saveStorySection = async function(
 
 
 
-    await setDoc(
-
-        doc(
-            db,
-            "story",
-            collectionName
-        ),
+    try{
 
 
-        {
+        await setDoc(
 
-            content:text,
-
-            updatedAt:
-            serverTimestamp()
-
-        }
-
-
-    );
+            doc(
+                db,
+                "story",
+                collectionName
+            ),
 
 
+            {
 
-    showNotice("Saved ❤️");
+                content:text,
+
+                updatedAt:
+                serverTimestamp()
+
+            }
 
 
-    loadStories();
+        );
+
+
+
+        showNotice(
+            "Saved ❤️"
+        );
+
+
+        loadStories();
+
+
+    }
+
+
+    catch(error){
+
+
+        console.log(error);
+
+
+        showNotice(
+            "Could not save"
+        );
+
+
+    }
 
 
 };
 
 
 
-// SEND PUBLIC MESSAGE
+
+// ===============================
+// LOAD GALLERY
+// ===============================
+
+function loadGallery(){
+
+
+    const gallery =
+    document
+    .getElementById("galleryGrid");
+
+
+
+    if(!gallery) return;
+
+
+
+    gallery.innerHTML = "";
+
+
+
+    galleryPhotos.forEach(photo=>{
+
+
+        const img =
+        new Image();
+
+
+
+        img.onload = function(){
+
+
+            gallery.innerHTML += `
+
+            <img
+            src="${photo}"
+            onclick="expandPhoto(this)">
+
+            `;
+
+
+        };
+
+
+
+        img.src = photo;
+
+
+    });
+
+
+}
+
+
+
+
+// ===============================
+// PHOTO VIEWER
+// ===============================
+
+window.expandPhoto = function(photo){
+
+
+    const viewer =
+    document
+    .getElementById("photoViewer");
+
+
+
+    const fullPhoto =
+    document
+    .getElementById("fullPhoto");
+
+
+
+    if(
+        viewer &&
+        fullPhoto
+    ){
+
+
+        fullPhoto.src =
+        photo.src;
+
+
+
+        viewer.style.display =
+        "flex";
+
+
+    }
+
+
+};
+
+
+
+
+window.closePhoto = function(){
+
+
+    const viewer =
+    document
+    .getElementById("photoViewer");
+
+
+
+    if(viewer){
+
+
+        viewer.style.display =
+        "none";
+
+
+    }
+
+
+};// ===============================
+// PUBLIC CHAT
+// ===============================
 
 window.sendMessage = async function(){
 
 
     const input =
-    document.getElementById("messageInput");
+    document
+    .getElementById("messageInput");
+
 
 
     const message =
-    input.value.trim();
+    input
+    .value
+    .trim();
 
 
 
-    if(message==="") return;
+    if(message === "") return;
 
 
 
-    await addDoc(
-
-        collection(
-            db,
-            "messages"
-        ),
+    try{
 
 
-        {
+        await addDoc(
 
-            ChatID:"public",
-
-            Message:message,
-
-            Sender:"Anonymous",
-
-            Time:
-            serverTimestamp()
-
-        }
+            collection(
+                db,
+                "messages"
+            ),
 
 
-    );
+            {
+
+                ChatID:"public",
+
+                Message:message,
+
+                Sender:"Anonymous",
+
+                Time:
+                serverTimestamp()
+
+            }
+
+
+        );
 
 
 
-    input.value="";
+        input.value = "";
 
+
+
+    }
+
+
+    catch(error){
+
+
+        console.log(error);
+
+
+    }
 
 
 };
@@ -434,13 +757,12 @@ window.sendMessage = async function(){
 
 
 
-// LOAD PUBLIC CHAT
-
 function loadMessages(){
 
 
     const box =
-    document.getElementById("chatBox");
+    document
+    .getElementById("chatBox");
 
 
 
@@ -459,7 +781,7 @@ function loadMessages(){
         (snapshot)=>{
 
 
-            box.innerHTML="";
+            box.innerHTML = "";
 
 
 
@@ -500,14 +822,12 @@ function loadMessages(){
             }
 
 
-
         }
 
 
     );
 
 
-
 }
 
 
@@ -516,101 +836,17 @@ function loadMessages(){
 
 
 
-// PHOTO VIEWER
-// LOAD GALLERY PHOTOS
 
-function loadGallery(){
-
-
-
-    const gallery =
-    document.getElementById("galleryGrid");
-
-
-    if(!gallery) return;
-
-
-
-    gallery.innerHTML = "";
-
-
-
-    galleryPhotos.forEach(photo=>{
-
-
-        const img = new Image();
-
-
-
-        img.onload = function(){
-
-
-            gallery.innerHTML += `
-
-            <img 
-            src="${photo}" 
-            onclick="expandPhoto(this)">
-
-            `;
-
-
-        };
-
-
-
-        img.src = photo;
-
-
-
-    });
-
-
-}
-
-window.expandPhoto = function(photo){
-
-
-    const viewer =
-    document.getElementById("photoViewer");
-
-
-    const fullPhoto =
-    document.getElementById("fullPhoto");
-
-
-    fullPhoto.src = photo.src;
-
-
-    viewer.style.display = "flex";
-
-
-};
-
-
-
-window.closePhoto = function(){
-
-
-    document
-    .getElementById("photoViewer")
-    .style.display = "none";
-
-
-};
-
-
-
-
-
-
-
-// WHATSAPP BUTTON
+// ===============================
+// WHATSAPP
+// ===============================
 
 window.openWhatsApp = function(){
 
 
     const phone =
     "254797147255";
+
 
 
     const text =
@@ -638,13 +874,16 @@ window.openWhatsApp = function(){
 
 
 
-// SMALL NOTIFICATION
+// ===============================
+// NOTICE MESSAGE
+// ===============================
 
 function showNotice(message){
 
 
     const notice =
-    document.createElement("div");
+    document
+    .createElement("div");
 
 
 
@@ -653,29 +892,53 @@ function showNotice(message){
 
 
 
-    notice.style.position="fixed";
+    notice.style.position =
+    "fixed";
 
-    notice.style.bottom="30px";
 
-    notice.style.left="50%";
 
-    notice.style.transform=
+    notice.style.bottom =
+    "30px";
+
+
+
+    notice.style.left =
+    "50%";
+
+
+
+    notice.style.transform =
     "translateX(-50%)";
 
 
 
-    notice.style.background="white";
+    notice.style.background =
+    "white";
 
-    notice.style.color="#d6336c";
 
-    notice.style.padding="15px 25px";
 
-    notice.style.borderRadius="30px";
+    notice.style.color =
+    "#d6336c";
 
-    notice.style.boxShadow=
+
+
+    notice.style.padding =
+    "15px 25px";
+
+
+
+    notice.style.borderRadius =
+    "30px";
+
+
+
+    notice.style.boxShadow =
     "0 5px 20px rgba(0,0,0,0.2)";
 
-    notice.style.zIndex="99999";
+
+
+    notice.style.zIndex =
+    "99999";
 
 
 
@@ -694,7 +957,6 @@ function showNotice(message){
     },3000);
 
 
-
 }
 
 
@@ -703,64 +965,9 @@ function showNotice(message){
 
 
 
-// GALLERY PHOTOS LIST
-
-const galleryPhotos = [
-
-    // 1 - 3
-    "IMG-20251228-WA0030.jpg",
-    "IMG-20251228-WA0032.jpg",
-    "IMG-20260215-WA0036.jpg",
-
-    // 4 - 7
-    "IMG-20260726-WA0006.jpg",
-    "IMG-20260726-WA0007.jpg",
-    "IMG-20260726-WA0008.jpg",
-    "IMG-20260726-WA0009.jpg",
-
-    // 8 - 45
-    "photo8.jpg",
-    "photo9.jpg",
-    "photo10.jpg",
-    "photo11.jpg",
-    "photo12.jpg",
-    "photo13.jpg",
-    "photo14.jpg",
-    "photo15.jpg",
-    "photo16.jpg",
-    "photo17.jpg",
-    "photo18.jpg",
-    "photo19.jpg",
-    "photo20.jpg",
-    "photo21.jpg",
-    "photo22.jpg",
-    "photo23.jpg",
-    "photo24.jpg",
-    "photo25.jpg",
-    "photo26.jpg",
-    "photo27.jpg",
-    "photo28.jpg",
-    "photo29.jpg",
-    "photo30.jpg",
-    "photo31.jpg",
-    "photo32.jpg",
-    "photo33.jpg",
-    "photo34.jpg",
-    "photo35.jpg",
-    "photo36.jpg",
-    "photo37.jpg",
-    "photo38.jpg",
-    "photo39.jpg",
-    "photo40.jpg",
-    "photo41.jpg",
-    "photo42.jpg",
-    "photo43.jpg",
-    "photo44.jpg",
-    "photo45.jpg"
-
-];
-
-// LOAD DATA WHEN OPENED
+// ===============================
+// START WEBSITE
+// ===============================
 
 window.addEventListener(
     "load",
@@ -768,45 +975,9 @@ window.addEventListener(
 
 
         loadStories();
-        
+
         loadGallery();
 
 
     }
 );
-// VISITOR PASSWORD
-
-const VISITOR_PASSWORD = "LOVE";
-
-
-window.checkVisitorPassword = function(){
-
-    const password =
-    document.getElementById("visitorPassword").value;
-
-
-    if(password === VISITOR_PASSWORD){
-
-        document
-        .getElementById("welcomePage")
-        .classList
-        .add("hidden");
-
-
-        document
-        .getElementById("mainPage")
-        .classList
-        .remove("hidden");
-
-
-    }
-    else{
-
-        document
-        .getElementById("visitorError")
-        .innerHTML =
-        "Wrong password ❤️";
-
-    }
-
-};
