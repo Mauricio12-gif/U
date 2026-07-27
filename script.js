@@ -516,7 +516,39 @@ function loadMessages(){
 
 
 
-// PHOTO VIEWER
+// PHOTO VIEWER// LOAD GALLERY PHOTOS
+
+function loadGallery(){
+
+
+    const gallery =
+    document.getElementById("galleryGrid");
+
+
+    if(!gallery) return;
+
+
+
+    gallery.innerHTML = "";
+
+
+
+    galleryPhotos.forEach(photo=>{
+
+
+        gallery.innerHTML += `
+
+        <img 
+        src="${photo}" 
+        onclick="expandPhoto(this)">
+
+        `;
+
+
+    });
+
+
+}
 
 window.expandPhoto = function(photo){
 
@@ -685,6 +717,8 @@ window.addEventListener(
 
 
         loadStories();
+        
+        loadGallery();
 
 
     }
