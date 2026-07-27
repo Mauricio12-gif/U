@@ -654,6 +654,29 @@ function showNotice(message){
 
 
 
+// GALLERY PHOTOS LIST
+
+const galleryPhotos = [
+
+    "IMG-20251228-WA00030.jpg",
+
+    "IMG-20251228-WA00032.jpg",
+
+    "IMG-2026215-WA00036.jpg",
+
+    "photo4.jpg",
+
+    "photo5.jpg",
+
+    "photo6.jpg",
+
+    "photo7.jpg",
+
+    "photo8.jpg",
+
+    "photo9.jpg"
+
+];
 // LOAD DATA WHEN OPENED
 
 window.addEventListener(
