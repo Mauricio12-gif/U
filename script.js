@@ -85,8 +85,7 @@ const galleryPhotos = [
 
 const galleryVideos = [
 
-    "video1.mp4",
-    "video2.mp4"
+    "video1.mp4"
 
 ];
 
