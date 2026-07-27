@@ -516,7 +516,10 @@ function loadMessages(){
 
 
 
-// PHOTO VIEWER// LOAD GALLERY PHOTOS
+// PHOTO VIEWER
+// LOAD GALLERY PHOTOS
+
+function loadGallery(){
 
 function loadGallery(){
 
@@ -536,13 +539,28 @@ function loadGallery(){
     galleryPhotos.forEach(photo=>{
 
 
-        gallery.innerHTML += `
+        const img = new Image();
 
-        <img 
-        src="${photo}" 
-        onclick="expandPhoto(this)">
 
-        `;
+
+        img.onload = function(){
+
+
+            gallery.innerHTML += `
+
+            <img 
+            src="${photo}" 
+            onclick="expandPhoto(this)">
+
+            `;
+
+
+        };
+
+
+
+        img.src = photo;
+
 
 
     });
@@ -690,25 +708,59 @@ function showNotice(message){
 
 const galleryPhotos = [
 
+    // 1 - 3
     "IMG-20251228-WA0030.jpg",
-
     "IMG-20251228-WA0032.jpg",
-
     "IMG-20260215-WA0036.jpg",
 
+    // 4 - 7
     "IMG-20260726-WA0006.jpg",
-
     "IMG-20260726-WA0007.jpg",
-
     "IMG-20260726-WA0008.jpg",
-
     "IMG-20260726-WA0009.jpg",
 
+    // 8 - 45
     "photo8.jpg",
-
-    "photo9.jpg"
+    "photo9.jpg",
+    "photo10.jpg",
+    "photo11.jpg",
+    "photo12.jpg",
+    "photo13.jpg",
+    "photo14.jpg",
+    "photo15.jpg",
+    "photo16.jpg",
+    "photo17.jpg",
+    "photo18.jpg",
+    "photo19.jpg",
+    "photo20.jpg",
+    "photo21.jpg",
+    "photo22.jpg",
+    "photo23.jpg",
+    "photo24.jpg",
+    "photo25.jpg",
+    "photo26.jpg",
+    "photo27.jpg",
+    "photo28.jpg",
+    "photo29.jpg",
+    "photo30.jpg",
+    "photo31.jpg",
+    "photo32.jpg",
+    "photo33.jpg",
+    "photo34.jpg",
+    "photo35.jpg",
+    "photo36.jpg",
+    "photo37.jpg",
+    "photo38.jpg",
+    "photo39.jpg",
+    "photo40.jpg",
+    "photo41.jpg",
+    "photo42.jpg",
+    "photo43.jpg",
+    "photo44.jpg",
+    "photo45.jpg"
 
 ];
+
 // LOAD DATA WHEN OPENED
 
 window.addEventListener(
