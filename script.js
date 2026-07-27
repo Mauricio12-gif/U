@@ -81,13 +81,9 @@ const galleryPhotos = [
     "photo44.jpg",
     "photo45.jpg"
 
-];// VIDEO LIST
+]; VIDEO LIST
 
-const galleryVideos = [
-
-    "video1.mp4"
-
-];
+const galleryVideos = [];
 
 
 
