@@ -305,7 +305,7 @@ window.showSection = function(id){
 
 if(id === "videos"){
 
-  //  loadVideos();
+    loadVideos();
 
 }
 
