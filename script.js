@@ -299,16 +299,19 @@ window.showSection = function(id){
 
     if(id === "chat"){
 
-        loadMessages();
+    loadMessages();
 
-    }
+}
 
 
-};if(id === "videos"){
+if(id === "videos"){
 
     loadVideos();
 
 }
+
+
+};
 
 
 
