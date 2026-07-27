@@ -694,15 +694,15 @@ const galleryPhotos = [
 
     "IMG-20251228-WA0032.jpg",
 
-    "IMG-2026215-WA0036.jpg",
+    "IMG_2026215-WA0036.jpg",
 
-    "IMG_20260726-WA0006.jpg",
+    "IMG-20260726-WA0006.jpg",
 
-    "IMG_20260726-WA0007.jpg",
+    "IMG-20260726-WA0007.jpg",
 
-    "IMG_20260726-WA0008.jpg",
+    "IMG-20260726-WA0008.jpg",
 
-    "IMG_20260726-WA0009.jpg",
+    "IMG-20260726-WA0009.jpg",
 
     "photo8.jpg",
 
