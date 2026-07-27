@@ -81,9 +81,12 @@ const galleryPhotos = [
     "photo44.jpg",
     "photo45.jpg"
 
-]; //VIDEO LIST
+]; // VIDEO LIST
 
-const galleryVideos = [];
+const galleryVideos = [
+    "video1.mp4",
+    "video2.mp4",
+];
 
 
 
@@ -1024,7 +1027,7 @@ window.addEventListener(
 
         loadGallery();
 
-        //loadVideos();
+        loadVideos();
 
 
     }
