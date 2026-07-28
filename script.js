@@ -1055,3 +1055,56 @@ if ("serviceWorker" in navigator) {
     });
 
 }
+// ===============================
+// INSTALL APP BUTTON
+// ===============================
+
+let deferredPrompt;
+
+const installButton =
+document.getElementById("installButton");
+
+
+window.addEventListener(
+"beforeinstallprompt",
+(event)=>{
+
+    event.preventDefault();
+
+    deferredPrompt = event;
+
+    installButton.style.display = "block";
+
+
+});
+
+
+installButton.addEventListener(
+"click",
+async ()=>{
+
+    if(!deferredPrompt){
+
+        return;
+
+    }
+
+
+    deferredPrompt.prompt();
+
+
+    const result =
+    await deferredPrompt.userChoice;
+
+
+    if(result.outcome === "accepted"){
+
+        console.log("App installed");
+
+    }
+
+
+    deferredPrompt = null;
+
+
+});
