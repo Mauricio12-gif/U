@@ -95,7 +95,6 @@ const galleryVideos = [
 // ===============================
 
 window.checkVisitorPassword = function(){
-    alert("Password button is working");
 
 
     const password =
