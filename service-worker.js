@@ -1,4 +1,4 @@
-const CACHE_NAME = "our-story-v3";
+const CACHE_NAME = "our-story-v4";
 
 const FILES_TO_CACHE = [
     "./",
