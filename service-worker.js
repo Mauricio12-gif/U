@@ -1,4 +1,4 @@
-const CACHE_NAME = "our-story-v1";
+const CACHE_NAME = "our-story-v2";
 
 const FILES_TO_CACHE = [
     "./",
@@ -35,6 +35,31 @@ self.addEventListener("fetch", event => {
         .then(response => {
 
             return response || fetch(event.request);
+
+        })
+
+    );
+
+});
+self.addEventListener("activate", event => {
+
+    event.waitUntil(
+
+        caches.keys().then(keys => {
+
+            return Promise.all(
+
+                keys.map(key => {
+
+                    if(key !== CACHE_NAME){
+
+                        return caches.delete(key);
+
+                    }
+
+                })
+
+            );
 
         })
 
