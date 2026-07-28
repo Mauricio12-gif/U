@@ -1110,21 +1110,6 @@ async ()=>{
 
 
 });
-let deferredPrompt;
-
-const installButton = document.getElementById("installButton");
-
-
-window.addEventListener("beforeinstallprompt", (event) => {
-
-    event.preventDefault();
-
-    deferredPrompt = event;
-
-    installButton.style.display = "block";
-
-
-});
 
 
 installButton.addEventListener("click", async () => {
