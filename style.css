@@ -1147,3 +1147,14 @@ cursor: pointer;
 
     display: block !important;
 }
+#installButton{
+    display:block !important;
+    position:fixed !important;
+    top:10px !important;
+    left:10px !important;
+    z-index:999999999 !important;
+    background:red !important;
+    color:white !important;
+    width:200px !important;
+    height:60px !important;
+}
