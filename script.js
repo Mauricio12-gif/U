@@ -1110,30 +1110,3 @@ async ()=>{
 
 
 });
-
-
-installButton.addEventListener("click", async () => {
-
-
-    if(deferredPrompt){
-
-
-        deferredPrompt.prompt();
-
-
-        const result = await deferredPrompt.userChoice;
-
-
-        console.log(result);
-
-
-        deferredPrompt = null;
-
-
-        installButton.style.display = "none";
-
-
-    }
-
-
-});
