@@ -21,7 +21,7 @@ import {
 
 const OWNER_EMAIL = "lovermax876@gmail.com";
 
-const VISITOR_PASSWORD = "LOVE";
+const VISITOR_PASSWORD = "Angel";
 
 let currentUser = null;
 
