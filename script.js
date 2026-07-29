@@ -1063,7 +1063,9 @@ let deferredPrompt;
 
 const installButton =
 document.getElementById("installButton");
+
 if (
+    installButton &&
     window.matchMedia("(display-mode: standalone)").matches
 ) {
     installButton.style.display = "none";
