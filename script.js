@@ -101,7 +101,7 @@ window.checkVisitorPassword = function(){
     document
     .getElementById("visitorPassword")
     .value;
-
+alert("Button clicked");
 
 
     if(password === VISITOR_PASSWORD){
