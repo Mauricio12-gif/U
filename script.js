@@ -27,35 +27,6 @@ let currentUser = null;
 
 
 
-import { db, auth } from "./firebase.js";
-
-import {
-    signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-
-import {
-    collection,
-    addDoc,
-    onSnapshot,
-    serverTimestamp,
-    doc,
-    setDoc,
-    getDoc
-} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-
-// ===============================
-// SETTINGS
-// ===============================
-
-const OWNER_EMAIL = "lovermax876@gmail.com";
-
-const VISITOR_PASSWORD = "Angel";
-
-let currentUser = null;
-
-
-
 // ===============================
 // GALLERY PHOTOS LIST
 // ===============================
