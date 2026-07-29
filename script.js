@@ -297,6 +297,108 @@ window.openLogin = function(){
 // USER REGISTER
 // ===============================
 
+window.registerUser = function(){
+
+    const username =
+    document.getElementById("registerUsername").value;
+
+    const password =
+    document.getElementById("registerPassword").value;
+
+
+    if(username === "" || password === ""){
+
+        document.getElementById("registerError").innerHTML =
+        "Fill all fields ❤️";
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "username",
+        username
+    );
+
+
+    localStorage.setItem(
+        "password",
+        password
+    );
+
+
+    alert("Account created ❤️");
+
+
+    document
+    .getElementById("registerPage")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("userLoginPage")
+    .classList
+    .remove("hidden");
+
+};
+
+
+
+// ===============================
+// USER LOGIN
+// ===============================
+
+window.loginUser = function(){
+
+    const username =
+    document.getElementById("loginUsername").value;
+
+
+    const password =
+    document.getElementById("loginPassword").value;
+
+
+    const savedUsername =
+    localStorage.getItem("username");
+
+
+    const savedPassword =
+    localStorage.getItem("password");
+
+
+    if(
+        username === savedUsername &&
+        password === savedPassword
+    ){
+
+        document
+        .getElementById("userLoginPage")
+        .classList
+        .add("hidden");
+
+
+        document
+        .getElementById("mainPage")
+        .classList
+        .remove("hidden");
+
+
+    }
+
+    else{
+
+        document.getElementById("loginError").innerHTML =
+        "Wrong username or password ❤️";
+
+    }
+
+};
+// ===============================
+// USER REGISTER
+// ===============================
+
 window.registerUser = async function(){
 
     const username =
