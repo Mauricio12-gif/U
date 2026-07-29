@@ -1131,34 +1131,6 @@ cursor: pointer;
 
 }
 .install-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-
-    z-index: 9999999;
-
-    background: yellow;
-    color: black;
-
-    width: 150px;
-    height: 50px;
-
-    font-size: 20px;
-
-    display: block !important;
-}
-#installButton{
-    display:block !important;
-    position:fixed !important;
-    top:10px !important;
-    left:10px !important;
-    z-index:999999999 !important;
-    background:red !important;
-    color:white !important;
-    width:200px !important;
-    height:60px !important;
-}
-.install-btn {
 
     position: fixed;
 
