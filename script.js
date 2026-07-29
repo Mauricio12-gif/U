@@ -1063,6 +1063,11 @@ let deferredPrompt;
 
 const installButton =
 document.getElementById("installButton");
+if (
+    window.matchMedia("(display-mode: standalone)").matches
+) {
+    installButton.style.display = "none";
+}
 
 
 window.addEventListener(
@@ -1099,12 +1104,25 @@ async ()=>{
 
     if(result.outcome === "accepted"){
 
-        console.log("App installed");
+    console.log("App installed");
+
+    installButton.style.display = "none";
 
     }
 
 
     deferredPrompt = null;
+    installButton.style.display = "none";
 
 
 });
+window.addEventListener(
+    "appinstalled",
+    () => {
+
+        installButton.style.display = "none";
+
+        console.log("PWA installed");
+
+    }
+);
