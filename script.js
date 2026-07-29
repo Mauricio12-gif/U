@@ -1,4 +1,4 @@
-console.log("SCRIPT STARTED");
+alert("SCRIPT STARTED");
 import { db, auth } from "./firebase.js";
 
 import {
