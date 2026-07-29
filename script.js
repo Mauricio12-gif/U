@@ -261,6 +261,12 @@ window.login = async function(){
 window.openRegister = function(){
 
     document
+    .getElementById("welcomePage")
+    .classList
+    .add("hidden");
+
+
+    document
     .getElementById("registerPage")
     .classList
     .remove("hidden");
@@ -268,11 +274,14 @@ window.openRegister = function(){
 };
 
 
-// ===============================
-// USER LOGIN BUTTON
-// ===============================
 
 window.openLogin = function(){
+
+    document
+    .getElementById("welcomePage")
+    .classList
+    .add("hidden");
+
 
     document
     .getElementById("userLoginPage")
