@@ -1,6 +1,7 @@
 import { db, auth } from "./firebase.js";
 
 import {
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
@@ -292,7 +293,116 @@ window.openLogin = function(){
     .remove("hidden");
 
 };
+// ===============================
+// USER REGISTER
+// ===============================
 
+window.registerUser = async function(){
+
+    const username =
+    document.getElementById("registerUsername").value.trim();
+
+
+    const password =
+    document.getElementById("registerPassword").value;
+
+
+    const error =
+    document.getElementById("registerError");
+
+
+    if(username === "" || password === ""){
+
+        error.innerHTML = "Fill all fields ❤️";
+        return;
+
+    }
+
+
+    try{
+
+        await createUserWithEmailAndPassword(
+            auth,
+            username + "@story.com",
+            password
+        );
+
+
+        document
+        .getElementById("registerPage")
+        .classList
+        .add("hidden");
+
+
+        document
+        .getElementById("mainPage")
+        .classList
+        .remove("hidden");
+
+
+    }
+
+    catch(errorMessage){
+
+        console.log(errorMessage);
+
+        error.innerHTML =
+        "Could not create account ❤️";
+
+    }
+
+};
+// ===============================
+// USER LOGIN
+// ===============================
+
+window.loginUser = async function(){
+
+    const username =
+    document.getElementById("loginUsername").value.trim();
+
+
+    const password =
+    document.getElementById("loginPassword").value;
+
+
+    const error =
+    document.getElementById("loginError");
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            username + "@story.com",
+            password
+        );
+
+
+        document
+        .getElementById("userLoginPage")
+        .classList
+        .add("hidden");
+
+
+        document
+        .getElementById("mainPage")
+        .classList
+        .remove("hidden");
+
+
+    }
+
+    catch(errorMessage){
+
+        console.log(errorMessage);
+
+        error.innerHTML =
+        "Wrong username or password ❤️";
+
+    }
+
+};
 
 
 
