@@ -1086,6 +1086,8 @@ window.addEventListener(
 });
 
 
+if(installButton){
+
 installButton.addEventListener(
 "click",
 async ()=>{
@@ -1106,9 +1108,9 @@ async ()=>{
 
     if(result.outcome === "accepted"){
 
-    console.log("App installed");
+        console.log("App installed");
 
-    installButton.style.display = "none";
+        installButton.style.display = "none";
 
     }
 
@@ -1118,13 +1120,5 @@ async ()=>{
 
 
 });
-window.addEventListener(
-    "appinstalled",
-    () => {
 
-        installButton.style.display = "none";
-
-        console.log("PWA installed");
-
-    }
-);
+}
