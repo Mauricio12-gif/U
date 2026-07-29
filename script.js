@@ -254,7 +254,32 @@ window.login = async function(){
 
 
     }
+// ===============================
+// USER REGISTER BUTTON
+// ===============================
 
+window.openRegister = function(){
+
+    document
+    .getElementById("registerPage")
+    .classList
+    .remove("hidden");
+
+};
+
+
+// ===============================
+// USER LOGIN BUTTON
+// ===============================
+
+window.openLogin = function(){
+
+    document
+    .getElementById("userLoginPage")
+    .classList
+    .remove("hidden");
+
+};
 
 };// ===============================
 // PAGE NAVIGATION
