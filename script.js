@@ -295,20 +295,6 @@ window.openLogin = function(){
 
 
 
-window.openLogin = function(){
-
-    document
-    .getElementById("welcomePage")
-    .classList
-    .add("hidden");
-
-
-    document
-    .getElementById("userLoginPage")
-    .classList
-    .remove("hidden");
-
-};
 
 // ===============================
 // PAGE NAVIGATION
