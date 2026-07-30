@@ -866,7 +866,7 @@ window.sendMessage = async function(){
 
                 Message:message,
 
-                Sender:"Anonymous",
+                Sender: currentUser || "Anonymous",
 
                 Time:
                 serverTimestamp()
