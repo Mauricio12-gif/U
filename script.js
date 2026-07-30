@@ -1179,8 +1179,15 @@ window.toggleGalleryLock = async function(){
     await getDoc(galleryRef);
 
 
-    const currentStatus =
-    snapshot.data().locked;
+    let currentStatus = false;
+
+
+    if(snapshot.exists()){
+
+        currentStatus =
+        snapshot.data().locked;
+
+    }
 
 
     await setDoc(
