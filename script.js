@@ -1375,3 +1375,55 @@ async ()=>{
 });
 
 }
+let galleryLocked = false;
+
+
+window.toggleGalleryLock = function(){
+
+
+const gallery =
+document.getElementById("galleryGrid");
+
+
+const message =
+document.getElementById("galleryLockMessage");
+
+
+const button =
+event.target;
+
+
+
+galleryLocked = !galleryLocked;
+
+
+if(galleryLocked){
+
+
+gallery.classList.add("gallery-locked");
+
+
+message.classList.remove("hidden");
+
+
+button.innerHTML = "👁️ Show Photos";
+
+
+}
+
+else{
+
+
+gallery.classList.remove("gallery-locked");
+
+
+message.classList.add("hidden");
+
+
+button.innerHTML = "👁️ Hide Photos";
+
+
+}
+
+
+};
