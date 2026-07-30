@@ -730,12 +730,38 @@ window.saveStorySection = async function(
 // LOAD GALLERY
 // ===============================
 
-function loadGallery(){
+async function loadGallery(){
 
 
     const gallery =
     document
     .getElementById("galleryGrid");
+    
+    const lockStatus =
+await getDoc(
+    doc(
+        db,
+        "settings",
+        "gallery"
+    )
+);
+
+
+if(lockStatus.exists()){
+
+    if(lockStatus.data().locked){
+
+        gallery.classList.add("blur-gallery");
+
+    }
+
+    else{
+
+        gallery.classList.remove("blur-gallery");
+
+    }
+
+}
 
 
 
