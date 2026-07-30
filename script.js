@@ -1231,6 +1231,45 @@ function showNotice(message){
 
 
 // ===============================
+// GALLERY LOCK
+// ===============================
+
+let galleryLocked = false;
+
+
+window.toggleGalleryLock = function(){
+
+    galleryLocked = !galleryLocked;
+
+
+    const gallery =
+    document.getElementById("galleryGrid");
+
+
+    const button =
+    document.getElementById("galleryLockButton");
+
+
+    if(galleryLocked){
+
+        gallery.classList.add("blur-gallery");
+
+        button.innerHTML =
+        "🔓 Unlock Gallery";
+
+    }
+
+    else{
+
+        gallery.classList.remove("blur-gallery");
+
+        button.innerHTML =
+        "🔒 Lock Gallery";
+
+    }
+
+};
+// ===============================
 // START WEBSITE
 // ===============================
 
