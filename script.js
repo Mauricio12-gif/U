@@ -742,7 +742,6 @@ async function loadGallery(){
 
     if(!gallery) return;
 
-    gallery.classList.remove("blur-gallery");
 
     gallery.innerHTML = "";
 
@@ -1184,7 +1183,6 @@ window.toggleGalleryLock = async function(){
 
     }
 
-    loadGallery();
 
 };
 // ===============================
