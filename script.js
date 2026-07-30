@@ -1129,15 +1129,16 @@ function showNotice(message){
 
 
 // ===============================
-// GALLERY LOCK
+// GALLERY LOCK (FIREBASE)
 // ===============================
 
-let galleryLocked = false;
+window.toggleGalleryLock = async function(){
 
-
-window.toggleGalleryLock = function(){
-
-    galleryLocked = !galleryLocked;
+    const galleryRef = doc(
+        db,
+        "settings",
+        "gallery"
+    );
 
 
     const gallery =
@@ -1148,7 +1149,23 @@ window.toggleGalleryLock = function(){
     document.getElementById("galleryLockButton");
 
 
-    if(galleryLocked){
+    const snapshot =
+    await getDoc(galleryRef);
+
+
+    const currentStatus =
+    snapshot.data().locked;
+
+
+    await setDoc(
+        galleryRef,
+        {
+            locked: !currentStatus
+        }
+    );
+
+
+    if(!currentStatus){
 
         gallery.classList.add("blur-gallery");
 
