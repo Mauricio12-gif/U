@@ -743,22 +743,9 @@ const gallery = document.getElementById("galleryGrid");
 if(!gallery) return;
 
 
-const lockStatus = await getDoc(
-    doc(db,"settings","gallery")
-);
-
-
-if(lockStatus.exists() && lockStatus.data().locked){
-
-    gallery.classList.add("blur-gallery");
-
-}
+gallery.classList.remove("blur-gallery");
 
 else{
-
-    gallery.classList.remove("blur-gallery");
-
-}
 
 
 gallery.innerHTML = "";
