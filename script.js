@@ -296,9 +296,6 @@ window.openLogin = function(){
 // ===============================
 // USER REGISTER
 // ===============================
-// ===============================
-// USER REGISTER
-// ===============================
 
 window.registerUser = async function(){
 
