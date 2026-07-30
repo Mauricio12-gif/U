@@ -736,15 +736,19 @@ async function loadGallery(){
     const gallery =
     document
     .getElementById("galleryGrid");
-    
+
+
+    if(!gallery) return;
+
+
     const lockStatus =
-await getDoc(
-    doc(
-        db,
-        "settings",
-        "gallery"
-    )
-);
+    await getDoc(
+        doc(
+            db,
+            "settings",
+            "gallery"
+        )
+    );
 
 
 if(lockStatus.exists()){
