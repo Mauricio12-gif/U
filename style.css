@@ -1172,3 +1172,23 @@ cursor: pointer;
     margin: 0 !important;
 
 }
+.gallery-locked img{
+
+    filter:blur(15px);
+
+}
+
+
+#galleryLockMessage{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:20px;
+
+    color:#e91e63;
+
+    margin:15px;
+
+}
