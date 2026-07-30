@@ -1120,6 +1120,7 @@ function showNotice(message){
 // ===============================
 
 window.toggleGalleryLock = async function(){
+    alert("Gallery button clicked");
 
     const galleryRef = doc(
         db,
