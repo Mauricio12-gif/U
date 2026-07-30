@@ -1118,7 +1118,6 @@ function showNotice(message){
 // ===============================
 // GALLERY LOCK (FIREBASE)
 // ===============================
-
 window.toggleGalleryLock = async function(){
     alert("Gallery button clicked");
 
@@ -1128,21 +1127,28 @@ window.toggleGalleryLock = async function(){
         "gallery"
     );
 
-
     const gallery =
     document.getElementById("galleryGrid");
-
 
     const button =
     document.getElementById("galleryLockButton");
 
+    let snapshot;
 
-    const snapshot =
-    await getDoc(galleryRef);
-alert("Firebase read successful");
+    try {
+
+        snapshot = await getDoc(galleryRef);
+
+        alert("Firebase read works");
+
+    } catch(error) {
+
+        alert(error.message);
+        return;
+
+    }
 
     let currentStatus = false;
-
 
     if(snapshot.exists()){
 
@@ -1150,7 +1156,6 @@ alert("Firebase read successful");
         snapshot.data().locked;
 
     }
-
 
     await setDoc(
         galleryRef,
@@ -1177,6 +1182,7 @@ alert("Firebase read successful");
         "🔒 Lock Gallery";
 
     }
+
     loadGallery();
 
 };
