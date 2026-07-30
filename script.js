@@ -952,27 +952,36 @@ onSnapshot(
 
             messages.forEach(data=>{
 
-
-                box.innerHTML += `
-
-                <div class="message right">
-
-                    <div class="bubble">
-
-                    ❤️ Anonymous
-
-                    <br>
-
-                    ${data.Message || ""}
-
-                    </div>
-
-                </div>
-
-                `;
+    let side = "left";
 
 
-            });
+    if(data.Sender === currentUser){
+
+        side = "right";
+
+    }
+
+
+    box.innerHTML += `
+
+    <div class="message ${side}">
+
+        <div class="bubble">
+
+        ${data.Sender || "Anonymous"}
+
+        <br>
+
+        ${data.Message || ""}
+
+        </div>
+
+    </div>
+
+    `;
+
+
+});
 
 
 
