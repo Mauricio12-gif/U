@@ -755,14 +755,23 @@ galleryPhotos.forEach(photo => {
 
 const img = document.createElement("img");
 
-img.src = "./" + photo;
-
-
-img.onload = function(){
+img.src = photo;
 
 gallery.appendChild(img);
 
+img.onerror = function(){
+
+console.log("Missing photo:", photo);
+
 };
+
+img.onclick = function(){
+
+expandPhoto(img);
+
+};
+
+});
 
 
 img.onerror = function(){
