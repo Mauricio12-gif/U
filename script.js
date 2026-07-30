@@ -768,7 +768,7 @@ galleryPhotos.forEach(photo => {
 
 const img = document.createElement("img");
 
-img.src = photo;
+img.src = "./" + photo;
 
 
 img.onload = function(){
