@@ -736,9 +736,30 @@ async function loadGallery(){
     document.getElementById("galleryGrid");
 
 
-    if(!gallery){
-        console.log("Gallery grid not found");
-        return;
+    if(!gallery) return;
+
+
+    const lockStatus =
+    await getDoc(
+        doc(
+            db,
+            "settings",
+            "gallery"
+        )
+    );
+
+
+    if(lockStatus.exists()){
+
+        if(lockStatus.data().locked){
+
+            gallery.innerHTML =
+            "<h3>🔒 Gallery Locked</h3>";
+
+            return;
+
+        }
+
     }
 
 
@@ -747,7 +768,6 @@ async function loadGallery(){
 
     galleryPhotos.forEach(photo=>{
 
-        console.log("Loading:", photo);
 
         gallery.innerHTML += `
 
@@ -757,7 +777,9 @@ async function loadGallery(){
 
         `;
 
+
     });
+
 
 }
 // ===============================
