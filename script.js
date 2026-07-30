@@ -12,7 +12,7 @@ import {
     serverTimestamp,
     doc,
     setDoc,
-    getDoc
+    getDoc,
     query,
     orderBy
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -375,11 +375,16 @@ window.loginUser = async function(){
 
     try{
 
-        await signInWithEmailAndPassword(
-            auth,
-            username + "@story.com",
-            password
-        );
+        const userCredential =
+await signInWithEmailAndPassword(
+    auth,
+    username + "@story.com",
+    password
+);
+
+
+currentUser =
+userCredential.user.email;
 
 
         document
