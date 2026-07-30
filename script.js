@@ -741,7 +741,16 @@ async function loadGallery(){
     const gallery = document.getElementById("galleryGrid");
 
     if(!gallery) return;
+    
+const galleryRef = doc(db, "settings", "gallery");
 
+const snapshot = await getDoc(galleryRef);
+
+if(snapshot.exists() && snapshot.data().locked){
+
+    gallery.classList.add("blur-gallery");
+
+}
 
     gallery.innerHTML = "";
 
