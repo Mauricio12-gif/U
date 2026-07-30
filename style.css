@@ -577,14 +577,11 @@ textarea:focus{
 }
 
 
-
 .message{
 
     display:flex;
 
     width:100%;
-
-    margin:10px 0;
 
 }
 
@@ -603,18 +600,15 @@ textarea:focus{
 }
 
 
-
 .bubble{
 
     max-width:75%;
-
-    background:white;
 
     padding:15px;
 
     border-radius:20px;
 
-    text-align:left;
+    background:white;
 
     box-shadow:
     0 5px 15px rgba(0,0,0,.1);
@@ -622,53 +616,41 @@ textarea:focus{
 }
 
 
+/* My messages */
 
-/* messages from others */
+.message.right .bubble{
 
-.message:nth-child(odd){
+    background:#e91e63;
 
-    align-self:flex-start;
-
-}
-
-
-
-/* messages coming later */
-
-.message:nth-child(even){
-
-    align-self:flex-end;
+    color:white;
 
 }
 
+
+/* Other people's messages */
+
+.message.left .bubble{
+
+    background:white;
+
+    color:#4a2030;
+
+}
 
 
 #messageInput{
 
-
     width:70%;
-
 
     padding:14px;
 
-
     border-radius:25px;
 
-
     border:1px solid #ddd;
-
 
     outline:none;
 
 }
-
-
-
-
-
-
-
-
 footer{
 
 
