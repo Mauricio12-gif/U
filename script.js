@@ -904,49 +904,60 @@ window.sendMessage = async function(){
 
 function loadMessages(){
 
-
     const box =
-    document
-    .getElementById("chatBox");
-
-
+    document.getElementById("chatBox");
 
     if(!box) return;
 
 
-
     onSnapshot(
-
-        collection(
-            db,
-            "messages"
-        ),
-
-
+        collection(db,"messages"),
         (snapshot)=>{
 
 
             box.innerHTML = "";
 
 
+            let messages = [];
+
 
             snapshot.forEach(item=>{
 
+                messages.push({
+                    id:item.id,
+                    ...item.data()
+                });
 
-                const data =
-                item.data();
+            });
 
+
+
+            messages.sort((a,b)=>{
+
+                if(!a.Time || !b.Time) return 0;
+
+                return a.Time.seconds - b.Time.seconds;
+
+            });
+
+
+
+            messages.forEach(data=>{
 
 
                 box.innerHTML += `
 
-                <div class="message">
+                <div class="message right">
 
-                ❤️ Anonymous
+                    <div class="bubble">
 
-                <br><br>
+                    ❤️ Anonymous
 
-                ${data.Message || ""}
+                    <br>
+
+                    ${data.Message || ""}
+
+                    </div>
 
                 </div>
 
@@ -957,21 +968,19 @@ function loadMessages(){
 
 
 
-            if(snapshot.empty){
+            box.scrollTop = box.scrollHeight;
 
+
+            if(messages.length === 0){
 
                 box.innerHTML =
                 "No messages yet ❤️";
-
 
             }
 
 
         }
-
-
     );
-
 
 }
 
