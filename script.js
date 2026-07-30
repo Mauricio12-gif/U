@@ -735,61 +735,37 @@ window.saveStorySection = async function(
 // LOAD GALLERY
 // ===============================
 
-
 async function loadGallery(){
 
-const gallery = document.getElementById("galleryGrid");
+    const gallery = document.getElementById("galleryGrid");
 
-if(!gallery) return;
+    if(!gallery) return;
 
+    gallery.classList.remove("blur-gallery");
 
-gallery.classList.remove("blur-gallery");
+    gallery.innerHTML = "";
 
-else{
+    galleryPhotos.forEach(photo => {
 
+        const img = document.createElement("img");
 
-gallery.innerHTML = "";
+        img.src = photo;
 
+        img.onerror = function(){
 
-galleryPhotos.forEach(photo => {
+            console.log("Missing photo:", photo);
 
-const img = document.createElement("img");
+        };
 
-img.src = photo;
+        img.onclick = function(){
 
-gallery.appendChild(img);
+            expandPhoto(img);
 
-img.onerror = function(){
+        };
 
-console.log("Missing photo:", photo);
+        gallery.appendChild(img);
 
-};
-
-img.onclick = function(){
-
-expandPhoto(img);
-
-};
-
-});
-
-
-img.onerror = function(){
-
-console.log("Missing photo:", photo);
-
-};
-
-
-img.onclick = function(){
-
-expandPhoto(img);
-
-};
-
-
-});
-
+    });
 
 }
 // ===============================
