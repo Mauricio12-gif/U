@@ -769,17 +769,24 @@ async function loadGallery(){
     galleryPhotos.forEach(photo=>{
 
 
-        gallery.innerHTML += `
+    const img = document.createElement("img");
 
-        <img
-        src="${photo}"
-        onclick="expandPhoto(this)">
+    img.src = photo;
 
-        `;
+    img.onclick = function(){
+        expandPhoto(this);
+    };
 
 
-    });
+    img.onerror = function(){
+        this.remove();
+    };
 
+
+    gallery.appendChild(img);
+
+
+});
 
 }
 // ===============================
