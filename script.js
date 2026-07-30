@@ -1416,19 +1416,3 @@ async ()=>{
 }
 
 
-else{
-
-
-gallery.classList.remove("gallery-locked");
-
-
-message.classList.add("hidden");
-
-
-button.innerHTML = "👁️ Hide Photos";
-
-
-}
-
-
-};
