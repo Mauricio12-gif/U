@@ -781,62 +781,48 @@ if(snapshot.exists() && snapshot.data().locked){
 // PHOTO VIEWER
 // ===============================
 
-window.expandPhoto = function(photo){
+window.expandPhoto = async function(photo){
 
+    const galleryRef = doc(
+        db,
+        "settings",
+        "gallery"
+    );
+
+    const snapshot =
+    await getDoc(galleryRef);
+
+    if(
+        snapshot.exists() &&
+        snapshot.data().locked
+    ){
+
+        showNotice(
+            "Gallery is locked ❤️"
+        );
+
+        return;
+
+    }
 
     const viewer =
-    document
-    .getElementById("photoViewer");
-
-
+    document.getElementById("photoViewer");
 
     const fullPhoto =
-    document
-    .getElementById("fullPhoto");
-
-
+    document.getElementById("fullPhoto");
 
     if(
         viewer &&
         fullPhoto
     ){
 
-
         fullPhoto.src =
         photo.src;
-
-
 
         viewer.style.display =
         "flex";
 
-
     }
-
-
-};
-
-
-
-
-window.closePhoto = function(){
-
-
-    const viewer =
-    document
-    .getElementById("photoViewer");
-
-
-
-    if(viewer){
-
-
-        viewer.style.display =
-        "none";
-
-
-    }
-
 
 };
 // ===============================
