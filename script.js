@@ -1139,7 +1139,7 @@ window.toggleGalleryLock = async function(){
 
     const snapshot =
     await getDoc(galleryRef);
-
+alert("Firebase read successful");
 
     let currentStatus = false;
 
