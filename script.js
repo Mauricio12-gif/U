@@ -13,6 +13,8 @@ import {
     doc,
     setDoc,
     getDoc
+    query,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
@@ -910,8 +912,14 @@ function loadMessages(){
     if(!box) return;
 
 
-    onSnapshot(
-        collection(db,"messages"),
+    const messagesQuery = query(
+    collection(db,"messages"),
+    orderBy("Time","asc")
+);
+
+
+onSnapshot(
+    messagesQuery,
         (snapshot)=>{
 
 
