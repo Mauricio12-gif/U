@@ -736,13 +736,18 @@ async function loadGallery(){
     document.getElementById("galleryGrid");
 
 
-    if(!gallery) return;
+    if(!gallery){
+        console.log("Gallery grid not found");
+        return;
+    }
 
 
     gallery.innerHTML = "";
 
 
     galleryPhotos.forEach(photo=>{
+
+        console.log("Loading:", photo);
 
         gallery.innerHTML += `
 
@@ -754,16 +759,7 @@ async function loadGallery(){
 
     });
 
-
 }
-     
-
-
-
-
-
-
-
 // ===============================
 // PHOTO VIEWER
 // ===============================
