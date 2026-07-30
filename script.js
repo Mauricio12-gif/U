@@ -732,61 +732,49 @@ window.saveStorySection = async function(
 
 async function loadGallery(){
 
-    const gallery =
-    document.getElementById("galleryGrid");
-
+    const gallery = document.getElementById("galleryGrid");
 
     if(!gallery) return;
-
-
-    const lockStatus =
-    await getDoc(
-        doc(
-            db,
-            "settings",
-            "gallery"
-        )
-    );
-
-
-    if(lockStatus.exists()){
-
-        if(lockStatus.data().locked){
-
-            gallery.innerHTML =
-            "<h3>🔒 Gallery Locked</h3>";
-
-            return;
-
-        }
-
-    }
 
 
     gallery.innerHTML = "";
 
 
-    galleryPhotos.forEach(photo=>{
+    galleryPhotos.forEach(photo => {
+
+        const img = document.createElement("img");
+
+        img.src = photo;
+
+        img.style.display = "none";
 
 
-    const img = document.createElement("img");
+        img.onload = function(){
 
-    img.src = photo;
+            img.style.display = "block";
 
-    img.onclick = function(){
-        expandPhoto(this);
-    };
+        };
 
 
-    img.onerror = function(){
-        this.remove();
-    };
+        img.onerror = function(){
+
+            console.log("Missing photo:", photo);
+
+            img.remove();
+
+        };
 
 
-    gallery.appendChild(img);
+        img.onclick = function(){
+
+            expandPhoto(img);
+
+        };
 
 
-});
+        gallery.appendChild(img);
+
+    });
 
 }
 // ===============================
