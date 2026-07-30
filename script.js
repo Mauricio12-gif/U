@@ -735,51 +735,65 @@ window.saveStorySection = async function(
 // LOAD GALLERY
 // ===============================
 
+
 async function loadGallery(){
 
-    const gallery = document.getElementById("galleryGrid");
+const gallery = document.getElementById("galleryGrid");
 
-    if(!gallery) return;
-
-
-    gallery.innerHTML = "";
+if(!gallery) return;
 
 
-    galleryPhotos.forEach(photo => {
-
-        const img = document.createElement("img");
-
-        img.src = photo;
-
-        img.style.display = "none";
+const lockStatus = await getDoc(
+    doc(db,"settings","gallery")
+);
 
 
-        img.onload = function(){
+if(lockStatus.exists() && lockStatus.data().locked){
 
-            img.style.display = "block";
+    gallery.classList.add("blur-gallery");
 
-        };
+}
 
+else{
 
-        img.onerror = function(){
+    gallery.classList.remove("blur-gallery");
 
-            console.log("Missing photo:", photo);
-
-            img.remove();
-
-        };
+}
 
 
-        img.onclick = function(){
-
-            expandPhoto(img);
-
-        };
+gallery.innerHTML = "";
 
 
-        gallery.appendChild(img);
+galleryPhotos.forEach(photo => {
 
-    });
+const img = document.createElement("img");
+
+img.src = photo;
+
+
+img.onload = function(){
+
+gallery.appendChild(img);
+
+};
+
+
+img.onerror = function(){
+
+console.log("Missing photo:", photo);
+
+};
+
+
+img.onclick = function(){
+
+expandPhoto(img);
+
+};
+
+
+});
+
 
 }
 // ===============================
@@ -843,7 +857,8 @@ window.closePhoto = function(){
     }
 
 
-};// ===============================
+};
+// ===============================
 // PUBLIC CHAT
 // ===============================
 
