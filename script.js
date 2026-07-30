@@ -200,6 +200,7 @@ window.login = async function(){
 
         const user =
         userCredential.user;
+        alert(user.email);
 
 
 
