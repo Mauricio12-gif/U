@@ -914,23 +914,46 @@ cursor: pointer;
 
 .password-card{
 
-    margin-top:30px;
+    width:90%;
+    max-width:420px;
 
-    padding:20px;
+    padding:35px 25px;
 
-    border-radius:20px;
+    border-radius:25px;
 
-    background:
+    background:rgba(255,255,255,0.15);
 
-    rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+
+    text-align:center;
+
+    color:white;
 
 }
 
 
 
-.password-card h3{
+.password-card button{
 
-    margin-bottom:15px;
+    width:85%;
+
+    margin:10px auto;
+
+    display:block;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#ff4d88;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
 
 }
 
@@ -1377,3 +1400,21 @@ cursor: pointer;
     }
 
     }
+.password-card h3{
+
+    font-size:28px;
+
+    margin-bottom:20px;
+
+}
+
+
+.password-card p{
+
+    font-size:16px;
+
+    line-height:1.6;
+
+    margin-bottom:20px;
+
+}
