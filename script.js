@@ -452,11 +452,16 @@ window.showSection = function(id){
     loadMessages();
 
 }
-
-
-if(id === "videos"){
+    if(id === "videos"){
 
     loadVideos();
+
+}
+
+
+if(id === "gallery"){
+
+    loadGallery();
 
 }
 
