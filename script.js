@@ -732,82 +732,34 @@ window.saveStorySection = async function(
 
 async function loadGallery(){
 
-
     const gallery =
-    document
-    .getElementById("galleryGrid");
+    document.getElementById("galleryGrid");
 
 
     if(!gallery) return;
-
-
-    const lockStatus =
-    await getDoc(
-        doc(
-            db,
-            "settings",
-            "gallery"
-        )
-    );
-
-
-if(lockStatus.exists()){
-
-    if(lockStatus.data().locked){
-
-        gallery.classList.add("blur-gallery");
-
-    }
-
-    else{
-
-        gallery.classList.remove("blur-gallery");
-
-    }
-
-}
-
-
-
-    if(!gallery) return;
-
 
 
     gallery.innerHTML = "";
 
 
-
     galleryPhotos.forEach(photo=>{
 
+        gallery.innerHTML += `
 
-        const img =
-        new Image();
+        <img
+        src="${photo}"
+        onclick="expandPhoto(this)">
 
-
-
-        img.onload = function(){
-
-
-            gallery.innerHTML += `
-
-            <img
-            src="${photo}"
-            onclick="expandPhoto(this)">
-
-            `;
-
-
-        };
-
-
-
-        img.src = photo;
-
+        `;
 
     });
 
 
 }
+     
+
+
+
 
 
 
