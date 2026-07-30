@@ -1184,6 +1184,7 @@ window.toggleGalleryLock = async function(){
         "🔒 Lock Gallery";
 
     }
+    loadGallery();
 
 };
 // ===============================
