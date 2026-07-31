@@ -82,7 +82,9 @@ const galleryPhotos = [
     "photo42.jpg",
     "photo43.jpg",
     "photo44.jpg",
-    "photo45.jpg"
+    "photo45.jpg",
+    "photo46.jpg"
+    
 
 ]; // VIDEO LIST
 
